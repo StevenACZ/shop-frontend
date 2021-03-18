@@ -6,7 +6,7 @@ import { HashRouter } from 'react-router-dom';
 import Routes from './routes/Routes';
 
 // Styles
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import 'antd/dist/antd.css';
 import GlobalStyle from './theme/globalStyle';
 
 // Components
