@@ -1,9 +1,11 @@
 // React
 import React, { ButtonHTMLAttributes, forwardRef, Ref } from 'react';
-import Spinner from '../spinner/Spinner';
 
 // Styles
 import { ButtonStyled } from './Styles';
+
+// Components
+import Spinner from '../spinner/Spinner';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   height?: string;
