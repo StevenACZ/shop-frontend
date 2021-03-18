@@ -8,6 +8,7 @@ export const ProductListItemStyled = styled.div`
 
 export const ProductImage = styled.figure`
   margin-bottom: 20px;
+  cursor: pointer;
 
   & > img {
     width: 100%;
@@ -25,6 +26,7 @@ export const ProductDetails = styled.div`
     line-height: 28px;
     margin-bottom: 10px;
     display: inline-block;
+    cursor: pointer;
   }
 
   & > div {
