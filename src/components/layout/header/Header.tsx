@@ -1,7 +1,8 @@
 // React
 import React from 'react';
+
+// React Router
 import { NavLink } from 'react-router-dom';
-import Button from '../../button/Button';
 
 // Styles
 import {
@@ -13,6 +14,9 @@ import {
   Profile,
   HeaderContainer,
 } from './Styles';
+
+// Components
+import Button from '../../button/Button';
 
 interface Props {}
 
