@@ -14,7 +14,7 @@ const Routes: React.FC<Props> = () => {
   return (
     <Switch>
       <Route exact path="/" component={HomeScreen} />
-      <Route path="/product" component={ProductScreen} />
+      <Route exact path="/product/:productID" component={ProductScreen} />
 
       <Redirect to="/" />
     </Switch>
