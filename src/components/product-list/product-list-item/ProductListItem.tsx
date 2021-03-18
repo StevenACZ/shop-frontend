@@ -1,6 +1,9 @@
 // React
 import React from 'react';
 
+// React Router
+import { useHistory } from 'react-router';
+
 // Styles
 import { ProductListItemStyled, ProductDetails, ProductImage } from './Styles';
 
@@ -11,20 +14,26 @@ import { Product } from '../../../data/products';
 import { Rate } from 'antd';
 
 const ProductListItem: React.FC<Product> = ({
+  _id,
   name,
   image,
   price,
   rating,
   numReviews,
 }) => {
+  const history = useHistory();
+
+  const productDetails = () => {
+    history.push(`/product/${_id}`);
+  };
   return (
     <ProductListItemStyled>
-      <ProductImage>
+      <ProductImage onClick={productDetails}>
         <img src={image} alt={name} />
       </ProductImage>
 
       <ProductDetails>
-        <p>{name}</p>
+        <p onClick={productDetails}>{name}</p>
         <div>
           <Rate allowHalf disabled defaultValue={rating} />
           <span>{numReviews} reviews</span>
