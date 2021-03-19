@@ -4,8 +4,11 @@ import React, { useEffect, useState } from 'react';
 // React Router
 import { useParams } from 'react-router';
 
-// Data & Types
+// Types
 import products, { Product } from '../data/products';
+
+// Components
+import ProductDetails from '../components/product/product-details/ProductDetails';
 
 interface Props {}
 
@@ -21,7 +24,7 @@ const ProductScreen: React.FC<Props> = () => {
   return (
     <>
       <h1>Product</h1>
-      {/* <ProductHero /> */}
+      <ProductDetails {...product} />
       {/* <ProductReviews /> */}
       {/* <ProductComments /> */}
     </>
