@@ -18,18 +18,15 @@ import {
 import { Product } from '../../../data/products';
 
 // Antd Components
-import { Rate } from 'antd';
+import { InputNumber, Rate } from 'antd';
 
 // Components
 import Button from '../../button/Button';
 
 const ProductDetails: React.FC<Product> = ({
-  _id,
   name,
   image,
   description,
-  brand,
-  category,
   price,
   countInStock,
   rating,
@@ -64,7 +61,27 @@ const ProductDetails: React.FC<Product> = ({
           </div>
         </Description>
 
-        <AddToCart></AddToCart>
+        <AddToCart>
+          <div>
+            <span>Price:</span>
+            <span>${price.toFixed(2)}</span>
+          </div>
+          <div>
+            <span>Status:</span>
+            <span>{countInStock > 0 ? 'In Stock' : 'Out of Stock'}</span>
+          </div>
+          <div>
+            <span>Quantity:</span>
+            <InputNumber
+              min={1}
+              max={countInStock}
+              defaultValue={countInStock}
+            />
+          </div>
+          <div>
+            <Button width="100%">Add to cart</Button>
+          </div>
+        </AddToCart>
       </Main>
     </ProductDetailsStyled>
   );
