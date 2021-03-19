@@ -21,10 +21,12 @@ const ProductScreen: React.FC<Props> = () => {
     const prod = products.find((product) => product._id === params.productID);
     setProduct(prod);
   }, [params]);
+
   return (
     <>
       <h1>Product</h1>
-      <ProductDetails {...product} />
+
+      {product && <ProductDetails {...product} />}
       {/* <ProductReviews /> */}
       {/* <ProductComments /> */}
     </>
