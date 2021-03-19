@@ -22,7 +22,7 @@ export const Image = styled.div`
 `;
 
 export const Description = styled.div`
-  & > div {
+  /* & > div {
     padding: 10px 20px;
   }
 
@@ -50,8 +50,9 @@ export const Description = styled.div`
 
   & > div:nth-child(4) {
     font-size: 14px;
-  }
+  } */
 `;
+
 export const AddToCart = styled.div`
   border: 1px solid green;
 `;
