@@ -79,7 +79,9 @@ const ProductDetails: React.FC<Product> = ({
             />
           </div>
           <div>
-            <Button width="100%">Add to cart</Button>
+            <Button width="100%" disabled={countInStock === 0}>
+              Add to cart
+            </Button>
           </div>
         </AddToCart>
       </Main>
