@@ -21,7 +21,6 @@ const ProductList: React.FC<Props> = () => {
 
   const fetchProducts = async () => {
     const { data } = await axios.get('/api/products');
-
     setProducts(data);
   };
 
