@@ -15,4 +15,10 @@ export const ButtonStyled = styled.button<Props>`
   color: ${color.colorWhite};
   border: none;
   outline: none;
+
+  &:disabled {
+    background-color: black;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;
