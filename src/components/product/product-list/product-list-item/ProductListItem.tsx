@@ -38,7 +38,7 @@ const ProductListItem: React.FC<Product> = ({
           <Rate allowHalf disabled defaultValue={rating} />
           <span>{numReviews} reviews</span>
         </div>
-        <h3>${price.toFixed(2)}</h3>
+        <h3>${price?.toFixed(2)}</h3>
       </ProductDetails>
     </ProductListItemStyled>
   );
