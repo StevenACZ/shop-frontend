@@ -22,14 +22,14 @@ export const Image = styled.div`
 `;
 
 export const Description = styled.div`
-  /* & > div {
+  & > div {
     padding: 10px 20px;
   }
 
   & > div:nth-child(1) {
     font-size: 18px;
-    line-height: 40px;
-    padding: 20px 20px;
+    line-height: 35px;
+    padding: 0 20px 20px;
   }
 
   & > div:nth-child(2) {
@@ -50,7 +50,7 @@ export const Description = styled.div`
 
   & > div:nth-child(4) {
     font-size: 14px;
-  } */
+  }
 `;
 
 export const AddToCart = styled.div`
