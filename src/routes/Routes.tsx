@@ -5,8 +5,8 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 // Components
-import HomeScreen from '../pages/HomeScreen';
-import ProductScreen from '../pages/ProductScreen';
+import HomeScreen from '../pages/home/HomeScreen';
+import ProductScreen from '../pages/product/ProductScreen';
 
 interface Props {}
 
