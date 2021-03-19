@@ -13,8 +13,15 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  width: 1200px;
+  max-width: 1000px;
+  width: 1000px;
+
+  @media (max-width: 1000px) {
+    padding: 0 20px;
+  }
+
+  @media (max-width: 768px) {
+  }
 `;
 
 export const Logo = styled.div`
@@ -27,7 +34,7 @@ export const Search = styled.div`
   & > label > input {
     max-width: 300px;
     width: 300px;
-    padding: 15px 0 15px 20px;
+    padding: 11px 0 11px 20px;
     outline: none;
     border-radius: 4px;
     margin-right: 10px;
@@ -37,6 +44,10 @@ export const Search = styled.div`
   & > button {
     background-color: ${color.colorWhite};
     color: ${color.colorBlack};
+  }
+
+  @media (max-width: 1000px) {
+    display: none;
   }
 `;
 
@@ -51,5 +62,12 @@ export const Profile = styled.div`
   & > button {
     background-color: ${color.colorWhite};
     color: ${color.colorBlack};
+  }
+
+  @media (max-width: 720px) {
+    & > button {
+      height: 35px;
+      width: 80px;
+    }
   }
 `;
