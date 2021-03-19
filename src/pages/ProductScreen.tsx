@@ -24,7 +24,7 @@ const ProductScreen: React.FC<Props> = () => {
 
   return (
     <>
-      <h1>Product</h1>
+      <h1>Product Details</h1>
 
       {product && <ProductDetails {...product} />}
       {/* <ProductReviews /> */}
