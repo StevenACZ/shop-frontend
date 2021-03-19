@@ -3,7 +3,7 @@ import { color } from '../../../../theme/variables';
 
 export const ProductListItemStyled = styled.div`
   border: 1px solid ${color.colorBlack};
-  padding: 20px;
+  padding: 10px;
 `;
 
 export const ProductImage = styled.figure`
@@ -22,24 +22,27 @@ export const ProductDetails = styled.div`
   flex-direction: column;
 
   & > p {
-    font-size: 20px;
-    line-height: 28px;
+    font-size: 16px;
+    line-height: 20px;
     margin-bottom: 10px;
     display: inline-block;
     cursor: pointer;
   }
 
   & > div {
+    & > ul {
+      font-size: 12px;
+    }
     & > span {
       margin-left: 10px;
-      font-size: 16px;
+      font-size: 12px;
     }
   }
 
   & > h3 {
     display: inline-block;
     margin-top: 10px;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 0;
   }
