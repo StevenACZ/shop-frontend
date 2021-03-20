@@ -13,9 +13,11 @@ import { ProductScreenStyled } from './Styles';
 // Types
 import { Product } from '../../data/products';
 
+// Antd Components
+import { Spin } from 'antd';
+
 // Components
 import ProductDetails from '../../components/product/product-details/ProductDetails';
-import { Spin } from 'antd';
 
 interface Props {}
 
