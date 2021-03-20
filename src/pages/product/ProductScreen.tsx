@@ -4,11 +4,14 @@ import React, { useEffect, useState } from 'react';
 // React Router
 import { useParams } from 'react-router';
 
+// Axios
+import axios from '../../axios';
+
 // Styles
 import { ProductScreenStyled } from './Styles';
 
 // Types
-import products, { Product } from '../../data/products';
+import { Product } from '../../data/products';
 
 // Components
 import ProductDetails from '../../components/product/product-details/ProductDetails';
@@ -16,14 +19,18 @@ import ProductDetails from '../../components/product/product-details/ProductDeta
 interface Props {}
 
 const ProductScreen: React.FC<Props> = () => {
-  const params = useParams() as { productID: string };
+  const { productID } = useParams() as { productID: string };
 
   const [product, setProduct] = useState<Product>();
 
+  const fetchProduct = async (productID: string) => {
+    const { data } = await axios.get(`/api/products/${productID}`);
+    setProduct(data);
+  };
+
   useEffect(() => {
-    const prod = products.find((product) => product._id === params.productID);
-    setProduct(prod);
-  }, [params]);
+    fetchProduct(productID);
+  }, [productID]);
 
   return (
     <ProductScreenStyled>
