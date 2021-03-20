@@ -16,6 +16,17 @@ export const ButtonStyled = styled.button<Props>`
   border: none;
   outline: none;
 
+  & > div {
+    height: 100%;
+
+    & > .ant-spin-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+  }
+
   &:disabled {
     background-color: black;
     opacity: 0.5;
