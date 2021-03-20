@@ -15,17 +15,20 @@ import { Product } from '../../data/products';
 
 // Components
 import ProductDetails from '../../components/product/product-details/ProductDetails';
+import { Spin } from 'antd';
 
 interface Props {}
 
 const ProductScreen: React.FC<Props> = () => {
   const { productID } = useParams() as { productID: string };
 
+  const [loading, setLoading] = useState<boolean>(true);
   const [product, setProduct] = useState<Product>();
 
   const fetchProduct = async (productID: string) => {
     const { data } = await axios.get(`/api/products/${productID}`);
     setProduct(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -33,13 +36,15 @@ const ProductScreen: React.FC<Props> = () => {
   }, [productID]);
 
   return (
-    <ProductScreenStyled>
-      <h1>Product Details</h1>
+    <Spin spinning={loading} delay={500}>
+      <ProductScreenStyled>
+        <h1>Product Details</h1>
 
-      {product && <ProductDetails {...product} />}
-      {/* <ProductReviews /> */}
-      {/* <ProductComments /> */}
-    </ProductScreenStyled>
+        {product && <ProductDetails {...product} />}
+        {/* <ProductReviews /> */}
+        {/* <ProductComments /> */}
+      </ProductScreenStyled>
+    </Spin>
   );
 };
 
