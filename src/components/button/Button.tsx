@@ -5,7 +5,7 @@ import React, { ButtonHTMLAttributes, forwardRef, Ref } from 'react';
 import { ButtonStyled } from './Styles';
 
 // Components
-import Spinner from '../spinner/Spinner';
+import { Spin } from 'antd';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   height?: string;
@@ -23,7 +23,7 @@ const Button = forwardRef(
       disabled,
       height = '2.7rem',
       width = '9rem',
-      loading,
+      loading = false,
       spinnerColor,
       spinnerHeight,
       spinnerWidth,
@@ -40,15 +40,9 @@ const Button = forwardRef(
         loading={loading}
         {...props}
       >
-        {loading ? (
-          <Spinner
-            color={spinnerColor}
-            height={spinnerHeight}
-            width={spinnerWidth}
-          />
-        ) : (
-          children
-        )}
+        <Spin spinning={loading} delay={500}>
+          <span>{children}</span>
+        </Spin>
       </ButtonStyled>
     );
   }
