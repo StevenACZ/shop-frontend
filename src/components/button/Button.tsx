@@ -11,9 +11,6 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   height?: string;
   width?: string;
   loading?: boolean;
-  spinnerColor?: string;
-  spinnerHeight?: number;
-  spinnerWidth?: number;
 }
 
 const Button = forwardRef(
@@ -24,9 +21,6 @@ const Button = forwardRef(
       height = '2.7rem',
       width = '9rem',
       loading = false,
-      spinnerColor,
-      spinnerHeight,
-      spinnerWidth,
       ...props
     }: Props,
     ref: Ref<HTMLButtonElement>
