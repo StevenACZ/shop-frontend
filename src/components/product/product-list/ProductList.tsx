@@ -1,8 +1,14 @@
 // React
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-// Axios
-import axios from '../../../axios';
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+
+// Redux - Actions
+import { listProducts } from '../../../actions/product';
+
+// Redux - Slices
+import { selectProducts, selectLoading } from '../../../slices/product';
 
 // Styles
 import { ProductListStyled } from './Styles';
@@ -19,23 +25,21 @@ import ProductListItem from './product-list-item/ProductListItem';
 interface Props {}
 
 const ProductList: React.FC<Props> = () => {
-  const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState([]);
+  // Dispatch
+  const dispatch = useDispatch();
 
-  const fetchProducts = async () => {
-    const { data } = await axios.get('/api/products');
-    setProducts(data);
-    setLoading(false);
-  };
+  // Selector
+  const productList = useSelector(selectProducts);
+  const loading = useSelector(selectLoading);
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    dispatch(listProducts());
+  }, [dispatch]);
 
   return (
-    <Spin spinning={loading} delay={500}>
+    <Spin spinning={loading} delay={0}>
       <ProductListStyled>
-        {products.map((product: Product) => (
+        {productList.map((product: Product) => (
           <ProductListItem key={product._id} {...product} />
         ))}
       </ProductListStyled>
