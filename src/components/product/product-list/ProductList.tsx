@@ -8,7 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../../../actions/productList';
 
 // Redux - Slices
-import { selectProducts, selectLoading } from '../../../slices/productList';
+import {
+  selectProducts,
+  selectLoading,
+  selectError,
+} from '../../../slices/productList';
 
 // Styles
 import { ProductListStyled } from './Styles';
@@ -17,7 +21,7 @@ import { ProductListStyled } from './Styles';
 import { Product } from '../../../data/products';
 
 // Antd Components
-import { Spin } from 'antd';
+import { Alert, Spin } from 'antd';
 
 // Components
 import ProductListItem from './product-list-item/ProductListItem';
@@ -31,6 +35,7 @@ const ProductList: React.FC<Props> = () => {
   // Selector
   const productList = useSelector(selectProducts);
   const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(listProducts());
@@ -38,11 +43,17 @@ const ProductList: React.FC<Props> = () => {
 
   return (
     <Spin spinning={loading} delay={0}>
-      <ProductListStyled>
-        {productList.map((product: Product) => (
-          <ProductListItem key={product._id} {...product} />
-        ))}
-      </ProductListStyled>
+      {loading ? (
+        <Spin />
+      ) : error ? (
+        <Alert message={error} type="error" showIcon banner />
+      ) : (
+        <ProductListStyled>
+          {productList.map((product: Product) => (
+            <ProductListItem key={product._id} {...product} />
+          ))}
+        </ProductListStyled>
+      )}
     </Spin>
   );
 };
