@@ -9,6 +9,7 @@ export type Product = {
   countInStock: number;
   rating: number;
   numReviews: number;
+  reviews: [];
 };
 
 const products = [
