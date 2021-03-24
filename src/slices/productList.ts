@@ -4,13 +4,13 @@ import type { RootState } from '../store/configureStore';
 interface ProductListState {
   products: [];
   loading: boolean;
-  error: string;
+  error: string | null;
 }
 
 const initialState: ProductListState = {
   products: [],
   loading: true,
-  error: '',
+  error: null,
 };
 
 export const productListSlice = createSlice({
@@ -20,14 +20,17 @@ export const productListSlice = createSlice({
     productListRequest: (state) => {
       state.products = [];
       state.loading = true;
+      state.error = null;
     },
     productListSuccess: (state, action) => {
       state.products = action.payload;
       state.loading = false;
+      state.error = null;
     },
     productListFail: (state, action) => {
-      state.error = action.payload;
+      state.products = [];
       state.loading = false;
+      state.error = action.payload;
     },
   },
 });
