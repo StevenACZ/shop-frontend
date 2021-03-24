@@ -1,17 +1,20 @@
 // React
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+
+// Redux - Actions
+import { listProductDetails } from '../../actions/productDetails';
+
+// Redux - Slices
+import { selectLoading, selectProduct } from '../../slices/productDetails';
 
 // React Router
 import { useParams } from 'react-router';
 
-// Axios
-import axios from '../../axios';
-
 // Styles
 import { ProductScreenStyled } from './Styles';
-
-// Types
-import { Product } from '../../data/products';
 
 // Antd Components
 import { Spin } from 'antd';
@@ -22,27 +25,25 @@ import ProductDetails from '../../components/product/product-details/ProductDeta
 interface Props {}
 
 const ProductScreen: React.FC<Props> = () => {
+  // Dispatch
+  const dispatch = useDispatch();
+
+  // Selector
+  const loading = useSelector(selectLoading);
+  const product = useSelector(selectProduct);
+
   const { productID } = useParams() as { productID: string };
 
-  const [loading, setLoading] = useState<boolean>(true);
-  const [product, setProduct] = useState<Product>();
-
-  const fetchProduct = async (productID: string) => {
-    const { data } = await axios.get(`/api/products/${productID}`);
-    setProduct(data);
-    setLoading(false);
-  };
-
   useEffect(() => {
-    fetchProduct(productID);
-  }, [productID]);
+    dispatch(listProductDetails(productID));
+  }, [dispatch, productID]);
 
   return (
-    <Spin spinning={loading} delay={500}>
+    <Spin spinning={loading} delay={0}>
       <ProductScreenStyled>
         <h1>Product Details</h1>
 
-        {product && <ProductDetails {...product} />}
+        {!loading && <ProductDetails {...product} />}
         {/* <ProductReviews /> */}
         {/* <ProductComments /> */}
       </ProductScreenStyled>
