@@ -18,7 +18,7 @@ interface Product {
 interface ProductDetailsState {
   product: Product;
   loading: boolean;
-  error: string;
+  error: string | null;
 }
 
 const initialState: ProductDetailsState = {
@@ -36,7 +36,7 @@ const initialState: ProductDetailsState = {
     reviews: [],
   },
   loading: true,
-  error: '',
+  error: null,
 };
 
 export const productDetailsSlice = createSlice({
@@ -49,10 +49,24 @@ export const productDetailsSlice = createSlice({
     productSuccess: (state, action) => {
       state.product = action.payload;
       state.loading = false;
+      state.error = null;
     },
     productFail: (state, action) => {
       state.error = action.payload;
       state.loading = false;
+      state.product = {
+        _id: '',
+        name: '',
+        image: '',
+        description: '',
+        brand: '',
+        category: '',
+        price: 0,
+        countInStock: 0,
+        rating: 0,
+        numReviews: 0,
+        reviews: [],
+      };
     },
   },
 });
