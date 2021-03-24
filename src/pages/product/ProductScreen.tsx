@@ -8,16 +8,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProductDetails } from '../../actions/productDetails';
 
 // Redux - Slices
-import { selectLoading, selectProduct } from '../../slices/productDetails';
+import {
+  selectError,
+  selectLoading,
+  selectProduct,
+} from '../../slices/productDetails';
 
 // React Router
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 
 // Styles
 import { ProductScreenStyled } from './Styles';
 
 // Antd Components
-import { Spin } from 'antd';
+import { Alert, Button, Spin } from 'antd';
 
 // Components
 import ProductDetails from '../../components/product/product-details/ProductDetails';
@@ -31,6 +35,10 @@ const ProductScreen: React.FC<Props> = () => {
   // Selector
   const loading = useSelector(selectLoading);
   const product = useSelector(selectProduct);
+  const error = useSelector(selectError);
+
+  // History
+  const history = useHistory();
 
   const { productID } = useParams() as { productID: string };
 
@@ -39,15 +47,32 @@ const ProductScreen: React.FC<Props> = () => {
   }, [dispatch, productID]);
 
   return (
-    <Spin spinning={loading} delay={0}>
-      <ProductScreenStyled>
-        <h1>Product Details</h1>
-
-        {!loading && <ProductDetails {...product} />}
-        {/* <ProductReviews /> */}
-        {/* <ProductComments /> */}
-      </ProductScreenStyled>
-    </Spin>
+    <ProductScreenStyled>
+      <h1>Product Details</h1>
+      <Spin spinning={loading}>
+        {loading ? (
+          <Spin />
+        ) : error ? (
+          <Alert
+            message={error}
+            type="error"
+            showIcon
+            banner
+            action={
+              <Button
+                size="small"
+                type="primary"
+                onClick={() => history.push('/')}
+              >
+                Home
+              </Button>
+            }
+          />
+        ) : (
+          <ProductDetails {...product} />
+        )}
+      </Spin>
+    </ProductScreenStyled>
   );
 };
 
