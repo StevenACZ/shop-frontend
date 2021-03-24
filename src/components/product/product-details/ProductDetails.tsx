@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 
 // React Router
 import { useHistory } from 'react-router';
@@ -24,6 +24,7 @@ import { InputNumber, Rate } from 'antd';
 import Button from '../../button/Button';
 
 const ProductDetails: React.FC<Product> = ({
+  _id,
   name,
   image,
   description,
@@ -32,8 +33,16 @@ const ProductDetails: React.FC<Product> = ({
   rating,
   numReviews,
 }) => {
+  // History
   const history = useHistory();
 
+  const [quantity, setQuantity] = useState<number>(countInStock);
+
+  const onChange = (value: number) => setQuantity(value);
+
+  const addToCartHandler = () => {
+    history.push(`/cart/${_id}?qty=${quantity}`);
+  };
   return (
     <ProductDetailsStyled>
       <Header>
@@ -76,10 +85,15 @@ const ProductDetails: React.FC<Product> = ({
               min={1}
               max={countInStock}
               defaultValue={countInStock}
+              onChange={onChange}
             />
           </div>
           <div>
-            <Button width="100%" disabled={countInStock === 0}>
+            <Button
+              width="100%"
+              disabled={countInStock === 0}
+              onClick={addToCartHandler}
+            >
               Add to cart
             </Button>
           </div>
