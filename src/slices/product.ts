@@ -19,14 +19,15 @@ export const productListSlice = createSlice({
   reducers: {
     productListRequest: (state) => {
       state.products = [];
+      state.loading = true;
     },
     productListSuccess: (state, action) => {
       state.products = action.payload;
       state.loading = false;
     },
     productListFail: (state, action) => {
-      state.loading = false;
       state.error = action.payload;
+      state.loading = false;
     },
   },
 });
