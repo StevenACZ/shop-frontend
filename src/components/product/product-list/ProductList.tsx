@@ -5,10 +5,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux - Actions
-import { listProducts } from '../../../actions/product';
+import { listProducts } from '../../../actions/productList';
 
 // Redux - Slices
-import { selectProducts, selectLoading } from '../../../slices/product';
+import { selectProducts, selectLoading } from '../../../slices/productList';
 
 // Styles
 import { ProductListStyled } from './Styles';
