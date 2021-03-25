@@ -9,6 +9,7 @@ export const CartListItemStyled = styled.li`
 `;
 
 export const Image = styled.div`
+  cursor: pointer;
   border-radius: 8px;
   overflow: hidden;
 
@@ -30,6 +31,7 @@ export const Name = styled.div`
   & > h3 {
     font-size: 14px;
     line-height: 18px;
+    cursor: pointer;
   }
 `;
 
