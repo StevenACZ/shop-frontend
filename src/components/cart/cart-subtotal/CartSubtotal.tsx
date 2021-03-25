@@ -7,18 +7,23 @@ import { CartSubtotalStyled, Summary, Checkout } from './Styles';
 // Component
 import Button from '../../button/Button';
 
-interface Props {}
+interface Props {
+  quantityItems: number;
+  totalAmount: number;
+}
 
-const CartSubtotal: React.FC<Props> = () => {
+const CartSubtotal: React.FC<Props> = ({ quantityItems, totalAmount }) => {
   return (
     <CartSubtotalStyled>
       <Summary>
-        <h3>Subtotal (3) items</h3>
-        <p>$579.97</p>
+        <h3>Subtotal ({quantityItems}) items</h3>
+        <p>${totalAmount.toFixed(2)}</p>
       </Summary>
 
       <Checkout>
-        <Button width="100%">Proceed to checkout</Button>
+        <Button width="100%" disabled={quantityItems === 0}>
+          Proceed to checkout
+        </Button>
       </Checkout>
     </CartSubtotalStyled>
   );
