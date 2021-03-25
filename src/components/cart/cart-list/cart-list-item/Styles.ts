@@ -6,6 +6,12 @@ export const CartListItemStyled = styled.li`
   grid-column-gap: 20px;
 
   padding: 10px 0;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    grid-template-columns: 15% 27% 18% 15% 1fr;
+    grid-column-gap: 10px;
+  }
 `;
 
 export const Image = styled.div`
@@ -32,6 +38,14 @@ export const Name = styled.div`
     line-height: 18px;
     cursor: pointer;
   }
+
+  @media (max-width: 768px) {
+    & > h3 {
+      font-size: 11px;
+      line-height: 16px;
+      cursor: pointer;
+    }
+  }
 `;
 
 export const Price = styled.div`
@@ -47,4 +61,8 @@ export const Quantity = styled.div`
 
 export const Remove = styled.div`
   padding: 15px;
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 `;
