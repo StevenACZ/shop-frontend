@@ -12,7 +12,7 @@ interface Props {}
 const HomeScreen: React.FC<Props> = () => {
   return (
     <HomeScreenStyled>
-      <h1>Product</h1>
+      <h2>Product</h2>
       <ProductList />
     </HomeScreenStyled>
   );
