@@ -1,5 +1,5 @@
 // React
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +14,7 @@ import { selectCartItems, selectError, selectLoading } from '../../slices/cart';
 import { useLocation, useParams } from 'react-router';
 
 // Styles
-import { CartScreenStyled } from './Styles';
+import { CartScreenStyled, Left, Right } from './Styles';
 
 // Components
 import CartList from '../../components/cart/cart-list/CartList';
@@ -44,10 +44,14 @@ const CartScreen: React.FC<Props> = () => {
 
   return (
     <CartScreenStyled>
-      <h2>Shopping cart</h2>
+      <Left>
+        <h2>Shopping cart</h2>
+        <CartList productList={productList} />
+      </Left>
 
-      <CartList productList={productList} />
-      <CartSubtotal />
+      <Right>
+        <CartSubtotal />
+      </Right>
     </CartScreenStyled>
   );
 };
