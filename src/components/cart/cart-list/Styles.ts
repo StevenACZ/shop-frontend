@@ -1,3 +1,3 @@
 import styled from 'styled-components';
 
-export const CartListStyled = styled.section``;
+export const CartListStyled = styled.ul``;
