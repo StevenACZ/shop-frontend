@@ -2,37 +2,33 @@
 import axios from '../axios/index';
 
 // Redux - Slices
-import { cartAddItem } from '../slices/cart';
+import { cartAddItem, cartRemoveItem } from '../slices/cart';
 
 export const addToCart = (productId: string, qty: number) => async (
   dispatch: any,
   getState: any
 ) => {
-  try {
-    const { data } = await axios.get(`/api/products/${productId}`);
+  const { data } = await axios.get(`/api/products/${productId}`);
 
-    dispatch(
-      cartAddItem({
-        product: data._id,
-        name: data.name,
-        image: data.image,
-        price: data.price,
-        countInStock: data.countInStock,
-        qty,
-      })
-    );
+  dispatch(
+    cartAddItem({
+      product: data._id,
+      name: data.name,
+      image: data.image,
+      price: data.price,
+      countInStock: data.countInStock,
+      qty,
+    })
+  );
 
-    localStorage.setItem(
-      'cartItems',
-      JSON.stringify(getState().cart.cartItems)
-    );
-  } catch (error) {
-    // dispatch(
-    //   productFail(
-    //     error.response && error.response.data.message
-    //       ? error.response.data.message
-    //       : error.message
-    //   )
-    // );
-  }
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+};
+
+export const removeFromCart = (productId: string) => async (
+  dispatch: any,
+  getState: any
+) => {
+  dispatch(cartRemoveItem(productId));
+
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
 };
