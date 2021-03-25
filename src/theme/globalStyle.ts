@@ -12,6 +12,11 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  ul {
+    margin: 0;
+    list-style: none;
+  }
+
   h1,
   h2,
   h3,
