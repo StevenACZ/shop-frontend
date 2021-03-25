@@ -1,6 +1,9 @@
 // React
 import React from 'react';
 
+// React Router
+import { useHistory } from 'react-router';
+
 // Styles
 import { CartSubtotalStyled, Summary, Checkout } from './Styles';
 
@@ -13,6 +16,13 @@ interface Props {
 }
 
 const CartSubtotal: React.FC<Props> = ({ quantityItems, totalAmount }) => {
+  // History
+  const history = useHistory();
+
+  const checkoutHandler = () => {
+    history.push(`/login?redirect=shipping`);
+  };
+
   return (
     <CartSubtotalStyled>
       <Summary>
@@ -21,7 +31,11 @@ const CartSubtotal: React.FC<Props> = ({ quantityItems, totalAmount }) => {
       </Summary>
 
       <Checkout>
-        <Button width="100%" disabled={quantityItems === 0}>
+        <Button
+          width="100%"
+          disabled={quantityItems === 0}
+          onClick={checkoutHandler}
+        >
           Proceed to checkout
         </Button>
       </Checkout>
