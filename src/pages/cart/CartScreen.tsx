@@ -32,11 +32,13 @@ const CartScreen: React.FC<Props> = () => {
   // Dispatch
   const dispatch = useDispatch();
 
+  // Location
+  const location = useLocation();
+
   // Selector
   const productList = useSelector(selectCartItems);
 
   const { productID } = useParams() as { productID: string };
-  const location = useLocation();
 
   const qty = location.search ? Number(location.search.split('=')[1]) : 1;
 

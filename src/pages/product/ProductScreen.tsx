@@ -64,7 +64,7 @@ const ProductScreen: React.FC<Props> = () => {
                 type="primary"
                 onClick={() => history.push('/')}
               >
-                Home
+                Go Home
               </Button>
             }
           />
