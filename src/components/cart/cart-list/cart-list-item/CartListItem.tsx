@@ -5,7 +5,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 // Redux - Actions
-import { addToCart } from '../../../../actions/cart';
+import { addToCart, removeFromCart } from '../../../../actions/cart';
 
 // React Router
 import { useHistory } from 'react-router';
@@ -52,6 +52,10 @@ const CartListItem: React.FC<Props> = ({
   // Dispatch
   const dispatch = useDispatch();
 
+  const removeFromCartHandler = (productId: string) => {
+    dispatch(removeFromCart(productId));
+  };
+
   const goToProduct = () => {
     history.push(`/product/${product}`);
   };
@@ -82,7 +86,11 @@ const CartListItem: React.FC<Props> = ({
       </Quantity>
 
       <Remove>
-        <Button width="100%" height="100%">
+        <Button
+          width="100%"
+          height="100%"
+          onClick={() => removeFromCartHandler(product)}
+        >
           <DeleteFilled />
         </Button>
       </Remove>
