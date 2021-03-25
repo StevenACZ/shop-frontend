@@ -26,7 +26,7 @@ const CartScreen: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   // Selector
-  // const productList = useSelector(selectCartItems);
+  const productList = useSelector(selectCartItems);
   // const loading = useSelector(selectLoading);
   // const error = useSelector(selectError);
 
@@ -45,7 +45,7 @@ const CartScreen: React.FC<Props> = () => {
     <CartScreenStyled>
       <h2>Shopping cart</h2>
 
-      <CartList />
+      <CartList productList={productList} />
       {/* <CartSubTotal /> */}
     </CartScreenStyled>
   );
