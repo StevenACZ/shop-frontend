@@ -13,7 +13,7 @@ interface Props {
 
 const CartList: React.FC<Props> = ({ productList }) => {
   return (
-    <CartListStyled style={{ width: '60%' }}>
+    <CartListStyled>
       {productList.map((product: any) => (
         <CartListItem key={product.product} {...product} />
       ))}
