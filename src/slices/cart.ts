@@ -7,14 +7,10 @@ const cartItemsFromStorage = localStorage.getItem('cartItems')
 
 interface CartState {
   cartItems: object[];
-  loading: boolean;
-  error: string | null;
 }
 
 const initialState: CartState = {
   cartItems: cartItemsFromStorage,
-  loading: true,
-  error: null,
 };
 
 export const cartSlice = createSlice({
@@ -35,30 +31,12 @@ export const cartSlice = createSlice({
       } else {
         state.cartItems.push(item);
       }
-      state.loading = false;
-      state.error = null;
-    },
-    productListSuccess: (state, action) => {
-      // state.products = action.payload;
-      // state.loading = false;
-      // state.error = null;
-    },
-    productListFail: (state, action) => {
-      // state.products = [];
-      // state.loading = false;
-      // state.error = action.payload;
     },
   },
 });
 
-export const {
-  cartAddItem,
-  productListSuccess,
-  productListFail,
-} = cartSlice.actions;
+export const { cartAddItem } = cartSlice.actions;
 
 export const selectCartItems = (state: RootState) => state.cart.cartItems;
-export const selectLoading = (state: RootState) => state.cart.loading;
-export const selectError = (state: RootState) => state.cart.error;
 
 export default cartSlice.reducer;
