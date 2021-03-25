@@ -47,6 +47,9 @@ export const Quantity = styled.div`
 `;
 
 export const Remove = styled.div`
-  border-radius: 8px;
-  overflow: hidden;
+  padding: 15px;
+
+  & > button {
+    border-radius: 8px;
+  }
 `;
