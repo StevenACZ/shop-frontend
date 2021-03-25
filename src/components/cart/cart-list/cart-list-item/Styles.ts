@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CartListItemStyled = styled.section`
+export const CartListItemStyled = styled.li`
   display: grid;
   grid-template-columns: 15% 1fr 10% 15% 15%;
   grid-column-gap: 20px;
