@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,8 +28,11 @@ const CartScreen: React.FC<Props> = () => {
 
   // Selector
   const productList = useSelector(selectCartItems);
-  // const loading = useSelector(selectLoading);
-  // const error = useSelector(selectError);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+
+  console.log(loading);
+  console.log(error);
 
   const { productID } = useParams() as { productID: string };
   const location = useLocation();
