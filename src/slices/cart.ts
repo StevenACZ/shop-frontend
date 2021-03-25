@@ -35,7 +35,7 @@ export const cartSlice = createSlice({
       } else {
         state.cartItems.push(item);
       }
-      state.loading = true;
+      state.loading = false;
       state.error = null;
     },
     productListSuccess: (state, action) => {
@@ -57,8 +57,8 @@ export const {
   productListFail,
 } = cartSlice.actions;
 
-export const selectCartItems = (state: RootState) => state.productList.products;
-export const selectLoading = (state: RootState) => state.productList.loading;
-export const selectError = (state: RootState) => state.productList.error;
+export const selectCartItems = (state: RootState) => state.cart.cartItems;
+export const selectLoading = (state: RootState) => state.cart.loading;
+export const selectError = (state: RootState) => state.cart.error;
 
 export default cartSlice.reducer;
