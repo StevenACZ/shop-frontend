@@ -4,10 +4,21 @@ import React from 'react';
 // Styles
 import { CartListStyled } from './Styles';
 
-interface Props {}
+// Components
+import CartListItem from './cart-list-item/CartListItem';
 
-const CartList: React.FC<Props> = () => {
-  return <CartListStyled>CartList</CartListStyled>;
+interface Props {
+  productList: {}[];
+}
+
+const CartList: React.FC<Props> = ({ productList }) => {
+  return (
+    <CartListStyled style={{ width: '60%' }}>
+      {productList.map((product: any) => (
+        <CartListItem key={product.product} {...product} />
+      ))}
+    </CartListStyled>
+  );
 };
 
 export default CartList;
