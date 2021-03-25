@@ -10,7 +10,6 @@ export const CartListItemStyled = styled.li`
 
 export const Image = styled.div`
   cursor: pointer;
-  border-radius: 8px;
   overflow: hidden;
 
   width: 100%;
@@ -48,8 +47,4 @@ export const Quantity = styled.div`
 
 export const Remove = styled.div`
   padding: 15px;
-
-  & > button {
-    border-radius: 8px;
-  }
 `;
