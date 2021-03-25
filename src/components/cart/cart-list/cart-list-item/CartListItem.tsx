@@ -1,6 +1,15 @@
 // React
 import React from 'react';
 
+// Redux
+import { useDispatch } from 'react-redux';
+
+// Redux - Actions
+import { addToCart } from '../../../../actions/cart';
+
+// React Router
+import { useHistory } from 'react-router';
+
 // Styles
 import {
   CartListItemStyled,
@@ -21,6 +30,7 @@ import { InputNumber } from 'antd';
 import Button from '../../../button/Button';
 
 interface Props {
+  product: string;
   name: string;
   image: string;
   price: number;
@@ -29,20 +39,31 @@ interface Props {
 }
 
 const CartListItem: React.FC<Props> = ({
+  product,
   name,
   image,
   price,
   countInStock,
   qty,
 }) => {
+  // History
+  const history = useHistory();
+
+  // Dispatch
+  const dispatch = useDispatch();
+
+  const goToProduct = () => {
+    history.push(`/product/${product}`);
+  };
+
   return (
     <CartListItemStyled>
-      <Image>
+      <Image onClick={goToProduct}>
         <img src={image} alt={name} />
       </Image>
 
       <Name>
-        <h3>{name}</h3>
+        <h3 onClick={goToProduct}>{name}</h3>
       </Name>
 
       <Price>
@@ -54,7 +75,9 @@ const CartListItem: React.FC<Props> = ({
           min={1}
           max={countInStock}
           defaultValue={qty}
-          // onChange={onChange}
+          onChange={(currentQty: number) =>
+            dispatch(addToCart(product, currentQty))
+          }
         />
       </Quantity>
 
