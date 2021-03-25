@@ -18,6 +18,7 @@ import { CartScreenStyled } from './Styles';
 
 // Components
 import CartList from '../../components/cart/cart-list/CartList';
+import CartSubtotal from '../../components/cart/cart-subtotal/CartSubtotal';
 
 interface Props {}
 
@@ -46,7 +47,7 @@ const CartScreen: React.FC<Props> = () => {
       <h2>Shopping cart</h2>
 
       <CartList productList={productList} />
-      {/* <CartSubTotal /> */}
+      <CartSubtotal />
     </CartScreenStyled>
   );
 };
