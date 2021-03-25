@@ -26,9 +26,9 @@ const CartScreen: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   // Selector
-  const productList = useSelector(selectCartItems);
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  // const productList = useSelector(selectCartItems);
+  // const loading = useSelector(selectLoading);
+  // const error = useSelector(selectError);
 
   const { productID } = useParams() as { productID: string };
   const location = useLocation();
