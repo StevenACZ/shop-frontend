@@ -79,6 +79,7 @@ const CartListItem: React.FC<Props> = ({
           min={1}
           max={countInStock}
           defaultValue={qty}
+          value={qty}
           onChange={(currentQty: number) =>
             dispatch(addToCart(product, currentQty))
           }
