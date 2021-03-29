@@ -15,6 +15,7 @@ export const ButtonStyled = styled.button<Props>`
   color: ${color.colorWhite};
   border: none;
   outline: none;
+  text-transform: uppercase;
 
   & > div {
     height: 100%;
@@ -24,6 +25,21 @@ export const ButtonStyled = styled.button<Props>`
       justify-content: center;
       align-items: center;
       height: 100%;
+
+      & > span {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0;
+
+        & > span {
+          margin: 0;
+        }
+
+        & > p {
+          margin-right: 10px;
+        }
+      }
     }
   }
 
