@@ -3,17 +3,17 @@ import type { RootState } from '../store/configureStore';
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo') || '{}')
-  : {};
+  : null;
 
 interface UserState {
-  userInfo: {};
+  userInfo: {} | null;
   loading: boolean;
   error: null | string;
 }
 
 const initialState: UserState = {
   userInfo: userInfoFromStorage,
-  loading: true,
+  loading: false,
   error: null,
 };
 
@@ -22,15 +22,22 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     userLoginRequest: (state) => {
+      state.userInfo = null;
       state.loading = true;
-      state.userInfo = {};
     },
     userLoginSuccess: (state, action) => {
       state.userInfo = action.payload;
       state.loading = false;
     },
-    userLoginFail: (state, action) => {},
-    userLogout: (state, action) => {},
+    userLoginFail: (state, action) => {
+      state.userInfo = null;
+      state.error = action.payload;
+      state.loading = false;
+    },
+    userLogout: (state) => {
+      state.userInfo = null;
+      state.loading = false;
+    },
   },
 });
 
