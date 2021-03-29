@@ -2,7 +2,7 @@
 import React from 'react';
 
 // React Router
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 // Styles
 import {
@@ -21,6 +21,8 @@ import Button from '../../button/Button';
 interface Props {}
 
 const Header: React.FC<Props> = () => {
+  const history = useHistory();
+
   return (
     <HeaderStyled>
       <HeaderContainer>
@@ -40,8 +42,8 @@ const Header: React.FC<Props> = () => {
         <Navbar>
           <Links></Links>
           <Profile>
-            <Button>Sign in</Button>
-            <Button>Sign up</Button>
+            <Button onClick={() => history.push('/login')}>Sign in</Button>
+            <Button onClick={() => history.push('/register')}>Sign up</Button>
           </Profile>
         </Navbar>
       </HeaderContainer>
