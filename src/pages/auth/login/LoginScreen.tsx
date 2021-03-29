@@ -1,5 +1,18 @@
 // React
-import React from 'react';
+import React, { useEffect } from 'react';
+
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+
+// Redux - Actions
+import { login } from '../../../actions/user';
+
+// Redux - Slices
+import {
+  selectError,
+  selectLoading,
+  selectUserInfo,
+} from '../../../slices/user';
 
 // React Router
 import { useHistory } from 'react-router';
@@ -10,6 +23,9 @@ import { useForm } from 'react-hook-form';
 // Styles
 import { LoginScreenStyled, Form, GoRegister } from './Styles';
 
+// Antd Components
+import { Alert, Spin } from 'antd';
+
 // Components
 import Input from '../../../components/input/Input';
 import Button from '../../../components/button/Button';
@@ -17,13 +33,30 @@ import Button from '../../../components/button/Button';
 interface Props {}
 
 const LoginScreen: React.FC<Props> = () => {
+  // History
   const history = useHistory();
+
+  // Dispatch
+  const dispatch = useDispatch();
+
+  // Selector
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+  const userInfo = useSelector(selectUserInfo);
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push('/');
+    }
+  }, [history, userInfo]);
 
   const { register, errors, handleSubmit } = useForm();
 
-  const handleSignIn = handleSubmit((data: {}) => {
-    console.log(data);
-  });
+  const handleSignIn = handleSubmit(
+    (data: { email: string; password: string }) => {
+      dispatch(login(data));
+    }
+  );
 
   return (
     <LoginScreenStyled>
@@ -60,6 +93,9 @@ const LoginScreen: React.FC<Props> = () => {
             },
           })}
         />
+        <Spin spinning={loading}>
+          {error && <Alert message={error} type="error" showIcon banner />}
+        </Spin>
         <Button width="100%">SIGN IN</Button>
 
         <GoRegister>
