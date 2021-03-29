@@ -15,6 +15,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   max-width: 1000px;
   width: 1000px;
+  height: 40px;
 
   @media (max-width: 1000px) {
     padding: 0 20px;
@@ -31,19 +32,33 @@ export const Logo = styled.div`
 `;
 
 export const Search = styled.div`
-  & > label > input {
-    max-width: 300px;
-    width: 300px;
-    padding: 11px 0 11px 20px;
-    outline: none;
-    border-radius: 4px;
-    margin-right: 10px;
-    border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+
+  & > label {
+    height: 100%;
+    display: inline-block;
+
+    & > input {
+      height: 100%;
+      max-width: 200px;
+      width: 300px;
+      padding: 0px 0 0px 15px;
+      outline: none;
+      border-radius: 4px;
+      margin-right: 10px;
+      border: none;
+    }
   }
 
   & > button {
     background-color: ${color.colorWhite};
     color: ${color.colorBlack};
+    width: auto;
+    padding: 0 20px;
+    height: 100%;
   }
 
   @media (max-width: 1000px) {
@@ -51,8 +66,33 @@ export const Search = styled.div`
   }
 `;
 
-export const Navbar = styled.nav``;
-export const Links = styled.div``;
+export const DrawerStyled = styled.div`
+  display: none;
+
+  & > button {
+    background: white;
+    color: black;
+    width: auto;
+    padding: 0 20px;
+  }
+
+  @media (max-width: 720px) {
+    display: block;
+  }
+`;
+
+export const Navbar = styled.nav`
+  height: 100%;
+  display: flex;
+
+  button {
+    height: 100%;
+  }
+
+  @media (max-width: 720px) {
+    display: none;
+  }
+`;
 
 export const Profile = styled.div`
   & > button:first-child {
@@ -62,12 +102,5 @@ export const Profile = styled.div`
   & > button {
     background-color: ${color.colorWhite};
     color: ${color.colorBlack};
-  }
-
-  @media (max-width: 720px) {
-    & > button {
-      height: 35px;
-      width: 80px;
-    }
   }
 `;
