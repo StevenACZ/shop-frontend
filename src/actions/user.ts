@@ -8,9 +8,13 @@ import {
   userLoginSuccess,
 } from '../slices/user';
 
-export const login = (email: string, password: string) => async (
-  dispatch: any
-) => {
+export const login = ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) => async (dispatch: any) => {
   try {
     dispatch(userLoginRequest());
 
@@ -31,8 +35,8 @@ export const login = (email: string, password: string) => async (
   } catch (error) {
     dispatch(
       userLoginFail(
-        error.response && error.response.data.message
-          ? error.response.data.message
+        error.response && error.response.data.msg
+          ? error.response.data.msg
           : error.message
       )
     );
