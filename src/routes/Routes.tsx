@@ -9,6 +9,7 @@ import HomeScreen from '../pages/home/HomeScreen';
 import ProductScreen from '../pages/product/ProductScreen';
 import CartScreen from '../pages/cart/CartScreen';
 import LoginScreen from '../pages/auth/login/LoginScreen';
+import RegisterScreen from '../pages/auth/register/RegisterScreen';
 
 interface Props {}
 
@@ -19,6 +20,7 @@ const Routes: React.FC<Props> = () => {
       <Route exact path="/product/:productID" component={ProductScreen} />
       <Route exact path="/cart/:productID?" component={CartScreen} />
       <Route exact path="/login" component={LoginScreen} />
+      <Route exact path="/register" component={RegisterScreen} />
 
       <Redirect to="/" />
     </Switch>
