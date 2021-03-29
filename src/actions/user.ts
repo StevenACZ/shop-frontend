@@ -6,6 +6,7 @@ import {
   userLoginFail,
   userLoginRequest,
   userLoginSuccess,
+  userLogout,
 } from '../slices/user';
 
 export const login = ({
@@ -41,4 +42,9 @@ export const login = ({
       )
     );
   }
+};
+
+export const logout = () => (dispatch: any) => {
+  localStorage.removeItem('userInfo');
+  dispatch(userLogout());
 };
