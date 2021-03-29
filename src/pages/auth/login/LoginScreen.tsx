@@ -21,31 +21,14 @@ const LoginScreen: React.FC<Props> = () => {
 
   const { register, errors, handleSubmit } = useForm();
 
-  const handleSignup = handleSubmit((data: {}) => {
+  const handleSignIn = handleSubmit((data: {}) => {
     console.log(data);
   });
 
   return (
     <LoginScreenStyled>
-      <Form onSubmit={handleSignup}>
+      <Form onSubmit={handleSignIn}>
         <h2>Sign in</h2>
-        <Input
-          name="username"
-          label="Username"
-          placeholder="Your username"
-          error={errors.username?.message}
-          ref={register({
-            required: 'Username is required',
-            minLength: {
-              value: 3,
-              message: 'Username must be at least 3 characters',
-            },
-            maxLength: {
-              value: 20,
-              message: 'Username must not be greater than 20 characters',
-            },
-          })}
-        />
         <Input
           name="email"
           label="Email"
