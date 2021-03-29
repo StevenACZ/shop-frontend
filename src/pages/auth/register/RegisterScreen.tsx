@@ -17,6 +17,7 @@ import Button from '../../../components/button/Button';
 interface Props {}
 
 const RegisterScreen: React.FC<Props> = () => {
+  // History
   const history = useHistory();
 
   const { register, errors, handleSubmit } = useForm();
