@@ -9,7 +9,7 @@ import { register as registerUser } from '../../../actions/user';
 
 // Redux - Slices
 import {
-  selectError,
+  selectErrorRegister,
   selectLoading,
   selectUserInfo,
 } from '../../../slices/user';
@@ -41,7 +41,7 @@ const RegisterScreen: React.FC<Props> = () => {
 
   // Selector
   const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  const error = useSelector(selectErrorRegister);
   const userInfo = useSelector(selectUserInfo);
 
   useEffect(() => {
