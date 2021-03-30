@@ -38,6 +38,19 @@ export const userSlice = createSlice({
       state.userInfo = null;
       state.loading = false;
     },
+    userRegisterRequest: (state) => {
+      state.userInfo = null;
+      state.loading = true;
+    },
+    userRegisterSuccess: (state, action) => {
+      state.userInfo = action.payload;
+      state.loading = false;
+    },
+    userRegisterFail: (state, action) => {
+      state.userInfo = null;
+      state.error = action.payload;
+      state.loading = false;
+    },
   },
 });
 
@@ -46,6 +59,9 @@ export const {
   userLoginSuccess,
   userLoginFail,
   userLogout,
+  userRegisterRequest,
+  userRegisterSuccess,
+  userRegisterFail,
 } = userSlice.actions;
 
 export const selectUserInfo = (state: RootState) => state.user.userInfo;
