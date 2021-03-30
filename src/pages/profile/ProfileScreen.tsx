@@ -5,14 +5,16 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux - Actions
-import { getUserDetails } from '../../actions/user';
+import { getUserDetails, updateUserProfile } from '../../actions/user';
 
 // Redux - Slices
 import {
   selectErrorDetails,
+  selectErrorUpdateDetails,
   selectLoading,
   selectUser,
   selectUserInfo,
+  selectSuccess,
 } from '../../slices/user';
 
 // React Router
@@ -41,13 +43,16 @@ const ProfileScreen: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   // Selector
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectErrorDetails);
   const userInfo = useSelector(selectUserInfo);
   const user = useSelector(selectUser) as {
     name: string;
     email: string;
   };
+
+  const success = useSelector(selectSuccess);
+  const errorDetails = useSelector(selectErrorDetails);
+  const errorUpdateDetails = useSelector(selectErrorUpdateDetails);
+  const loading = useSelector(selectLoading);
 
   useEffect(() => {
     if (!userInfo) {
@@ -71,8 +76,7 @@ const ProfileScreen: React.FC<Props> = () => {
       password: string;
       password_repeat: string;
     }) => {
-      console.log(data);
-      // dispatch(registerUser(data));
+      dispatch(updateUserProfile(data));
     }
   );
 
@@ -84,7 +88,7 @@ const ProfileScreen: React.FC<Props> = () => {
           <Input
             name="name"
             label="Name"
-            value={user && user.name}
+            defaultValue={user && user.name}
             placeholder="Your name"
             error={errors.name?.message}
             ref={register({
@@ -102,7 +106,7 @@ const ProfileScreen: React.FC<Props> = () => {
           <Input
             name="email"
             label="Email"
-            value={user && user.email}
+            defaultValue={user && user.email}
             placeholder="Your email"
             error={errors.email?.message}
             ref={register({
@@ -120,7 +124,6 @@ const ProfileScreen: React.FC<Props> = () => {
             placeholder="Enter password"
             error={errors.password?.message}
             ref={register({
-              required: 'Password is required',
               minLength: {
                 value: 6,
                 message: 'Password must be at least 6 characters',
@@ -142,7 +145,15 @@ const ProfileScreen: React.FC<Props> = () => {
                 value === password.current || 'The passwords do not match',
             })}
           />
-          {error && <Alert message={error} type="error" showIcon banner />}
+          {errorDetails && (
+            <Alert message={errorDetails} type="error" showIcon banner />
+          )}
+          {errorUpdateDetails && (
+            <Alert message={errorUpdateDetails} type="error" showIcon banner />
+          )}
+          {success && (
+            <Alert message="Updated" type="success" showIcon banner />
+          )}
           <Button width="100%">UPDATE</Button>
         </Form>
       </Spin>
