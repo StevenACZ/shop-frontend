@@ -9,7 +9,7 @@ import { login } from '../../../actions/user';
 
 // Redux - Slices
 import {
-  selectError,
+  selectErrorLogin,
   selectLoading,
   selectUserInfo,
 } from '../../../slices/user';
@@ -41,7 +41,7 @@ const LoginScreen: React.FC<Props> = () => {
 
   // Selector
   const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  const error = useSelector(selectErrorLogin);
   const userInfo = useSelector(selectUserInfo);
 
   useEffect(() => {
