@@ -9,7 +9,7 @@ import { getUserDetails } from '../../actions/user';
 
 // Redux - Slices
 import {
-  selectError,
+  selectErrorDetails,
   selectLoading,
   selectUser,
   selectUserInfo,
@@ -42,7 +42,7 @@ const ProfileScreen: React.FC<Props> = () => {
 
   // Selector
   const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  const error = useSelector(selectErrorDetails);
   const userInfo = useSelector(selectUserInfo);
   const user = useSelector(selectUser) as {
     name: string;
