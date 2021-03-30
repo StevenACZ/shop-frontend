@@ -1,5 +1,5 @@
 // React
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -50,10 +50,18 @@ const RegisterScreen: React.FC<Props> = () => {
     }
   }, [history, userInfo]);
 
-  const { register, errors, handleSubmit } = useForm();
+  const { register, errors, handleSubmit, watch } = useForm();
+
+  const password = useRef({});
+  password.current = watch('password', '');
 
   const handleSignUp = handleSubmit(
-    (data: { name: string; email: string; password: string }) => {
+    (data: {
+      name: string;
+      email: string;
+      password: string;
+      password_repeat: string;
+    }) => {
       dispatch(registerUser(data));
     }
   );
@@ -109,6 +117,17 @@ const RegisterScreen: React.FC<Props> = () => {
                 value: 50,
                 message: 'Password must not be greater than 50 characters',
               },
+            })}
+          />
+          <Input
+            type="password"
+            name="password_repeat"
+            label="Confirm Password"
+            placeholder="Confirm password"
+            error={errors.password_repeat?.message}
+            ref={register({
+              validate: (value) =>
+                value === password.current || 'The passwords do not match',
             })}
           />
           {error && <Alert message={error} type="error" showIcon banner />}
