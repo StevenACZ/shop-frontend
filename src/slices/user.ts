@@ -54,6 +54,7 @@ export const userSlice = createSlice({
       state.user = null;
       state.userInfo = null;
       state.loading = false;
+      state.success = false;
       state.errors.errorLogin = null;
       state.errors.errorRegister = null;
       state.errors.errorDetails = null;
@@ -108,6 +109,14 @@ export const userSlice = createSlice({
       state.errors.errorUpdateDetails = action.payload;
       state.loading = false;
     },
+    // DELETE ALERTS
+    deleteAlert: (state) => {
+      state.success = false;
+      state.errors.errorLogin = null;
+      state.errors.errorRegister = null;
+      state.errors.errorDetails = null;
+      state.errors.errorUpdateDetails = null;
+    },
   },
 });
 
@@ -126,6 +135,7 @@ export const {
   userUpdateProfileSuccess,
   userUpdateProfileFail,
   userUpdateProfileReset,
+  deleteAlert,
 } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user.user;
