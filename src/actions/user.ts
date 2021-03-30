@@ -16,7 +16,14 @@ import {
   userUpdateProfileRequest,
   userUpdateProfileSuccess,
   userUpdateProfileFail,
+  deleteAlert,
 } from '../slices/user';
+
+export const deleteAlerts = () => (dispatch: any) => {
+  setTimeout(() => {
+    dispatch(deleteAlert());
+  }, 3000);
+};
 
 export const login = ({
   email,
@@ -51,6 +58,8 @@ export const login = ({
           : error.message
       )
     );
+
+    dispatch(deleteAlerts());
   }
 };
 
@@ -95,6 +104,8 @@ export const register = ({
           : error.message
       )
     );
+
+    dispatch(deleteAlerts());
   }
 };
 
@@ -126,6 +137,8 @@ export const getUserDetails = () => async (dispatch: any, getState: any) => {
           : error.message
       )
     );
+
+    dispatch(deleteAlerts());
   }
 };
 
@@ -161,8 +174,10 @@ export const updateUserProfile = ({
     );
 
     dispatch(userUpdateProfileSuccess(data));
-
     dispatch(getUserDetails());
+
+    localStorage.setItem('userInfo', JSON.stringify(data));
+    dispatch(deleteAlerts());
   } catch (error) {
     dispatch(
       userUpdateProfileFail(
@@ -171,5 +186,7 @@ export const updateUserProfile = ({
           : error.message
       )
     );
+
+    dispatch(deleteAlerts());
   }
 };
