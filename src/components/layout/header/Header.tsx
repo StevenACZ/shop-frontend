@@ -61,7 +61,11 @@ const Header: React.FC<Props> = () => {
 
   const menu = (
     <Menu>
-      <Menu.Item key="1" icon={<ProfileOutlined />}>
+      <Menu.Item
+        key="1"
+        icon={<ProfileOutlined />}
+        onClick={() => history.push('/profile')}
+      >
         Profile
       </Menu.Item>
       <Menu.Divider />
