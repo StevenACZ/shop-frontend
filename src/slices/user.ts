@@ -6,12 +6,14 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   : null;
 
 interface UserState {
+  user: {} | null;
   userInfo: {} | null;
   loading: boolean;
   error: null | string;
 }
 
 const initialState: UserState = {
+  user: null,
   userInfo: userInfoFromStorage,
   loading: false,
   error: null,
@@ -21,6 +23,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    // LOGIN
     userLoginRequest: (state) => {
       state.userInfo = null;
       state.loading = true;
@@ -38,6 +41,7 @@ export const userSlice = createSlice({
       state.userInfo = null;
       state.loading = false;
     },
+    // REGISTER
     userRegisterRequest: (state) => {
       state.userInfo = null;
       state.loading = true;
@@ -48,6 +52,20 @@ export const userSlice = createSlice({
     },
     userRegisterFail: (state, action) => {
       state.userInfo = null;
+      state.error = action.payload;
+      state.loading = false;
+    },
+    // DETAILS
+    userDetailsRequest: (state) => {
+      state.user = null;
+      state.loading = true;
+    },
+    userDetailsSuccess: (state, action) => {
+      state.user = action.payload;
+      state.loading = false;
+    },
+    userDetailsFail: (state, action) => {
+      state.user = null;
       state.error = action.payload;
       state.loading = false;
     },
@@ -62,6 +80,9 @@ export const {
   userRegisterRequest,
   userRegisterSuccess,
   userRegisterFail,
+  userDetailsRequest,
+  userDetailsSuccess,
+  userDetailsFail,
 } = userSlice.actions;
 
 export const selectUserInfo = (state: RootState) => state.user.userInfo;
