@@ -7,6 +7,9 @@ import {
   userLoginRequest,
   userLoginSuccess,
   userLogout,
+  userRegisterFail,
+  userRegisterRequest,
+  userRegisterSuccess,
 } from '../slices/user';
 
 export const login = ({
@@ -31,13 +34,14 @@ export const login = ({
       config
     );
 
-    localStorage.setItem('userInfo', JSON.stringify(data));
     dispatch(userLoginSuccess(data));
+
+    localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch(
       userLoginFail(
-        error.response && error.response.data.msg
-          ? error.response.data.msg
+        error.response && error.response.data.message
+          ? error.response.data.message
           : error.message
       )
     );
@@ -47,4 +51,43 @@ export const login = ({
 export const logout = () => (dispatch: any) => {
   localStorage.removeItem('userInfo');
   dispatch(userLogout());
+};
+
+export const register = ({
+  name,
+  email,
+  password,
+}: {
+  name: string;
+  email: string;
+  password: string;
+}) => async (dispatch: any) => {
+  try {
+    dispatch(userRegisterRequest());
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.post(
+      '/api/users',
+      { name, email, password },
+      config
+    );
+
+    dispatch(userRegisterSuccess(data));
+    dispatch(userLoginSuccess(data));
+
+    localStorage.setItem('userInfo', JSON.stringify(data));
+  } catch (error) {
+    dispatch(
+      userRegisterFail(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      )
+    );
+  }
 };
