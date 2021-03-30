@@ -85,6 +85,7 @@ export const {
   userDetailsFail,
 } = userSlice.actions;
 
+export const selectUser = (state: RootState) => state.user.user;
 export const selectUserInfo = (state: RootState) => state.user.userInfo;
 export const selectLoading = (state: RootState) => state.user.loading;
 export const selectError = (state: RootState) => state.user.error;
