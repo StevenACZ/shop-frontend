@@ -60,49 +60,49 @@ const LoginScreen: React.FC<Props> = () => {
 
   return (
     <LoginScreenStyled>
-      <Form onSubmit={handleSignIn}>
-        <h2>Sign in</h2>
-        <Input
-          name="email"
-          label="Email"
-          placeholder="Your email"
-          error={errors.email?.message}
-          ref={register({
-            required: 'Email is required',
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Email is in wrong format',
-            },
-          })}
-        />
-        <Input
-          type="password"
-          name="password"
-          label="Password"
-          placeholder="Your password"
-          error={errors.password?.message}
-          ref={register({
-            required: 'Password is required',
-            minLength: {
-              value: 6,
-              message: 'Password must be at least 6 characters',
-            },
-            maxLength: {
-              value: 50,
-              message: 'Password must not be greater than 50 characters',
-            },
-          })}
-        />
-        <Spin spinning={loading}>
+      <Spin spinning={loading}>
+        <Form onSubmit={handleSignIn}>
+          <h2>Sign in</h2>
+          <Input
+            name="email"
+            label="Email"
+            placeholder="Your email"
+            error={errors.email?.message}
+            ref={register({
+              required: 'Email is required',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Email is in wrong format',
+              },
+            })}
+          />
+          <Input
+            type="password"
+            name="password"
+            label="Password"
+            placeholder="Your password"
+            error={errors.password?.message}
+            ref={register({
+              required: 'Password is required',
+              minLength: {
+                value: 6,
+                message: 'Password must be at least 6 characters',
+              },
+              maxLength: {
+                value: 50,
+                message: 'Password must not be greater than 50 characters',
+              },
+            })}
+          />
           {error && <Alert message={error} type="error" showIcon banner />}
-        </Spin>
-        <Button width="100%">SIGN IN</Button>
+          <Button width="100%">SIGN IN</Button>
 
-        <GoRegister>
-          New Customer?
-          <span onClick={() => history.push('/register')}>Register</span>
-        </GoRegister>
-      </Form>
+          <GoRegister>
+            New Customer?
+            <span onClick={() => history.push('/register')}>Register</span>
+          </GoRegister>
+        </Form>
+      </Spin>
     </LoginScreenStyled>
   );
 };
