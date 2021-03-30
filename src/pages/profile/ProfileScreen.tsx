@@ -8,7 +8,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetails } from '../../actions/user';
 
 // Redux - Slices
-import { selectError, selectLoading, selectUser } from '../../slices/user';
+import {
+  selectError,
+  selectLoading,
+  selectUser,
+  selectUserInfo,
+} from '../../slices/user';
+
+// React Router
+import { useHistory } from 'react-router';
 
 // React Hook Form
 import { useForm } from 'react-hook-form';
@@ -26,16 +34,26 @@ import Button from '../../components/button/Button';
 interface Props {}
 
 const ProfileScreen: React.FC<Props> = () => {
+  // History
+  const history = useHistory();
+
   // Dispatch
   const dispatch = useDispatch();
 
   // Selector
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const userInfo = useSelector(selectUserInfo);
   const user = useSelector(selectUser) as {
     name: string;
     email: string;
   };
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push('/');
+    }
+  }, [history, userInfo]);
 
   useEffect(() => {
     dispatch(getUserDetails());
