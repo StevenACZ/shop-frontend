@@ -4,11 +4,9 @@ import React, { useEffect, useState } from 'react';
 // Redux
 import { useSelector } from 'react-redux';
 
-// Redux - Actions
-// import { register as registerUser } from '../../../actions/user';
-
 // Redux - Slices
 import { selectUserInfo } from '../../slices/user';
+import { selectShippingAddress } from '../../slices/cart';
 
 // React Router
 import { useHistory } from 'react-router';
@@ -20,6 +18,7 @@ import { CheckoutProcessScreenStyled, Container } from './Styles';
 import { Steps } from 'antd';
 
 // Components
+import Shipping from '../../components/checkout-process/shipping/Shipping';
 
 interface Props {}
 
@@ -29,11 +28,11 @@ const CheckoutProcessScreen: React.FC<Props> = () => {
 
   // Selector
   const userInfo = useSelector(selectUserInfo);
+  const shippingAddress = useSelector(selectShippingAddress);
 
   const { Step } = Steps;
 
-  // const [currentProcess, setCurrentProcess] = useState(0);
-  const [currentProcess] = useState(0);
+  const [currentProcess, setCurrentProcess] = useState(0);
 
   useEffect(() => {
     if (!userInfo) {
@@ -41,25 +40,24 @@ const CheckoutProcessScreen: React.FC<Props> = () => {
     }
   }, [history, userInfo]);
 
-  // const currentStep = (current: number) => {
-  // 	setCurrentProcess((e) => e + 1);
-  // };
+  useEffect(() => {
+    if (shippingAddress) {
+      setCurrentProcess(1);
+    }
+  }, [shippingAddress]);
 
   const steps = [
     {
       title: 'Shipping',
-      content: 'Second-content',
-      disabled: false,
+      content: <Shipping />,
     },
     {
       title: 'Payment',
       content: 'Three-content',
-      disabled: false,
     },
     {
       title: 'Place Order',
       content: 'Four-content',
-      disabled: false,
     },
   ];
 
@@ -73,10 +71,6 @@ const CheckoutProcessScreen: React.FC<Props> = () => {
         {steps.map((item) => (
           <Step key={item.title} title={item.title} />
         ))}
-        {/* <Step status="finish" title="finish 1" />
-        <Step status="finish" title="finish 2" />
-        <Step status="process" title="current process" />
-        <Step status="wait" title="wait" disabled={false} /> */}
       </Steps>
 
       <Container>{steps[currentProcess].content}</Container>
