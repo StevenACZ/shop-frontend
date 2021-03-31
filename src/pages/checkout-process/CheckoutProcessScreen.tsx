@@ -32,7 +32,8 @@ const CheckoutProcessScreen: React.FC<Props> = () => {
 
   const { Step } = Steps;
 
-  const [currentProcess, setCurrentProcess] = useState(0);
+  // const [currentProcess, setCurrentProcess] = useState(0);
+  const [currentProcess] = useState(0);
 
   useEffect(() => {
     if (!userInfo) {
