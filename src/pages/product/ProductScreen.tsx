@@ -29,6 +29,9 @@ import ProductDetails from '../../components/product/product-details/ProductDeta
 interface Props {}
 
 const ProductScreen: React.FC<Props> = () => {
+  // History
+  const history = useHistory();
+
   // Dispatch
   const dispatch = useDispatch();
 
@@ -36,9 +39,6 @@ const ProductScreen: React.FC<Props> = () => {
   const loading = useSelector(selectLoading);
   const product = useSelector(selectProduct);
   const error = useSelector(selectError);
-
-  // History
-  const history = useHistory();
 
   const { productID } = useParams() as { productID: string };
 
