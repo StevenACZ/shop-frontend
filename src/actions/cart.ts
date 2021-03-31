@@ -2,7 +2,11 @@
 import axios from '../axios/index';
 
 // Redux - Slices
-import { cartAddItem, cartRemoveItem } from '../slices/cart';
+import {
+  cartAddItem,
+  cartRemoveItem,
+  cartSaveShippingAddress,
+} from '../slices/cart';
 
 export const addToCart = (productId: string, qty: number) => async (
   dispatch: any,
@@ -31,4 +35,13 @@ export const removeFromCart = (productId: string) => async (
   dispatch(cartRemoveItem(productId));
 
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
+};
+
+export const saveShippingAddress = (data: any) => async (
+  dispatch: any,
+  getState: any
+) => {
+  dispatch(cartSaveShippingAddress(data));
+
+  localStorage.setItem('shippingAddress', JSON.stringify(data));
 };
