@@ -51,28 +51,30 @@ export const OrderItem = styled.li`
   grid-column-gap: 30px;
   padding: 8px 20px;
   border-bottom: 1px solid black;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const OrderImage = styled.div`
   width: 100%;
-  border: 1px solid blue;
 
   & > img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 `;
 
 export const OrderName = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid black;
 `;
 
 export const OrderCant = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid peru;
 `;
 
 export const OrderSummary = styled.div`
@@ -84,6 +86,10 @@ export const OrderSummary = styled.div`
   }
 
   & > div:nth-child(1) {
+    & > h2 {
+      text-transform: uppercase;
+    }
+
     border-top: 1px solid black;
     border-left: 1px solid black;
     border-right: 1px solid black;
