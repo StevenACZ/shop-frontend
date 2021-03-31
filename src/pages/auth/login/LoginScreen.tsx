@@ -46,7 +46,7 @@ const LoginScreen: React.FC<Props> = () => {
 
   useEffect(() => {
     if (userInfo) {
-      history.push('/');
+      history.goBack();
     }
   }, [history, userInfo]);
 
