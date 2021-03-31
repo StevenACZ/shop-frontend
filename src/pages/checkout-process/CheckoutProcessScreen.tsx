@@ -20,6 +20,7 @@ import { Steps } from 'antd';
 // Components
 import Shipping from '../../components/checkout-process/shipping/Shipping';
 import Payment from '../../components/checkout-process/payment/Payment';
+import PlaceOrder from '../../components/checkout-process/place-order/PlaceOrder';
 
 interface Props {}
 
@@ -65,7 +66,7 @@ const CheckoutProcessScreen: React.FC<Props> = () => {
     },
     {
       title: 'Place Order',
-      content: 'Four-content',
+      content: <PlaceOrder />,
     },
   ];
 
