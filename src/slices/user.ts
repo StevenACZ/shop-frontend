@@ -6,8 +6,8 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   : null;
 
 interface UserState {
-  user: {} | null;
-  userInfo: {} | null;
+  user: null | {};
+  userInfo: null | {};
   loading: boolean;
   success: boolean;
   errors: {
