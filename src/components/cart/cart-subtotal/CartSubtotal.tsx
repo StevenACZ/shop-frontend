@@ -20,7 +20,7 @@ const CartSubtotal: React.FC<Props> = ({ quantityItems, totalAmount }) => {
   const history = useHistory();
 
   const checkoutHandler = () => {
-    history.push(`/login?redirect=shipping`);
+    history.push(`/checkout-process`);
   };
 
   return (
