@@ -59,6 +59,7 @@ export const OrderItem = styled.li`
 
 export const OrderImage = styled.div`
   width: 100%;
+  cursor: pointer;
 
   & > img {
     width: 100%;
@@ -70,6 +71,11 @@ export const OrderImage = styled.div`
 export const OrderName = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
+
+  & > p:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const OrderCant = styled.div`
