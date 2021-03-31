@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 // Redux - Slices
 import { selectUserInfo } from '../../slices/user';
-import { selectShippingAddress } from '../../slices/cart';
+import { selectShippingAddress, selectPaymentMethod } from '../../slices/cart';
 
 // React Router
 import { useHistory } from 'react-router';
@@ -19,6 +19,7 @@ import { Steps } from 'antd';
 
 // Components
 import Shipping from '../../components/checkout-process/shipping/Shipping';
+import Payment from '../../components/checkout-process/payment/Payment';
 
 interface Props {}
 
@@ -29,6 +30,7 @@ const CheckoutProcessScreen: React.FC<Props> = () => {
   // Selector
   const userInfo = useSelector(selectUserInfo);
   const shippingAddress = useSelector(selectShippingAddress);
+  const paymentMethod = useSelector(selectPaymentMethod);
 
   const { Step } = Steps;
 
@@ -46,6 +48,12 @@ const CheckoutProcessScreen: React.FC<Props> = () => {
     }
   }, [shippingAddress]);
 
+  useEffect(() => {
+    if (paymentMethod) {
+      setCurrentProcess(2);
+    }
+  }, [paymentMethod]);
+
   const steps = [
     {
       title: 'Shipping',
@@ -53,7 +61,7 @@ const CheckoutProcessScreen: React.FC<Props> = () => {
     },
     {
       title: 'Payment',
-      content: 'Three-content',
+      content: <Payment />,
     },
     {
       title: 'Place Order',
