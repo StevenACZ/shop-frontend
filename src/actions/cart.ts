@@ -6,6 +6,7 @@ import {
   cartAddItem,
   cartRemoveItem,
   cartSaveShippingAddress,
+  cartSavePaymentMethod,
 } from '../slices/cart';
 
 export const addToCart = (productId: string, qty: number) => async (
@@ -46,4 +47,10 @@ export const saveShippingAddress = (data: {
   dispatch(cartSaveShippingAddress(data));
 
   localStorage.setItem('shippingAddress', JSON.stringify(data));
+};
+
+export const savePaymentMethod = (data: string) => async (dispatch: any) => {
+  dispatch(cartSavePaymentMethod(data));
+
+  localStorage.setItem('paymentMethod', JSON.stringify(data));
 };
