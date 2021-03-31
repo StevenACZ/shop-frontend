@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 // import { register as registerUser } from '../../../actions/user';
 
 // Redux - Slices
-import { selectLoading, selectUserInfo } from '../../slices/user';
+import { selectUserInfo } from '../../slices/user';
 
 // React Router
 import { useHistory } from 'react-router';
