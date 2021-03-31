@@ -16,7 +16,7 @@ import {
 } from '../../../slices/cart';
 
 // React Router
-// import { useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 
 // Styles
 import {
@@ -37,7 +37,7 @@ interface Props {}
 
 const PlaceOrder: React.FC<Props> = () => {
   // History
-  // const history = useHistory();
+  const history = useHistory();
 
   // Dispatch
   // const dispatch = useDispatch();
@@ -89,11 +89,17 @@ const PlaceOrder: React.FC<Props> = () => {
           <OrderList>
             {products.map((product: any) => (
               <OrderItem>
-                <OrderImage>
+                <OrderImage
+                  onClick={() => history.push(`/product/${product.product}`)}
+                >
                   <img src={product.image} alt={product.name} />
                 </OrderImage>
                 <OrderName>
-                  <p>{product.name}</p>
+                  <p
+                    onClick={() => history.push(`/product/${product.product}`)}
+                  >
+                    {product.name}
+                  </p>
                 </OrderName>
                 <OrderCant>
                   <p>
