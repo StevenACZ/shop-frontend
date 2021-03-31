@@ -11,6 +11,7 @@ import CartScreen from '../pages/cart/CartScreen';
 import LoginScreen from '../pages/auth/login/LoginScreen';
 import RegisterScreen from '../pages/auth/register/RegisterScreen';
 import ProfileScreen from '../pages/profile/ProfileScreen';
+import CheckoutProcessScreen from '../pages/checkout-process/CheckoutProcessScreen';
 
 interface Props {}
 
@@ -23,6 +24,7 @@ const Routes: React.FC<Props> = () => {
       <Route exact path="/login" component={LoginScreen} />
       <Route exact path="/register" component={RegisterScreen} />
       <Route exact path="/profile" component={ProfileScreen} />
+      <Route exact path="/checkout-process" component={CheckoutProcessScreen} />
 
       <Redirect to="/" />
     </Switch>
