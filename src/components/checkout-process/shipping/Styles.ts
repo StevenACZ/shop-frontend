@@ -26,17 +26,3 @@ export const Form = styled.form`
     max-width: 95%;
   }
 `;
-
-export const GoLogin = styled.p`
-  margin-top: 20px;
-
-  & > span {
-    font-weight: bold;
-    cursor: pointer;
-    margin-left: 7px;
-  }
-
-  & > span:hover {
-    text-decoration: underline;
-  }
-`;
