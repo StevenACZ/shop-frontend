@@ -30,9 +30,6 @@ import {
 // Antd Components
 import { Alert, Spin } from 'antd';
 
-// Components
-// import Button from '../../components/button/Button';
-
 interface Props {}
 
 const OrderScreen: React.FC<Props> = () => {
@@ -106,6 +103,7 @@ const OrderScreen: React.FC<Props> = () => {
   //     })
   //   );
   // };
+
   return (
     <Spin spinning={loading}>
       <OrderScreenStyled>
@@ -199,15 +197,6 @@ const OrderScreen: React.FC<Props> = () => {
           <div>
             <span>Total:</span>
             <span>${order && order.totalPrice}</span>
-          </div>
-          <div>
-            {/* <Button
-              width="100%"
-              onClick={placeOrderHanlder}
-              // disabled={products.length === 0}
-            >
-              Place order
-            </Button> */}
           </div>
           {error && <Alert message={error} type="error" showIcon banner />}
         </OrderSummary>
