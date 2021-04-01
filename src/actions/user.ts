@@ -18,6 +18,8 @@ import {
   userUpdateProfileFail,
   deleteAlert,
 } from '../slices/user';
+import { clearAllOrder } from './order';
+import { clearAllCart } from './cart';
 
 export const deleteAlerts = () => (dispatch: any) => {
   setTimeout(() => {
@@ -66,6 +68,8 @@ export const login = ({
 export const logout = () => (dispatch: any) => {
   localStorage.removeItem('userInfo');
   dispatch(userLogout());
+  dispatch(clearAllOrder());
+  dispatch(clearAllCart());
 };
 
 export const register = ({
