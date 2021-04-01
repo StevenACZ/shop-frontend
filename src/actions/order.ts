@@ -7,6 +7,9 @@ import {
   orderCreateSuccess,
   orderCreateFail,
   clearOrder,
+  orderDetailsRequest,
+  orderDetailsSuccess,
+  orderDetailsFail,
 } from '../slices/order';
 
 export const createOrder = (order: any) => async (
@@ -37,6 +40,42 @@ export const createOrder = (order: any) => async (
   } catch (error) {
     dispatch(
       orderCreateFail(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      )
+    );
+  }
+};
+
+export const getOrderDetails = (orderId: string) => async (
+  dispatch: any,
+  getState: any
+) => {
+  try {
+    dispatch(orderDetailsRequest());
+
+    const {
+      user: {
+        userInfo: { token },
+      },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/orders/${orderId}`, config);
+
+    dispatch(orderDetailsSuccess(data));
+
+    localStorage.setItem('order', JSON.stringify(data));
+  } catch (error) {
+    dispatch(
+      orderDetailsFail(
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message
