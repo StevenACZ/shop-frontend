@@ -10,6 +10,9 @@ import {
   orderDetailsRequest,
   orderDetailsSuccess,
   orderDetailsFail,
+  orderPayRequest,
+  orderPaySuccess,
+  orderPayFail,
 } from '../slices/order';
 
 export const createOrder = (order: any) => async (
@@ -76,6 +79,46 @@ export const getOrderDetails = (orderId: string) => async (
   } catch (error) {
     dispatch(
       orderDetailsFail(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      )
+    );
+  }
+};
+
+export const payOrder = (orderId: string, paymentResult: any) => async (
+  dispatch: any,
+  getState: any
+) => {
+  try {
+    dispatch(orderPayRequest());
+
+    const {
+      user: {
+        userInfo: { token },
+      },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/orders/${orderId}/pay`,
+      paymentResult,
+      config
+    );
+
+    dispatch(orderPaySuccess(data));
+
+    localStorage.setItem('order', JSON.stringify(data));
+  } catch (error) {
+    dispatch(
+      orderPayFail(
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message
