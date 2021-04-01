@@ -37,6 +37,12 @@ export const orderSlice = createSlice({
       state.success = false;
       state.loading = false;
     },
+    clearOrder: (state) => {
+      state.order = null;
+      state.error = null;
+      state.success = false;
+      state.loading = false;
+    },
   },
 });
 
@@ -44,6 +50,7 @@ export const {
   orderCreateRequest,
   orderCreateSuccess,
   orderCreateFail,
+  clearOrder,
 } = orderSlice.actions;
 
 export const selectOrders = (state: RootState) => state.order.order;
