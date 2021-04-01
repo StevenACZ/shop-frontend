@@ -125,12 +125,26 @@ const OrderScreen: React.FC<Props> = () => {
                 </span>
               )}
             </p>
+            {order && (
+              <>
+                {!order.isDelivered && (
+                  <Alert message="Not Delivered" type="error" />
+                )}
+              </>
+            )}
           </div>
           <div>
             <h2>Payment method</h2>
             <p>
               Method: <span>{order && order.paymentMethod}</span>
             </p>
+            {order && (
+              <>
+                {!order.isDelivered && (
+                  <Alert message="Not Paid" type="error" />
+                )}
+              </>
+            )}
           </div>
           <div>
             <h2>Order items</h2>
