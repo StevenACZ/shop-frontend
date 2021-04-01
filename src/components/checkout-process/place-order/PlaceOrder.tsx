@@ -1,3 +1,7 @@
+// ELIMINAR order: {order: null}
+// cartItems, shippingAddress y paymentMethod cuando
+// uno hace logout
+
 // React
 import React, { useEffect } from 'react';
 
