@@ -1,7 +1,3 @@
-// ELIMINAR order: {order: null}
-// cartItems, shippingAddress y paymentMethod cuando
-// uno hace logout
-
 // React
 import React, { useEffect } from 'react';
 
@@ -20,7 +16,7 @@ import {
 import {
   selectError,
   selectLoading,
-  selectOrders,
+  selectOrder,
   selectSuccess,
 } from '../../../slices/order';
 
@@ -63,7 +59,7 @@ const PlaceOrder: React.FC<Props> = () => {
     country: string;
   };
   const paymentMethod = useSelector(selectPaymentMethod);
-  const order = useSelector(selectOrders) as {
+  const order = useSelector(selectOrder) as {
     _id: string;
   };
   const loading = useSelector(selectLoading);
