@@ -12,7 +12,7 @@ import {
   selectErrorDetails,
   selectErrorUpdateDetails,
   selectLoading,
-  selectUser,
+  selectProfile,
   selectUserInfo,
   selectSuccess,
 } from '../../slices/user';
@@ -44,7 +44,7 @@ const ProfileScreen: React.FC<Props> = () => {
 
   // Selector
   const userInfo = useSelector(selectUserInfo);
-  const user = useSelector(selectUser) as {
+  const user = useSelector(selectProfile) as {
     name: string;
     email: string;
   };
