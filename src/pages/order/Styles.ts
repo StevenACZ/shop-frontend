@@ -32,6 +32,10 @@ export const Details = styled.div`
     padding-top: 10px;
     padding-bottom: 20px;
     border-bottom: 1px solid black;
+
+    & > p {
+      margin-bottom: 8px;
+    }
   }
 
   & > div:last-child {
