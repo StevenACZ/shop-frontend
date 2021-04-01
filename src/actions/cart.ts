@@ -8,6 +8,7 @@ import {
   cartSaveShippingAddress,
   cartSavePaymentMethod,
   clearCart,
+  clearCartReadyForCheckoutProcess,
 } from '../slices/cart';
 
 export const addToCart = (productId: string, qty: number) => async (
@@ -60,6 +61,12 @@ export const clearAllCart = () => async (dispatch: any) => {
   dispatch(clearCart());
 
   localStorage.removeItem('cartItems');
+  localStorage.removeItem('shippingAddress');
+  localStorage.removeItem('paymentMethod');
+};
+
+export const readyForCheckoutProcess = () => async (dispatch: any) => {
+  dispatch(clearCartReadyForCheckoutProcess());
   localStorage.removeItem('shippingAddress');
   localStorage.removeItem('paymentMethod');
 };
