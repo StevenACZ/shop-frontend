@@ -77,7 +77,7 @@ export const {
   clearOrder,
 } = orderSlice.actions;
 
-export const selectOrders = (state: RootState) => state.order.order;
+export const selectOrder = (state: RootState) => state.order.order;
 export const selectLoading = (state: RootState) => state.order.loading;
 export const selectSuccess = (state: RootState) => state.order.success;
 export const selectError = (state: RootState) => state.order.error;
