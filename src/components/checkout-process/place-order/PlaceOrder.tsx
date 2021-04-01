@@ -95,16 +95,6 @@ const PlaceOrder: React.FC<Props> = () => {
         totalPrice,
       })
     );
-
-    console.log({
-      orderItems: products,
-      shippingAddress,
-      paymentMethod,
-      itemsPrice,
-      taxPrice,
-      shippingPrice,
-      totalPrice,
-    });
   };
 
   return (
