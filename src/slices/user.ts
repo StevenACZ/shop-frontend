@@ -50,6 +50,7 @@ export const userSlice = createSlice({
       state.errors.errorLogin = action.payload;
       state.loading = false;
     },
+    // LOGOUT
     userLogout: (state) => {
       state.user = null;
       state.userInfo = null;
