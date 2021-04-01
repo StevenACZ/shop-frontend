@@ -6,6 +6,7 @@ import {
   orderCreateRequest,
   orderCreateSuccess,
   orderCreateFail,
+  clearOrder,
 } from '../slices/order';
 
 export const createOrder = (order: any) => async (
@@ -31,6 +32,8 @@ export const createOrder = (order: any) => async (
     const { data } = await axios.post('/api/orders', order, config);
 
     dispatch(orderCreateSuccess(data));
+
+    localStorage.setItem('order', JSON.stringify(data));
   } catch (error) {
     dispatch(
       orderCreateFail(
@@ -39,7 +42,11 @@ export const createOrder = (order: any) => async (
           : error.message
       )
     );
-
-    // dispatch(deleteAlerts());
   }
+};
+
+export const clearAllOrder = () => async (dispatch: any) => {
+  dispatch(clearOrder());
+
+  localStorage.removeItem('order');
 };
