@@ -1,6 +1,13 @@
 // React
 import React from 'react';
 
+// Redux
+import { useDispatch } from 'react-redux';
+
+// Redux - Actions
+import { clearAllOrder } from '../../../actions/order';
+import { readyForCheckoutProcess } from '../../../actions/cart';
+
 // React Router
 import { useHistory } from 'react-router';
 
@@ -19,8 +26,13 @@ const CartSubtotal: React.FC<Props> = ({ quantityItems, totalAmount }) => {
   // History
   const history = useHistory();
 
+  // Dispatch
+  const dispatch = useDispatch();
+
   const checkoutHandler = () => {
     history.push(`/checkout-process`);
+    dispatch(clearAllOrder());
+    dispatch(readyForCheckoutProcess());
   };
 
   return (
