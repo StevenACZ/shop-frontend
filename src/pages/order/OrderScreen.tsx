@@ -1,11 +1,14 @@
 // React
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
+// Axios
+import axios from '../../axios/index';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux - Actions
-import { getOrderDetails } from '../../actions/order';
+import { getOrderDetails, payOrder } from '../../actions/order';
 
 // Redux - Slices
 import { selectUserInfo } from '../../slices/user';
@@ -29,6 +32,9 @@ import {
 
 // Antd Components
 import { Alert, Spin } from 'antd';
+
+// Component
+import { PayPalButton } from 'react-paypal-button-v2';
 
 interface Props {}
 
@@ -69,6 +75,8 @@ const OrderScreen: React.FC<Props> = () => {
       name: string;
       email: string;
     };
+    paidAt: string;
+    deliveredAt: string;
   };
   const userInfo = useSelector(selectUserInfo);
   const loading = useSelector(selectLoading);
@@ -76,33 +84,50 @@ const OrderScreen: React.FC<Props> = () => {
 
   const { orderId } = useParams() as { orderId: string };
 
+  const [, setSdkReady] = useState<boolean>(false);
+
   useEffect(() => {
     if (!userInfo) {
       history.push('/login');
     }
   }, [history, userInfo]);
 
+  const addPayPalScript = async () => {
+    const { data: clientId } = await axios.get('/api/config/paypal');
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+    script.async = true;
+    script.onload = () => {
+      setSdkReady(true);
+    };
+    document.body.appendChild(script);
+  };
+
   useEffect(() => {
     dispatch(getOrderDetails(orderId));
   }, [dispatch, orderId]);
+
+  useEffect(() => {
+    if (order) {
+      if (!order.isPaid) {
+        if (!(window as any).paypal) {
+          addPayPalScript();
+          console.log('paypal script added');
+        } else {
+          setSdkReady(true);
+        }
+      }
+    }
+  }, [order]);
 
   const itemsPrice =
     order &&
     order.orderItems.reduce((acc, item: any) => acc + item.price * item.qty, 0);
 
-  // const placeOrderHanlder = () => {
-  //   dispatch(
-  //     createOrder({
-  //       orderItems: products,
-  //       shippingAddress,
-  //       paymentMethod,
-  //       itemsPrice,
-  //       taxPrice,
-  //       shippingPrice,
-  //       totalPrice,
-  //     })
-  //   );
-  // };
+  const handlerSuccessPayment = (paymentResult: any) => {
+    dispatch(payOrder(orderId, paymentResult));
+  };
 
   return (
     <Spin spinning={loading}>
@@ -125,8 +150,13 @@ const OrderScreen: React.FC<Props> = () => {
             </p>
             {order && (
               <>
-                {!order.isDelivered && (
+                {!order.isDelivered ? (
                   <Alert message="Not Delivered" type="error" />
+                ) : (
+                  <Alert
+                    message={`Paided ${order.deliveredAt}`}
+                    type="success"
+                  />
                 )}
               </>
             )}
@@ -138,8 +168,10 @@ const OrderScreen: React.FC<Props> = () => {
             </p>
             {order && (
               <>
-                {!order.isDelivered && (
+                {!order.isPaid ? (
                   <Alert message="Not Paid" type="error" />
+                ) : (
+                  <Alert message={`Paid on ${order.paidAt}`} type="success" />
                 )}
               </>
             )}
@@ -198,6 +230,14 @@ const OrderScreen: React.FC<Props> = () => {
             <span>Total:</span>
             <span>${order && order.totalPrice}</span>
           </div>
+          {order && !order.isPaid && (
+            <div>
+              <PayPalButton
+                amount={order && order.totalPrice}
+                onSuccess={handlerSuccessPayment}
+              />
+            </div>
+          )}
           {error && <Alert message={error} type="error" showIcon banner />}
         </OrderSummary>
       </OrderScreenStyled>
