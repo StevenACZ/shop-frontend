@@ -67,6 +67,7 @@ export const clearAllCart = () => async (dispatch: any) => {
 
 export const readyForCheckoutProcess = () => async (dispatch: any) => {
   dispatch(clearCartReadyForCheckoutProcess());
+
   localStorage.removeItem('shippingAddress');
   localStorage.removeItem('paymentMethod');
 };
