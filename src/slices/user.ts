@@ -6,7 +6,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   : null;
 
 interface UserState {
-  user: null | {};
+  profile: null | {};
   userInfo: null | {};
   loading: boolean;
   success: boolean;
@@ -19,7 +19,7 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  user: null,
+  profile: null,
   userInfo: userInfoFromStorage,
   loading: false,
   success: false,
@@ -52,7 +52,7 @@ export const userSlice = createSlice({
     },
     // LOGOUT
     userLogout: (state) => {
-      state.user = null;
+      state.profile = null;
       state.userInfo = null;
       state.loading = false;
       state.success = false;
@@ -77,16 +77,16 @@ export const userSlice = createSlice({
     },
     // DETAILS
     userDetailsRequest: (state) => {
-      state.user = null;
+      state.profile = null;
       state.loading = true;
     },
     userDetailsSuccess: (state, action) => {
-      state.user = action.payload;
+      state.profile = action.payload;
       state.errors.errorDetails = null;
       state.loading = false;
     },
     userDetailsFail: (state, action) => {
-      state.user = null;
+      state.profile = null;
       state.errors.errorDetails = action.payload;
       state.loading = false;
     },
@@ -139,7 +139,7 @@ export const {
   deleteAlert,
 } = userSlice.actions;
 
-export const selectUser = (state: RootState) => state.user.user;
+export const selectProfile = (state: RootState) => state.user.profile;
 export const selectUserInfo = (state: RootState) => state.user.userInfo;
 export const selectLoading = (state: RootState) => state.user.loading;
 export const selectSuccess = (state: RootState) => state.user.success;
