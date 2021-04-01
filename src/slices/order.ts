@@ -57,6 +57,31 @@ export const orderSlice = createSlice({
       state.success = false;
       state.loading = false;
     },
+    // PAY
+    orderPayRequest: (state) => {
+      state.order = null;
+      state.error = null;
+      state.success = false;
+      state.loading = true;
+    },
+    orderPaySuccess: (state, action) => {
+      state.order = action.payload;
+      state.error = null;
+      state.success = true;
+      state.loading = false;
+    },
+    orderPayFail: (state, action) => {
+      state.order = null;
+      state.error = action.payload;
+      state.success = false;
+      state.loading = false;
+    },
+    orderPayReset: (state) => {
+      state.order = null;
+      state.error = null;
+      state.success = false;
+      state.loading = false;
+    },
     // CLEAR
     clearOrder: (state) => {
       state.order = null;
@@ -74,6 +99,10 @@ export const {
   orderDetailsRequest,
   orderDetailsSuccess,
   orderDetailsFail,
+  orderPayRequest,
+  orderPaySuccess,
+  orderPayFail,
+  orderPayReset,
   clearOrder,
 } = orderSlice.actions;
 
