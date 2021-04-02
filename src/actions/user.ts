@@ -67,6 +67,7 @@ export const login = ({
 
 export const logout = () => (dispatch: any) => {
   localStorage.removeItem('userInfo');
+  localStorage.removeItem('__paypal_storage__');
   dispatch(userLogout());
   dispatch(clearAllOrder());
   dispatch(clearAllCart());
