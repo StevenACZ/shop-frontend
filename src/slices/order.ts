@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/configureStore';
 
 interface CartState {
+  orders: null | [{}];
   order: null | {};
   success: boolean;
   error: null | {};
@@ -9,6 +10,7 @@ interface CartState {
 }
 
 const initialState: CartState = {
+  orders: [{}],
   order: null,
   success: false,
   error: null,
@@ -82,6 +84,22 @@ export const orderSlice = createSlice({
       state.success = false;
       state.loading = false;
     },
+    // LIST MY
+    orderListMyRequest: (state) => {
+      state.orders = null;
+      state.error = null;
+      state.loading = true;
+    },
+    orderListMySuccess: (state, action) => {
+      state.orders = action.payload;
+      state.error = null;
+      state.loading = false;
+    },
+    orderListMyFail: (state, action) => {
+      state.orders = null;
+      state.error = action.payload;
+      state.loading = false;
+    },
     // CLEAR
     clearOrder: (state) => {
       state.order = null;
@@ -103,9 +121,13 @@ export const {
   orderPaySuccess,
   orderPayFail,
   orderPayReset,
+  orderListMyRequest,
+  orderListMySuccess,
+  orderListMyFail,
   clearOrder,
 } = orderSlice.actions;
 
+export const selectOrders = (state: RootState) => state.order.orders;
 export const selectOrder = (state: RootState) => state.order.order;
 export const selectLoading = (state: RootState) => state.order.loading;
 export const selectSuccess = (state: RootState) => state.order.success;
