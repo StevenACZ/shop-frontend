@@ -27,7 +27,7 @@ const MyOrdersScreen: React.FC<Props> = () => {
 
   useEffect(() => {
     if (!userInfo) {
-      history.push('/login');
+      history.push('/');
     }
   }, [history, userInfo]);
 
