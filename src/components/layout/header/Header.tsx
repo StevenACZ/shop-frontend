@@ -32,6 +32,7 @@ import {
   ShoppingCartOutlined,
   SearchOutlined,
   MenuOutlined,
+  DatabaseOutlined,
 } from '@ant-design/icons';
 
 // Antd Components
@@ -69,7 +70,15 @@ const Header: React.FC<Props> = () => {
         Profile
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="2" icon={<LogoutOutlined />} onClick={handleLogout}>
+      <Menu.Item
+        key="2"
+        icon={<DatabaseOutlined />}
+        onClick={() => history.push('/myorders')}
+      >
+        My orders
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="3" icon={<LogoutOutlined />} onClick={handleLogout}>
         Logout
       </Menu.Item>
     </Menu>
@@ -156,7 +165,7 @@ const Header: React.FC<Props> = () => {
           <Profile>
             {userInfo ? (
               <Dropdown overlay={menu} trigger={['click']}>
-                <Button loading={loading}>
+                <Button loading={loading} disabled={loading}>
                   <p>{userInfo.name}</p> <DownOutlined />
                 </Button>
               </Dropdown>
