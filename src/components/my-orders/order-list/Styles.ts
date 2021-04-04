@@ -7,4 +7,5 @@ export const OrderListStyled = styled.ul`
   grid-auto-rows: auto;
   grid-column-gap: 20px;
   grid-row-gap: 30px; */
+  color: black;
 `;
