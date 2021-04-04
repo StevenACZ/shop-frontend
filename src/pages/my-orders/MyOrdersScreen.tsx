@@ -1,5 +1,14 @@
 // React
-import React from 'react';
+import React, { useEffect } from 'react';
+
+// Redux
+import { useSelector } from 'react-redux';
+
+// Redux - Slices
+import { selectUserInfo } from '../../slices/user';
+
+// React Router
+import { useHistory } from 'react-router';
 
 // Styles
 import { MyOrdersScreenStyled } from './Styles';
@@ -10,6 +19,18 @@ import OrderList from '../../components/my-orders/order-list/OrderList';
 interface Props {}
 
 const MyOrdersScreen: React.FC<Props> = () => {
+  // History
+  const history = useHistory();
+
+  // Selector
+  const userInfo = useSelector(selectUserInfo);
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push('/login');
+    }
+  }, [history, userInfo]);
+
   return (
     <MyOrdersScreenStyled>
       <h2>My Orders</h2>
