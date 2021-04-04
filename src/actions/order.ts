@@ -167,4 +167,5 @@ export const clearAllOrder = () => async (dispatch: any) => {
   dispatch(clearOrder());
 
   localStorage.removeItem('order');
+  localStorage.removeItem('orders');
 };
