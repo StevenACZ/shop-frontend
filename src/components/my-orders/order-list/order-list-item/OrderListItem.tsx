@@ -1,13 +1,23 @@
 // React
 import React from 'react';
 
+// React Router
+import { useHistory } from 'react-router';
+
 // Styles
 import { OrderListItemStyled } from './Styles';
 
 interface Props {}
 
 const OrderListItem: React.FC<Props> = () => {
-  return <OrderListItemStyled>OrderListItem</OrderListItemStyled>;
+  // History
+  const history = useHistory();
+
+  return (
+    <OrderListItemStyled>
+      <p>sadsad</p>
+    </OrderListItemStyled>
+  );
 };
 
 export default OrderListItem;
