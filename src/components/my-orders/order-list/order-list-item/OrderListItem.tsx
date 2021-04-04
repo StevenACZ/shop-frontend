@@ -4,8 +4,6 @@ import React from 'react';
 // React Router
 import { useHistory } from 'react-router';
 
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-
 // Styles
 import { OrderListItemStyled, Header, Body, Footer } from './Styles';
 
