@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { color } from '../../../../theme/variables';
 
-export const ProductListItemStyled = styled.div`
+export const ProductListItemStyled = styled.li`
   border: 1px solid ${color.colorBlack};
   padding: 10px;
 `;
