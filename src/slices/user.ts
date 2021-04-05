@@ -7,7 +7,11 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 
 interface UserState {
   profile: null | {};
-  userInfo: null | {};
+  userInfo: null | {
+    name: string;
+    isAdmin: boolean;
+    token: string;
+  };
   users: null | [{}];
   loading: boolean;
   success: boolean;
