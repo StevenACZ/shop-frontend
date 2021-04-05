@@ -16,6 +16,9 @@ import {
   userUpdateProfileRequest,
   userUpdateProfileSuccess,
   userUpdateProfileFail,
+  userListRequest,
+  userListSuccess,
+  userListFail,
   deleteAlert,
 } from '../slices/user';
 import { clearAllOrder } from './order';
@@ -137,6 +140,39 @@ export const getUserDetails = () => async (dispatch: any, getState: any) => {
   } catch (error) {
     dispatch(
       userDetailsFail(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      )
+    );
+
+    dispatch(deleteAlerts());
+  }
+};
+
+export const listUsers = () => async (dispatch: any, getState: any) => {
+  try {
+    dispatch(userListRequest());
+
+    const {
+      user: {
+        userInfo: { token },
+      },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.get('/api/users', config);
+
+    dispatch(userListSuccess(data));
+  } catch (error) {
+    dispatch(
+      userListFail(
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message
