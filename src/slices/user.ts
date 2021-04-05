@@ -8,6 +8,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 interface UserState {
   profile: null | {};
   userInfo: null | {};
+  users: null | [{}];
   loading: boolean;
   success: boolean;
   errors: {
@@ -15,12 +16,14 @@ interface UserState {
     errorRegister: null | string;
     errorDetails: null | string;
     errorUpdateDetails: null | string;
+    errorList: null | string;
   };
 }
 
 const initialState: UserState = {
   profile: null,
   userInfo: userInfoFromStorage,
+  users: null,
   loading: false,
   success: false,
   errors: {
@@ -28,6 +31,7 @@ const initialState: UserState = {
     errorRegister: null,
     errorDetails: null,
     errorUpdateDetails: null,
+    errorList: null,
   },
 };
 
@@ -110,6 +114,21 @@ export const userSlice = createSlice({
       state.errors.errorUpdateDetails = action.payload;
       state.loading = false;
     },
+    // USER LIST
+    userListRequest: (state) => {
+      state.users = null;
+      state.loading = true;
+    },
+    userListSuccess: (state, action) => {
+      state.users = action.payload;
+      state.errors.errorList = null;
+      state.loading = false;
+    },
+    userListFail: (state, action) => {
+      state.users = null;
+      state.errors.errorList = action.payload;
+      state.loading = false;
+    },
     // DELETE ALERTS
     deleteAlert: (state) => {
       state.success = false;
@@ -117,6 +136,7 @@ export const userSlice = createSlice({
       state.errors.errorRegister = null;
       state.errors.errorDetails = null;
       state.errors.errorUpdateDetails = null;
+      state.errors.errorList = null;
     },
   },
 });
@@ -136,11 +156,15 @@ export const {
   userUpdateProfileSuccess,
   userUpdateProfileFail,
   userUpdateProfileReset,
+  userListRequest,
+  userListSuccess,
+  userListFail,
   deleteAlert,
 } = userSlice.actions;
 
 export const selectProfile = (state: RootState) => state.user.profile;
 export const selectUserInfo = (state: RootState) => state.user.userInfo;
+export const selectUsers = (state: RootState) => state.user.users;
 export const selectLoading = (state: RootState) => state.user.loading;
 export const selectSuccess = (state: RootState) => state.user.success;
 
@@ -152,5 +176,7 @@ export const selectErrorDetails = (state: RootState) =>
   state.user.errors.errorDetails;
 export const selectErrorUpdateDetails = (state: RootState) =>
   state.user.errors.errorUpdateDetails;
+export const selectErrorList = (state: RootState) =>
+  state.user.errors.errorList;
 
 export default userSlice.reducer;
