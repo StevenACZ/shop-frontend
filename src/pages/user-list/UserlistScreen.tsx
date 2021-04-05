@@ -30,8 +30,12 @@ const UserListScreen: React.FC<Props> = () => {
   };
 
   useEffect(() => {
-    if (!userInfo.isAdmin) {
+    if (!userInfo) {
       history.push('/');
+    } else {
+      if (!userInfo.isAdmin) {
+        history.push('/');
+      }
     }
   }, [history, userInfo]);
 

@@ -32,7 +32,8 @@ import {
   ShoppingCartOutlined,
   SearchOutlined,
   MenuOutlined,
-  DatabaseOutlined,
+  TeamOutlined,
+  DeploymentUnitOutlined,
 } from '@ant-design/icons';
 
 // Antd Components
@@ -54,6 +55,7 @@ const Header: React.FC<Props> = () => {
   const loading = useSelector(selectLoading);
   const userInfo = useSelector(selectUserInfo) as {
     name: string;
+    isAdmin: boolean;
   };
 
   const handleLogout = () => {
@@ -69,16 +71,33 @@ const Header: React.FC<Props> = () => {
       >
         Profile
       </Menu.Item>
+
       <Menu.Divider />
+
       <Menu.Item
         key="2"
-        icon={<DatabaseOutlined />}
+        icon={<DeploymentUnitOutlined />}
         onClick={() => history.push('/myorders')}
       >
         My orders
       </Menu.Item>
+
+      {userInfo && userInfo.isAdmin && (
+        <>
+          <Menu.Divider />
+          <Menu.Item
+            key="3"
+            icon={<TeamOutlined />}
+            onClick={() => history.push('/admin/userlist')}
+          >
+            Users
+          </Menu.Item>
+        </>
+      )}
+
       <Menu.Divider />
-      <Menu.Item key="3" icon={<LogoutOutlined />} onClick={handleLogout}>
+
+      <Menu.Item key="4" icon={<LogoutOutlined />} onClick={handleLogout}>
         Logout
       </Menu.Item>
     </Menu>
