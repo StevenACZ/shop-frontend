@@ -35,6 +35,7 @@ import { Alert, Spin } from 'antd';
 
 // Component
 import { PayPalButton } from 'react-paypal-button-v2';
+import Button from '../../components/button/Button';
 
 interface Props {}
 
@@ -238,6 +239,9 @@ const OrderScreen: React.FC<Props> = () => {
               />
             </div>
           )}
+          <Button onClick={() => history.push('/myorders')} width="100%">
+            Go Back
+          </Button>
           {error && <Alert message={error} type="error" showIcon banner />}
         </OrderSummary>
       </OrderScreenStyled>
