@@ -23,6 +23,9 @@ import {
   userDeleteRequest,
   userDeleteSuccess,
   userDeleteFail,
+  userUpdateRequest,
+  userUpdateSuccess,
+  userUpdateFail,
 } from '../slices/user';
 import { clearAllOrder } from './order';
 import { clearAllCart } from './cart';
@@ -179,6 +182,55 @@ export const getUserById = (userId: string) => async (
   } catch (error) {
     dispatch(
       userDetailsFail(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      )
+    );
+
+    dispatch(deleteAlerts());
+  }
+};
+
+export const updateUser = ({
+  userId,
+  name,
+  email,
+  isAdmin,
+}: {
+  userId: string;
+  name: string;
+  email: string;
+  isAdmin: boolean;
+}) => async (dispatch: any, getState: any) => {
+  try {
+    dispatch(userUpdateRequest());
+
+    const {
+      user: {
+        userInfo: { token },
+      },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/users/${userId}`,
+      { userId, name, email, isAdmin },
+      config
+    );
+
+    dispatch(userUpdateSuccess(data));
+
+    dispatch(deleteAlerts());
+  } catch (error) {
+    dispatch(
+      userUpdateFail(
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message
