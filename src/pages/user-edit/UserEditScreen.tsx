@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux - Actions
-import { getUserById } from '../../actions/user';
+import { getUserById, updateUser } from '../../actions/user';
 
 // Redux - Slices
 import {
@@ -60,13 +60,13 @@ const UserEditScreen: React.FC<Props> = () => {
   const { register, errors, handleSubmit } = useForm();
 
   const handleUpdate = handleSubmit((data: { name: string; email: string }) => {
-    // dispatch(saveShippingAddress(data));
-
-    console.log({
-      userId,
-      ...data,
-      isAdmin: admin,
-    });
+    dispatch(
+      updateUser({
+        userId,
+        ...data,
+        isAdmin: admin,
+      })
+    );
   });
 
   useEffect(() => {
@@ -92,65 +92,68 @@ const UserEditScreen: React.FC<Props> = () => {
   return (
     <UserEditScreenStyled>
       <Spin spinning={loading}>
-        <Form onSubmit={handleUpdate}>
-          <h2>Edit user</h2>
-          <Input
-            name="name"
-            label="Name"
-            defaultValue={profile && profile.name}
-            placeholder="Enter name"
-            error={errors.name?.message}
-            ref={register({
-              required: 'Name is required',
-              minLength: {
-                value: 3,
-                message: 'Name must be at least 3 characters',
-              },
-              maxLength: {
-                value: 100,
-                message: 'Name must not be greater than 200 characters',
-              },
-            })}
-          />
-          <Input
-            name="email"
-            label="Email Address"
-            defaultValue={profile && profile.email}
-            placeholder="Enter email"
-            error={errors.email?.message}
-            ref={register({
-              required: 'Email is required',
-              minLength: {
-                value: 3,
-                message: 'Email must be at least 3 characters',
-              },
-              maxLength: {
-                value: 200,
-                message: 'Email must not be greater than 100 characters',
-              },
-            })}
-          />
-          {profile && (
-            <Switch
-              checkedChildren="Admin"
-              unCheckedChildren="User"
-              defaultChecked={profile.isAdmin}
-              onChange={() => setAdmin(!admin)}
+        {profile && (
+          <Form onSubmit={handleUpdate}>
+            <h2>Edit user</h2>
+
+            <Input
+              name="name"
+              label="Name"
+              defaultValue={profile && profile.name}
+              placeholder="Enter name"
+              error={errors.name?.message}
+              ref={register({
+                required: 'Name is required',
+                minLength: {
+                  value: 3,
+                  message: 'Name must be at least 3 characters',
+                },
+                maxLength: {
+                  value: 100,
+                  message: 'Name must not be greater than 200 characters',
+                },
+              })}
             />
-          )}
-          {errorDetails && (
-            <Alert message={errorDetails} type="error" showIcon banner />
-          )}
-          {success && (
-            <Alert message="Updated" type="success" showIcon banner />
-          )}
-          <Button width="100%" type="submit">
-            UPDATE
-          </Button>
-          <Button width="100%" type="button" onClick={() => history.goBack()}>
-            GO BACK
-          </Button>
-        </Form>
+            <Input
+              name="email"
+              label="Email Address"
+              defaultValue={profile && profile.email}
+              placeholder="Enter email"
+              error={errors.email?.message}
+              ref={register({
+                required: 'Email is required',
+                minLength: {
+                  value: 3,
+                  message: 'Email must be at least 3 characters',
+                },
+                maxLength: {
+                  value: 200,
+                  message: 'Email must not be greater than 100 characters',
+                },
+              })}
+            />
+            {profile && (
+              <Switch
+                checkedChildren="Admin"
+                unCheckedChildren="User"
+                defaultChecked={profile.isAdmin}
+                onChange={() => setAdmin(!admin)}
+              />
+            )}
+            {errorDetails && (
+              <Alert message={errorDetails} type="error" showIcon banner />
+            )}
+            {success && (
+              <Alert message="Updated" type="success" showIcon banner />
+            )}
+            <Button width="100%" type="submit">
+              UPDATE
+            </Button>
+            <Button width="100%" type="button" onClick={() => history.goBack()}>
+              GO BACK
+            </Button>
+          </Form>
+        )}
       </Spin>
     </UserEditScreenStyled>
   );
