@@ -1,5 +1,5 @@
 // React
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import {
   selectLoading,
   selectProfile,
   selectSuccess,
+  selectUserInfo,
 } from '../../slices/user';
 
 // React Router
@@ -41,6 +42,9 @@ const UserEditScreen: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   // Selector
+  const userInfo = useSelector(selectUserInfo) as {
+    isAdmin: boolean;
+  };
   const profile = useSelector(selectProfile) as {
     email: string;
     name: string;
@@ -50,7 +54,7 @@ const UserEditScreen: React.FC<Props> = () => {
   const loading = useSelector(selectLoading);
   const errorDetails = useSelector(selectErrorDetails);
 
-  const { productID } = useParams() as { productID: string };
+  const { userId } = useParams() as { userId: string };
 
   const [admin, setAdmin] = useState(false);
   const { register, errors, handleSubmit } = useForm();
@@ -59,11 +63,31 @@ const UserEditScreen: React.FC<Props> = () => {
     // dispatch(saveShippingAddress(data));
 
     console.log({
-      // userId: _id,
+      userId,
       ...data,
       isAdmin: admin,
     });
   });
+
+  useEffect(() => {
+    dispatch(getUserById(userId));
+  }, [dispatch, userId]);
+
+  useEffect(() => {
+    if (profile) {
+      setAdmin(profile.isAdmin);
+    }
+  }, [profile]);
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push('/');
+    } else {
+      if (!userInfo.isAdmin) {
+        history.push('/');
+      }
+    }
+  }, [history, userInfo]);
 
   return (
     <UserEditScreenStyled>
@@ -106,11 +130,14 @@ const UserEditScreen: React.FC<Props> = () => {
               },
             })}
           />
-          <Switch
-            checkedChildren="Admin"
-            unCheckedChildren="User"
-            defaultChecked={admin}
-          />
+          {profile && (
+            <Switch
+              checkedChildren="Admin"
+              unCheckedChildren="User"
+              defaultChecked={profile.isAdmin}
+              onChange={() => setAdmin(!admin)}
+            />
+          )}
           {errorDetails && (
             <Alert message={errorDetails} type="error" showIcon banner />
           )}
@@ -120,7 +147,7 @@ const UserEditScreen: React.FC<Props> = () => {
           <Button width="100%" type="submit">
             UPDATE
           </Button>
-          <Button width="100%" onClick={() => history.goBack()}>
+          <Button width="100%" type="button" onClick={() => history.goBack()}>
             GO BACK
           </Button>
         </Form>
