@@ -153,6 +153,42 @@ export const getUserDetails = () => async (dispatch: any, getState: any) => {
   }
 };
 
+export const getUserById = (userId: string) => async (
+  dispatch: any,
+  getState: any
+) => {
+  try {
+    dispatch(userDetailsRequest());
+
+    const {
+      user: {
+        userInfo: { token },
+      },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/users/${userId}`, config);
+
+    dispatch(userDetailsSuccess(data));
+  } catch (error) {
+    dispatch(
+      userDetailsFail(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      )
+    );
+
+    dispatch(deleteAlerts());
+  }
+};
+
 export const listUsers = () => async (dispatch: any, getState: any) => {
   try {
     dispatch(userListRequest());
