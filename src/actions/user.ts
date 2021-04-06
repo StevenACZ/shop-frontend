@@ -20,6 +20,9 @@ import {
   userListSuccess,
   userListFail,
   deleteAlert,
+  userDeleteRequest,
+  userDeleteSuccess,
+  userDeleteFail,
 } from '../slices/user';
 import { clearAllOrder } from './order';
 import { clearAllCart } from './cart';
@@ -173,6 +176,42 @@ export const listUsers = () => async (dispatch: any, getState: any) => {
   } catch (error) {
     dispatch(
       userListFail(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      )
+    );
+
+    dispatch(deleteAlerts());
+  }
+};
+
+export const deleteUser = (userId: string) => async (
+  dispatch: any,
+  getState: any
+) => {
+  try {
+    dispatch(userDeleteRequest());
+
+    const {
+      user: {
+        userInfo: { token },
+      },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    await axios.delete(`/api/users/${userId}`, config);
+
+    dispatch(userDeleteSuccess());
+  } catch (error) {
+    dispatch(
+      userDeleteFail(
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message
