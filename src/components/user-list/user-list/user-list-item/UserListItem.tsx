@@ -1,5 +1,5 @@
 // React
-import React, { useState } from 'react';
+import React from 'react';
 
 // Redux
 import { useDispatch } from 'react-redux';
@@ -7,8 +7,8 @@ import { useDispatch } from 'react-redux';
 // Redux - Actions
 import { deleteUser } from '../../../../actions/user';
 
-// React Hook Form
-import { useForm } from 'react-hook-form';
+// React Router
+import { useHistory } from 'react-router';
 
 // Styles
 import {
@@ -17,15 +17,13 @@ import {
   Body,
   Footer,
   ActionsContainer,
-  Form,
 } from './Styles';
 
 // Antd Components
-import { Alert, Popconfirm, message, Drawer, Switch } from 'antd';
+import { Alert, Popconfirm, message } from 'antd';
 
 // Components
 import Button from '../../../button/Button';
-import Input from '../../../input/Input';
 
 interface Props {
   _id: string;
@@ -35,33 +33,19 @@ interface Props {
 }
 
 const UserListItem: React.FC<Props> = ({ _id, isAdmin, name, email }) => {
+  // History
+  const history = useHistory();
+
   // Dispatch
   const dispatch = useDispatch();
-
-  const [visible, setVisible] = useState(false);
-  const [admin, setAdmin] = useState(false);
-  const { register, errors, handleSubmit } = useForm();
-
-  const handleUpdate = handleSubmit((data: { name: string; email: string }) => {
-    // dispatch(saveShippingAddress(data));
-
-    console.log({
-      userId: _id,
-      ...data,
-      isAdmin: admin,
-    });
-  });
 
   const handleDelete = (userId: string) => {
     dispatch(deleteUser(userId));
     message.success('User Deleted');
   };
 
-  const showDrawer = () => {
-    setVisible(true);
-  };
-  const onClose = () => {
-    setVisible(false);
+  const handleGoToUpdate = (userId: string) => {
+    history.push(`/admin/${userId}/edit`);
   };
 
   return (
@@ -85,7 +69,7 @@ const UserListItem: React.FC<Props> = ({ _id, isAdmin, name, email }) => {
         )}
       </Footer>
       <ActionsContainer>
-        <Button width="48%" onClick={showDrawer}>
+        <Button width="48%" onClick={() => handleGoToUpdate(_id)}>
           Edit
         </Button>
         <Popconfirm
@@ -97,59 +81,6 @@ const UserListItem: React.FC<Props> = ({ _id, isAdmin, name, email }) => {
           <Button width="48%">Delete</Button>
         </Popconfirm>
       </ActionsContainer>
-
-      <Drawer
-        placement="right"
-        closable={false}
-        onClose={onClose}
-        visible={visible}
-      >
-        <Form onSubmit={handleUpdate}>
-          <h2>Edit user</h2>
-          <Input
-            name="name"
-            label="Name"
-            placeholder="Enter name"
-            error={errors.name?.message}
-            ref={register({
-              required: 'Name is required',
-              minLength: {
-                value: 3,
-                message: 'Name must be at least 3 characters',
-              },
-              maxLength: {
-                value: 100,
-                message: 'Name must not be greater than 200 characters',
-              },
-            })}
-          />
-          <Input
-            name="email"
-            label="Email Address"
-            placeholder="Enter email"
-            error={errors.email?.message}
-            ref={register({
-              required: 'Email is required',
-              minLength: {
-                value: 3,
-                message: 'Email must be at least 3 characters',
-              },
-              maxLength: {
-                value: 200,
-                message: 'Email must not be greater than 100 characters',
-              },
-            })}
-          />
-          <Switch
-            checkedChildren="Admin"
-            unCheckedChildren="User"
-            onChange={() => setAdmin(!admin)}
-          />
-          <Button width="100%" type="submit">
-            UPDATE
-          </Button>
-        </Form>
-      </Drawer>
     </UserListItemStyled>
   );
 };
