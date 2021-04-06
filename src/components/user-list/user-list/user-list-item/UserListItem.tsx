@@ -65,7 +65,10 @@ const UserListItem: React.FC<Props> = ({ _id, isAdmin, name, email }) => {
         )}
       </Footer>
       <ActionsContainer>
-        <Button width="48%" onClick={() => history.push(`user/${_id}/edit`)}>
+        <Button
+          width="48%"
+          onClick={() => history.push(`/admin/user/${_id}/edit`)}
+        >
           Edit
         </Button>
         <Popconfirm
