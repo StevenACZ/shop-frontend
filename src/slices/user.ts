@@ -21,6 +21,7 @@ interface UserState {
     errorDetails: null | string;
     errorUpdateDetails: null | string;
     errorList: null | string;
+    errorDelete: null | string;
   };
 }
 
@@ -36,6 +37,7 @@ const initialState: UserState = {
     errorDetails: null,
     errorUpdateDetails: null,
     errorList: null,
+    errorDelete: null,
   },
 };
 
@@ -118,7 +120,7 @@ export const userSlice = createSlice({
       state.errors.errorUpdateDetails = action.payload;
       state.loading = false;
     },
-    // USER LIST
+    // LIST
     userListRequest: (state) => {
       state.users = null;
       state.loading = true;
@@ -133,6 +135,21 @@ export const userSlice = createSlice({
       state.errors.errorList = action.payload;
       state.loading = false;
     },
+    // DELETE
+    userDeleteRequest: (state) => {
+      state.success = false;
+      state.loading = true;
+    },
+    userDeleteSuccess: (state) => {
+      state.success = true;
+      state.errors.errorDelete = null;
+      state.loading = false;
+    },
+    userDeleteFail: (state, action) => {
+      state.success = false;
+      state.errors.errorDelete = action.payload;
+      state.loading = false;
+    },
     // DELETE ALERTS
     deleteAlert: (state) => {
       state.success = false;
@@ -141,6 +158,7 @@ export const userSlice = createSlice({
       state.errors.errorDetails = null;
       state.errors.errorUpdateDetails = null;
       state.errors.errorList = null;
+      state.errors.errorDelete = null;
     },
   },
 });
@@ -163,6 +181,9 @@ export const {
   userListRequest,
   userListSuccess,
   userListFail,
+  userDeleteRequest,
+  userDeleteSuccess,
+  userDeleteFail,
   deleteAlert,
 } = userSlice.actions;
 
@@ -182,5 +203,7 @@ export const selectErrorUpdateDetails = (state: RootState) =>
   state.user.errors.errorUpdateDetails;
 export const selectErrorList = (state: RootState) =>
   state.user.errors.errorList;
+export const selectErrorDelete = (state: RootState) =>
+  state.user.errors.errorDelete;
 
 export default userSlice.reducer;
