@@ -1,6 +1,12 @@
 // React
 import React from 'react';
 
+// Redux
+import { useDispatch } from 'react-redux';
+
+// Redux - Actions
+import { deleteUser } from '../../../../actions/user';
+
 // React Router
 import { useHistory } from 'react-router';
 
@@ -14,7 +20,7 @@ import {
 } from './Styles';
 
 // Antd Components
-import { Alert } from 'antd';
+import { Alert, Popconfirm, message } from 'antd';
 
 // Components
 import Button from '../../../button/Button';
@@ -30,7 +36,13 @@ const UserListItem: React.FC<Props> = ({ _id, isAdmin, name, email }) => {
   // History
   const history = useHistory();
 
-  const handleDelete = (userId: string) => {};
+  // Dispatch
+  const dispatch = useDispatch();
+
+  const handleDelete = (userId: string) => {
+    dispatch(deleteUser(userId));
+    message.success('User Deleted');
+  };
 
   return (
     <UserListItemStyled>
@@ -56,9 +68,14 @@ const UserListItem: React.FC<Props> = ({ _id, isAdmin, name, email }) => {
         <Button width="48%" onClick={() => history.push(`user/${_id}/edit`)}>
           Edit
         </Button>
-        <Button width="48%" onClick={() => handleDelete(_id)}>
-          Delete
-        </Button>
+        <Popconfirm
+          title="Are you sure to delete this user?"
+          onConfirm={() => handleDelete(_id)}
+          okText="Yes"
+          cancelText="No"
+        >
+          <Button width="48%">Delete</Button>
+        </Popconfirm>
       </ActionsContainer>
     </UserListItemStyled>
   );
