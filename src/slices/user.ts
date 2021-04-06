@@ -20,6 +20,7 @@ interface UserState {
     errorRegister: null | string;
     errorDetails: null | string;
     errorUpdateDetails: null | string;
+    errorUpdate: null | string;
     errorList: null | string;
     errorDelete: null | string;
   };
@@ -36,6 +37,7 @@ const initialState: UserState = {
     errorRegister: null,
     errorDetails: null,
     errorUpdateDetails: null,
+    errorUpdate: null,
     errorList: null,
     errorDelete: null,
   },
@@ -116,8 +118,20 @@ export const userSlice = createSlice({
       state.errors.errorUpdateDetails = action.payload;
       state.loading = false;
     },
-    userUpdateProfileReset: (state, action) => {
-      state.errors.errorUpdateDetails = action.payload;
+    // UPDATE
+    userUpdateRequest: (state) => {
+      state.success = false;
+      state.loading = true;
+    },
+    userUpdateSuccess: (state, action) => {
+      state.profile = action.payload;
+      state.success = true;
+      state.errors.errorUpdate = null;
+      state.loading = false;
+    },
+    userUpdateFail: (state, action) => {
+      state.success = false;
+      state.errors.errorUpdate = action.payload;
       state.loading = false;
     },
     // LIST
@@ -157,6 +171,7 @@ export const userSlice = createSlice({
       state.errors.errorRegister = null;
       state.errors.errorDetails = null;
       state.errors.errorUpdateDetails = null;
+      state.errors.errorUpdate = null;
       state.errors.errorList = null;
       state.errors.errorDelete = null;
     },
@@ -177,7 +192,9 @@ export const {
   userUpdateProfileRequest,
   userUpdateProfileSuccess,
   userUpdateProfileFail,
-  userUpdateProfileReset,
+  userUpdateRequest,
+  userUpdateSuccess,
+  userUpdateFail,
   userListRequest,
   userListSuccess,
   userListFail,
@@ -201,6 +218,8 @@ export const selectErrorDetails = (state: RootState) =>
   state.user.errors.errorDetails;
 export const selectErrorUpdateDetails = (state: RootState) =>
   state.user.errors.errorUpdateDetails;
+export const selectErrorUpdate = (state: RootState) =>
+  state.user.errors.errorUpdate;
 export const selectErrorList = (state: RootState) =>
   state.user.errors.errorList;
 export const selectErrorDelete = (state: RootState) =>
