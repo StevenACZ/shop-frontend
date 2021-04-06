@@ -57,7 +57,7 @@ const UserListItem: React.FC<Props> = ({ _id, isAdmin, name, email }) => {
     message.success('User Deleted');
   };
 
-  const showDrawer = (userId: string) => {
+  const showDrawer = () => {
     setVisible(true);
   };
   const onClose = () => {
@@ -85,11 +85,7 @@ const UserListItem: React.FC<Props> = ({ _id, isAdmin, name, email }) => {
         )}
       </Footer>
       <ActionsContainer>
-        <Button
-          width="48%"
-          onClick={() => showDrawer(_id)}
-          // onClick={() => history.push(`/admin/user/${_id}/edit`)}
-        >
+        <Button width="48%" onClick={showDrawer}>
           Edit
         </Button>
         <Popconfirm
