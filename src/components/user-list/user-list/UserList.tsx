@@ -11,7 +11,9 @@ import { listUsers } from '../../../actions/user';
 import {
   selectErrorList,
   selectLoading,
+  selectSuccess,
   selectUsers,
+  selectErrorDelete,
 } from '../../../slices/user';
 
 // Styles
@@ -32,11 +34,13 @@ const UserList: React.FC<Props> = () => {
   // Selector
   const loading = useSelector(selectLoading);
   const users = useSelector(selectUsers);
-  const error = useSelector(selectErrorList);
+  const success = useSelector(selectSuccess);
+  const errorList = useSelector(selectErrorList);
+  const errorDelete = useSelector(selectErrorDelete);
 
   useEffect(() => {
     dispatch(listUsers());
-  }, [dispatch]);
+  }, [dispatch, success]);
 
   return (
     <Spin spinning={loading}>
@@ -46,7 +50,14 @@ const UserList: React.FC<Props> = () => {
             <UserListItem key={order._id} {...order} />
           ))}
       </UserListStyled>
-      {users && error && <Alert message={error} type="error" showIcon banner />}
+      {users && (errorList || errorDelete) && (
+        <Alert
+          message={errorList || errorDelete}
+          type="error"
+          showIcon
+          banner
+        />
+      )}
     </Spin>
   );
 };
