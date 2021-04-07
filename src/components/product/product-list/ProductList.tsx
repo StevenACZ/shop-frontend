@@ -43,16 +43,14 @@ const ProductList: React.FC<Props> = () => {
 
   return (
     <Spin spinning={loading} delay={0}>
-      {loading ? (
-        <Spin />
-      ) : error ? (
-        <Alert message={error} type="error" showIcon banner />
-      ) : (
-        <ProductListStyled>
-          {productList.map((product: Product) => (
+      <ProductListStyled>
+        {productList &&
+          productList.map((product: Product) => (
             <ProductListItem key={product._id} {...product} />
           ))}
-        </ProductListStyled>
+      </ProductListStyled>
+      {productList && error && (
+        <Alert message={error} type="error" showIcon banner />
       )}
     </Spin>
   );
