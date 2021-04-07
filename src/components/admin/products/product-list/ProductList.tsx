@@ -21,7 +21,7 @@ import { ProductListStyled } from './Styles';
 import { Alert, Spin } from 'antd';
 
 // Components
-// import UserListItem from './user-list-item/UserListItem';
+import ProductListItem from './product-list-item/ProductListItem';
 
 interface Props {}
 
@@ -40,16 +40,14 @@ const ProductList: React.FC<Props> = () => {
 
   return (
     <Spin spinning={loading}>
-      {loading ? (
-        <Spin />
-      ) : error ? (
-        <Alert message={error} type="error" showIcon banner />
-      ) : (
-        <ProductListStyled>
-          {/* {productList.map((product: Product) => (
+      <ProductListStyled>
+        {productList &&
+          productList.map((product: any) => (
             <ProductListItem key={product._id} {...product} />
-          ))} */}
-        </ProductListStyled>
+          ))}
+      </ProductListStyled>
+      {productList && error && (
+        <Alert message={error} type="error" showIcon banner />
       )}
     </Spin>
   );
