@@ -2,14 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/configureStore';
 
 interface ProductListState {
-  products: [];
+  products: null | [];
   loading: boolean;
-  error: string | null;
+  error: null | string;
 }
 
 const initialState: ProductListState = {
-  products: [],
-  loading: true,
+  products: null,
+  loading: false,
   error: null,
 };
 
@@ -18,7 +18,7 @@ export const productListSlice = createSlice({
   initialState,
   reducers: {
     productListRequest: (state) => {
-      state.products = [];
+      state.products = null;
       state.loading = true;
       state.error = null;
     },
@@ -28,7 +28,7 @@ export const productListSlice = createSlice({
       state.error = null;
     },
     productListFail: (state, action) => {
-      state.products = [];
+      state.products = null;
       state.loading = false;
       state.error = action.payload;
     },
