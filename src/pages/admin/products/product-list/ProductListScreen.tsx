@@ -14,7 +14,7 @@ import { useHistory } from 'react-router';
 import { ProductListScreenStyled } from './Styles';
 
 // Components
-// import UserList from '../../../../components/user-list/user-list/UserList';
+import ProductList from '../../../../components/admin/products/product-list/ProductList';
 
 interface Props {}
 
@@ -42,7 +42,7 @@ const ProductListScreen: React.FC<Props> = () => {
   return (
     <ProductListScreenStyled>
       <h2>Product list</h2>
-      {/* <UserList /> */}
+      <ProductList />
     </ProductListScreenStyled>
   );
 };
