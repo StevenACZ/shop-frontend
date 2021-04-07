@@ -11,7 +11,7 @@ import { selectUserInfo } from '../../../../slices/user';
 import { useHistory } from 'react-router';
 
 // Styles
-import { UserListScreenStyled } from './Styles';
+import { UserListScreenStyled, Header } from './Styles';
 
 // Components
 import UserList from '../../../../components/admin/users/user-list/UserList';
@@ -41,7 +41,9 @@ const UserListScreen: React.FC<Props> = () => {
 
   return (
     <UserListScreenStyled>
-      <h2>User list</h2>
+      <Header>
+        <h2>User list</h2>
+      </Header>
       <UserList />
     </UserListScreenStyled>
   );
