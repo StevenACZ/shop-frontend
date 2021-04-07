@@ -14,8 +14,8 @@ import ProfileScreen from '../pages/profile/ProfileScreen';
 import CheckoutProcessScreen from '../pages/checkout-process/CheckoutProcessScreen';
 import OrderScreen from '../pages/order/OrderScreen';
 import MyOrdersScreen from '../pages/my-orders/MyOrdersScreen';
-import UserListScreen from '../pages/user-list/UserListScreen';
-import UserEditScreen from '../pages/user-edit/UserEditScreen';
+import UserListScreen from '../pages/admin/users/user-list/UserListScreen';
+import UserEditScreen from '../pages/admin/users/user-edit/UserEditScreen';
 
 interface Props {}
 
