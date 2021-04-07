@@ -142,12 +142,6 @@ const UserEditScreen: React.FC<Props> = () => {
                 onChange={() => setAdmin(!admin)}
               />
             )}
-            {errorDetails && (
-              <Alert message={errorDetails} type="error" showIcon banner />
-            )}
-            {errorUpdate && (
-              <Alert message={errorUpdate} type="error" showIcon banner />
-            )}
             {success && (
               <Alert message="Updated" type="success" showIcon banner />
             )}
@@ -158,6 +152,12 @@ const UserEditScreen: React.FC<Props> = () => {
               GO BACK
             </Button>
           </Form>
+        )}
+        {errorDetails && (
+          <Alert message={errorDetails} type="error" showIcon banner />
+        )}
+        {errorUpdate && (
+          <Alert message={errorUpdate} type="error" showIcon banner />
         )}
       </Spin>
     </UserEditScreenStyled>
