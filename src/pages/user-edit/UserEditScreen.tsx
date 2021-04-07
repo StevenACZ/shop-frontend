@@ -10,6 +10,7 @@ import { getUserById, updateUser } from '../../actions/user';
 // Redux - Slices
 import {
   selectErrorDetails,
+  selectErrorUpdate,
   selectLoading,
   selectProfile,
   selectSuccess,
@@ -53,6 +54,7 @@ const UserEditScreen: React.FC<Props> = () => {
   const success = useSelector(selectSuccess);
   const loading = useSelector(selectLoading);
   const errorDetails = useSelector(selectErrorDetails);
+  const errorUpdate = useSelector(selectErrorUpdate);
 
   const { userId } = useParams() as { userId: string };
 
@@ -142,6 +144,9 @@ const UserEditScreen: React.FC<Props> = () => {
             )}
             {errorDetails && (
               <Alert message={errorDetails} type="error" showIcon banner />
+            )}
+            {errorUpdate && (
+              <Alert message={errorUpdate} type="error" showIcon banner />
             )}
             {success && (
               <Alert message="Updated" type="success" showIcon banner />
