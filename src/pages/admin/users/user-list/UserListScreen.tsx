@@ -14,7 +14,7 @@ import { useHistory } from 'react-router';
 import { UserListScreenStyled } from './Styles';
 
 // Components
-import UserList from '../../../../components/user-list/user-list/UserList';
+import UserList from '../../../../components/admin/users/user-list/UserList';
 
 interface Props {}
 
