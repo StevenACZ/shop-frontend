@@ -34,6 +34,7 @@ import {
   MenuOutlined,
   TeamOutlined,
   DeploymentUnitOutlined,
+  InboxOutlined,
 } from '@ant-design/icons';
 
 // Antd Components
@@ -85,6 +86,7 @@ const Header: React.FC<Props> = () => {
       {userInfo && userInfo.isAdmin && (
         <>
           <Menu.Divider />
+
           <Menu.Item
             key="3"
             icon={<TeamOutlined />}
@@ -92,12 +94,22 @@ const Header: React.FC<Props> = () => {
           >
             Users
           </Menu.Item>
+
+          <Menu.Divider />
+
+          <Menu.Item
+            key="4"
+            icon={<InboxOutlined />}
+            onClick={() => history.push('/admin/productlist')}
+          >
+            Products
+          </Menu.Item>
         </>
       )}
 
       <Menu.Divider />
 
-      <Menu.Item key="4" icon={<LogoutOutlined />} onClick={handleLogout}>
+      <Menu.Item key="5" icon={<LogoutOutlined />} onClick={handleLogout}>
         Logout
       </Menu.Item>
     </Menu>
