@@ -5,7 +5,7 @@ import React from 'react';
 import { HomeScreenStyled, Header } from './Styles';
 
 // Components
-import ProductList from '../../components/product/product-list/ProductList';
+import ProductList from '../../components/home/product-list/ProductList';
 
 interface Props {}
 
