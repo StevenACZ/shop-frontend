@@ -16,26 +16,14 @@ interface Product {
 }
 
 interface ProductDetailsState {
-  product: Product;
+  product: null | Product;
   loading: boolean;
-  error: string | null;
+  error: null | string;
 }
 
 const initialState: ProductDetailsState = {
-  product: {
-    _id: '',
-    name: '',
-    image: '',
-    description: '',
-    brand: '',
-    category: '',
-    price: 0,
-    countInStock: 0,
-    rating: 0,
-    numReviews: 0,
-    reviews: [],
-  },
-  loading: true,
+  product: null,
+  loading: false,
   error: null,
 };
 
@@ -44,7 +32,9 @@ export const productDetailsSlice = createSlice({
   initialState,
   reducers: {
     productRequest: (state) => {
+      state.product = null;
       state.loading = true;
+      state.error = null;
     },
     productSuccess: (state, action) => {
       state.product = action.payload;
@@ -52,21 +42,9 @@ export const productDetailsSlice = createSlice({
       state.error = null;
     },
     productFail: (state, action) => {
-      state.error = action.payload;
+      state.product = null;
       state.loading = false;
-      state.product = {
-        _id: '',
-        name: '',
-        image: '',
-        description: '',
-        brand: '',
-        category: '',
-        price: 0,
-        countInStock: 0,
-        rating: 0,
-        numReviews: 0,
-        reviews: [],
-      };
+      state.error = action.payload;
     },
   },
 });
