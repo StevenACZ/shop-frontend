@@ -51,18 +51,18 @@ const UserListItem: React.FC<Props> = ({ _id, isAdmin, name, email }) => {
   return (
     <UserListItemStyled>
       <Header>
-        <h3>{_id && _id}</h3>
+        <h3>{_id}</h3>
       </Header>
       <Body>
         <p>
-          <span>Name:</span> {name && name}
+          <span>Name:</span> {name}
         </p>
         <p>
-          <span>Email:</span> {email && email}
+          <span>Email:</span> {email}
         </p>
       </Body>
       <Footer>
-        {isAdmin && isAdmin ? (
+        {isAdmin ? (
           <Alert message="Admin" type="success" showIcon />
         ) : (
           <Alert message="User" type="warning" showIcon />
