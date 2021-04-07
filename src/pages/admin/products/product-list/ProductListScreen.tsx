@@ -11,10 +11,14 @@ import { selectUserInfo } from '../../../../slices/user';
 import { useHistory } from 'react-router';
 
 // Styles
-import { ProductListScreenStyled } from './Styles';
+import { ProductListScreenStyled, Header } from './Styles';
+
+// Antd Icons
+import { FileAddOutlined } from '@ant-design/icons';
 
 // Components
 import ProductList from '../../../../components/admin/products/product-list/ProductList';
+import Button from '../../../../components/button/Button';
 
 interface Props {}
 
@@ -41,7 +45,13 @@ const ProductListScreen: React.FC<Props> = () => {
 
   return (
     <ProductListScreenStyled>
-      <h2>Product list</h2>
+      <Header>
+        <h2>Product list</h2>
+        <Button>
+          <p>Create Product</p>
+          <FileAddOutlined />
+        </Button>
+      </Header>
       <ProductList />
     </ProductListScreenStyled>
   );
