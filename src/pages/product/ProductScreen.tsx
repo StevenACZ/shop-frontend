@@ -18,7 +18,7 @@ import {
 import { useHistory, useParams } from 'react-router';
 
 // Styles
-import { ProductScreenStyled } from './Styles';
+import { ProductScreenStyled, Header } from './Styles';
 
 // Antd Components
 import { Alert, Button, Spin } from 'antd';
@@ -36,8 +36,8 @@ const ProductScreen: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   // Selector
-  const loading = useSelector(selectLoading);
   const product = useSelector(selectProduct);
+  const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
   const { productID } = useParams() as { productID: string };
@@ -48,11 +48,12 @@ const ProductScreen: React.FC<Props> = () => {
 
   return (
     <ProductScreenStyled>
-      <h1>Product Details</h1>
+      <Header>
+        <h2>Product Details</h2>
+      </Header>
       <Spin spinning={loading}>
-        {loading ? (
-          <Spin />
-        ) : error ? (
+        {product && <ProductDetails {...product} />}
+        {error && (
           <Alert
             message={error}
             type="error"
@@ -68,8 +69,6 @@ const ProductScreen: React.FC<Props> = () => {
               </Button>
             }
           />
-        ) : (
-          <ProductDetails {...product} />
         )}
       </Spin>
     </ProductScreenStyled>
