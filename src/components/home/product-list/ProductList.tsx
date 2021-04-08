@@ -12,7 +12,7 @@ import {
   selectProducts,
   selectLoading,
   selectError,
-} from '../../../slices/productList';
+} from '../../../slices/product/productList';
 
 // Styles
 import { ProductListStyled } from './Styles';
