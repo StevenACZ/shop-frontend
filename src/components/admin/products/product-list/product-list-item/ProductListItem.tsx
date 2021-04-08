@@ -5,7 +5,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux - Actions
-import { deleteProduct } from '../../../../../actions/productDelete';
+import { deleteProduct } from '../../../../../actions/product/productDelete';
 
 // Redux - Slices
 import {
