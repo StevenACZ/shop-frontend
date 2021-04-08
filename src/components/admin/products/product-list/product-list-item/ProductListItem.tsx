@@ -11,7 +11,7 @@ import { deleteProduct } from '../../../../../actions/product/productDelete';
 import {
   selectLoading,
   selectError,
-} from '../../../../../slices/productDelete';
+} from '../../../../../slices/product/productDelete';
 
 // React Router
 import { useHistory } from 'react-router';
