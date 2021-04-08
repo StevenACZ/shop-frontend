@@ -32,9 +32,9 @@ const UserList: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   // Selector
-  const loading = useSelector(selectLoading);
-  const users = useSelector(selectUsers);
   const success = useSelector(selectSuccess);
+  const users = useSelector(selectUsers);
+  const loading = useSelector(selectLoading);
   const errorList = useSelector(selectErrorList);
   const errorDelete = useSelector(selectErrorDelete);
 
