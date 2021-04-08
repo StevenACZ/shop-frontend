@@ -13,6 +13,7 @@ import {
   selectLoading,
   selectError,
 } from '../../../../slices/productList';
+import { selectSuccess } from '../../../../slices/productDelete';
 
 // Styles
 import { ProductListStyled } from './Styles';
@@ -31,15 +32,13 @@ const ProductList: React.FC<Props> = () => {
 
   // Selector
   const productList = useSelector(selectProducts);
+  const success = useSelector(selectSuccess);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(listProducts());
-    // return () => {
-    //   console.log('La lista se a borrado');
-    // };
-  }, [dispatch]);
+  }, [dispatch, success]);
 
   return (
     <Spin spinning={loading}>
@@ -49,9 +48,7 @@ const ProductList: React.FC<Props> = () => {
             <ProductListItem key={product._id} {...product} />
           ))}
       </ProductListStyled>
-      {productList && error && (
-        <Alert message={error} type="error" showIcon banner />
-      )}
+      {error && <Alert message={error} type="error" showIcon banner />}
     </Spin>
   );
 };
