@@ -2,12 +2,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 // Redux - Slices
-import { productListSlice } from '../slices/productList';
-import { productDetailsSlice } from '../slices/productDetails';
+import { productListSlice } from '../slices/product/productList';
+import { productDetailsSlice } from '../slices/product/productDetails';
+import { productDeleteSlice } from '../slices/product/productDelete';
 import { cartSlice } from '../slices/cart';
 import { userSlice } from '../slices/user';
 import { orderSlice } from '../slices/order';
-import { productDeleteSlice } from '../slices/productDelete';
 
 const store = configureStore({
   reducer: {
