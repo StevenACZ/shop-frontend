@@ -11,12 +11,12 @@ import { orderSlice } from '../slices/order';
 
 const store = configureStore({
   reducer: {
+    user: userSlice.reducer,
+    cart: cartSlice.reducer,
+    order: orderSlice.reducer,
     productList: productListSlice.reducer,
     productDetails: productDetailsSlice.reducer,
     productDelete: productDeleteSlice.reducer,
-    cart: cartSlice.reducer,
-    user: userSlice.reducer,
-    order: orderSlice.reducer,
   },
 });
 
