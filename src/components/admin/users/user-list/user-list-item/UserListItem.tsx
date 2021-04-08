@@ -20,7 +20,7 @@ import {
 } from './Styles';
 
 // Antd Components
-import { Alert, Popconfirm, message } from 'antd';
+import { Alert, Popconfirm } from 'antd';
 
 // Components
 import Button from '../../../../button/Button';
@@ -41,7 +41,6 @@ const UserListItem: React.FC<Props> = ({ _id, isAdmin, name, email }) => {
 
   const handleDelete = (userId: string) => {
     dispatch(deleteUser(userId));
-    message.success('User Deleted');
   };
 
   const handleGoToUpdate = (userId: string) => {
