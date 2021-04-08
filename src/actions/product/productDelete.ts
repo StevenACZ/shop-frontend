@@ -6,7 +6,7 @@ import {
   productDeleteRequest,
   productDeleteSuccess,
   productDeleteFail,
-} from '../../slices/productDelete';
+} from '../../slices/product/productDelete';
 
 export const deleteProduct = (productId: string) => async (
   dispatch: any,
