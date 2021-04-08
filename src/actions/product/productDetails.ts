@@ -6,7 +6,7 @@ import {
   productRequest,
   productSuccess,
   productFail,
-} from '../../slices/productDetails';
+} from '../../slices/product/productDetails';
 
 export const listProductDetails = (productId: string) => async (
   dispatch: any
