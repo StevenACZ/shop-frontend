@@ -12,7 +12,7 @@ import {
   selectError,
   selectLoading,
   selectProduct,
-} from '../../../slices/productDetails';
+} from '../../../slices/product/productDetails';
 
 // React Router
 import { useHistory, useParams } from 'react-router';
