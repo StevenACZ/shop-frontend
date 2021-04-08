@@ -12,8 +12,8 @@ import {
   selectProducts,
   selectLoading,
   selectError,
-} from '../../../../slices/productList';
-import { selectSuccess } from '../../../../slices/productDelete';
+} from '../../../../slices/product/productList';
+import { selectSuccess } from '../../../../slices/product/productDelete';
 
 // Styles
 import { ProductListStyled } from './Styles';
