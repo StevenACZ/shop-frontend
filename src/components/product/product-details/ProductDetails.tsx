@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux - Actions
-import { listProductDetails } from '../../../actions/productDetails';
+import { listProductDetails } from '../../../actions/product/productDetails';
 
 // Redux - Slices
 import {
