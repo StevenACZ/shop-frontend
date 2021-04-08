@@ -6,7 +6,7 @@ import {
   productListRequest,
   productListSuccess,
   productListFail,
-} from '../../slices/productList';
+} from '../../slices/product/productList';
 
 export const listProducts = () => async (dispatch: any) => {
   try {
