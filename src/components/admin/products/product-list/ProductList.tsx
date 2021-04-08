@@ -36,6 +36,9 @@ const ProductList: React.FC<Props> = () => {
 
   useEffect(() => {
     dispatch(listProducts());
+    // return () => {
+    //   console.log('La lista se a borrado');
+    // };
   }, [dispatch]);
 
   return (
