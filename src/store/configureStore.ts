@@ -9,6 +9,7 @@ import { productListSlice } from '../slices/product/productList';
 import { productDetailsSlice } from '../slices/product/productDetails';
 import { productDeleteSlice } from '../slices/product/productDelete';
 import { productCreateSlice } from '../slices/product/productCreate';
+import { productUpdateSlice } from '../slices/product/productUpdate';
 
 const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ const store = configureStore({
     productDetails: productDetailsSlice.reducer,
     productDelete: productDeleteSlice.reducer,
     productCreate: productCreateSlice.reducer,
+    productUpdate: productUpdateSlice.reducer,
   },
 });
 
