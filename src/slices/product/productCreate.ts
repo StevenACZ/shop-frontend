@@ -47,8 +47,12 @@ export const {
   productCreateReset,
 } = productCreateSlice.actions;
 
-export const selectSuccess = (state: RootState) => state.productCreate.success;
-export const selectLoading = (state: RootState) => state.productCreate.loading;
-export const selectError = (state: RootState) => state.productCreate.error;
+export const selectProductCreateSuccess = (state: RootState) =>
+  state.productCreate.success;
+export const selectProductCreateLoading = (state: RootState) =>
+  state.productCreate.loading;
+
+export const selectProductCreateError = (state: RootState) =>
+  state.productCreate.error;
 
 export default productCreateSlice.reducer;
