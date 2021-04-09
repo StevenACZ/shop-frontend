@@ -43,7 +43,7 @@ const OrderList: React.FC<Props> = () => {
       <OrderListStyled>
         {orders &&
           orders.map((order: any) => (
-            <OrderListItem key={order._id} {...order} />
+            <OrderListItem key={order._id + 1} {...order} />
           ))}
       </OrderListStyled>
       {orders && error && (
