@@ -9,11 +9,11 @@ import { listProducts } from '../../../../actions/product/productList';
 
 // Redux - Slices
 import {
-  selectProducts,
-  selectLoading,
-  selectError,
+  selectProductListProducts,
+  selectProductListLoading,
+  selectProductListError,
 } from '../../../../slices/product/productList';
-import { selectSuccess } from '../../../../slices/product/productDelete';
+import { selectProductDeleteSuccess } from '../../../../slices/product/productDelete';
 
 // Styles
 import { ProductListStyled } from './Styles';
@@ -31,10 +31,11 @@ const ProductList: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   // Selector
-  const productList = useSelector(selectProducts);
-  const success = useSelector(selectSuccess);
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  const productList = useSelector(selectProductListProducts);
+  const loading = useSelector(selectProductListLoading);
+  const error = useSelector(selectProductListError);
+
+  const success = useSelector(selectProductDeleteSuccess);
 
   useEffect(() => {
     dispatch(listProducts());
