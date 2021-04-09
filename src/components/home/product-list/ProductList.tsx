@@ -12,6 +12,7 @@ import {
   selectProductListProducts,
   selectProductListLoading,
   selectProductListError,
+  productListReset,
 } from '../../../slices/product/productList';
 
 // Styles
@@ -39,6 +40,10 @@ const ProductList: React.FC<Props> = () => {
 
   useEffect(() => {
     dispatch(listProducts());
+
+    return () => {
+      dispatch(productListReset());
+    };
   }, [dispatch]);
 
   return (
