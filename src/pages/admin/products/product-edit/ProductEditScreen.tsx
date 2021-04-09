@@ -96,6 +96,8 @@ const ProductEditScreen: React.FC<Props> = () => {
     }
   );
 
+  const uploadFileHandler = async (e: any) => {};
+
   useEffect(() => {
     dispatch(listProductDetails(productId));
   }, [dispatch, productId, successUpdate]);
@@ -123,7 +125,6 @@ const ProductEditScreen: React.FC<Props> = () => {
         {product && (
           <Form onSubmit={handleCreate}>
             <h2>Edit product</h2>
-
             <Input
               name="name"
               label="Name"
@@ -162,6 +163,15 @@ const ProductEditScreen: React.FC<Props> = () => {
               ref={register({
                 required: 'Image is required',
               })}
+            />
+            <Input
+              type="file"
+              name="imageUpload"
+              label="Image Upload"
+              onChange={uploadFileHandler}
+              placeholder="Enter imageUpload"
+              error={errors.imageUpload?.message}
+              ref={register({})}
             />
             <Input
               name="brand"
