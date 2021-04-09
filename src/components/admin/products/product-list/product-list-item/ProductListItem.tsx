@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,8 +9,9 @@ import { deleteProduct } from '../../../../../actions/product/productDelete';
 
 // Redux - Slices
 import {
-  selectLoading,
-  selectError,
+  selectProductDeleteLoading,
+  selectProductDeleteError,
+  productDeleteReset,
 } from '../../../../../slices/product/productDelete';
 
 // React Router
@@ -55,8 +56,8 @@ const ProductListItem: React.FC<Props> = ({
   const dispatch = useDispatch();
 
   // Selector
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  const loading = useSelector(selectProductDeleteLoading);
+  const error = useSelector(selectProductDeleteError);
 
   const handleDelete = (productId: string) => {
     dispatch(deleteProduct(productId));
@@ -65,6 +66,12 @@ const ProductListItem: React.FC<Props> = ({
   const handleGoToUpdate = (productId: string) => {
     history.push(`/admin/products/${productId}/edit`);
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(productDeleteReset());
+    };
+  }, [dispatch]);
 
   return (
     <Spin spinning={loading}>
