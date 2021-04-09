@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Redux - Slices
 import { selectUserInfo } from '../../../../slices/user';
@@ -19,12 +19,16 @@ import { FileAddOutlined } from '@ant-design/icons';
 // Components
 import ProductList from '../../../../components/admin/products/product-list/ProductList';
 import Button from '../../../../components/button/Button';
+import { productListReset } from '../../../../slices/product/productList';
 
 interface Props {}
 
 const ProductListScreen: React.FC<Props> = () => {
   // History
   const history = useHistory();
+
+  // Dispatch
+  const dispatch = useDispatch();
 
   // Selector
   const userInfo = useSelector(selectUserInfo) as {
@@ -42,6 +46,12 @@ const ProductListScreen: React.FC<Props> = () => {
       }
     }
   }, [history, userInfo]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(productListReset());
+    };
+  }, [dispatch]);
 
   const handleCreateProduct = () => {
     history.push('/admin/products');
