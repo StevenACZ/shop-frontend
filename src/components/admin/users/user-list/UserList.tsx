@@ -9,11 +9,11 @@ import { listUsers } from '../../../../actions/user';
 
 // Redux - Slices
 import {
-  selectErrorList,
-  selectLoading,
-  selectSuccess,
   selectUsers,
+  selectSuccess,
+  selectErrorList,
   selectErrorDelete,
+  selectLoading,
 } from '../../../../slices/user';
 
 // Styles
@@ -32,8 +32,8 @@ const UserList: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   // Selector
-  const success = useSelector(selectSuccess);
   const users = useSelector(selectUsers);
+  const success = useSelector(selectSuccess);
   const loading = useSelector(selectLoading);
   const errorList = useSelector(selectErrorList);
   const errorDelete = useSelector(selectErrorDelete);
