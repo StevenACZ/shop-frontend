@@ -8,6 +8,7 @@ import { cartSlice } from '../slices/cart';
 import { productListSlice } from '../slices/product/productList';
 import { productDetailsSlice } from '../slices/product/productDetails';
 import { productDeleteSlice } from '../slices/product/productDelete';
+import { productCreateSlice } from '../slices/product/productCreate';
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     productList: productListSlice.reducer,
     productDetails: productDetailsSlice.reducer,
     productDelete: productDeleteSlice.reducer,
+    productCreate: productCreateSlice.reducer,
   },
 });
 
