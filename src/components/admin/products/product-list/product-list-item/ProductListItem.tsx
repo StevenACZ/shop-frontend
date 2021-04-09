@@ -63,7 +63,7 @@ const ProductListItem: React.FC<Props> = ({
   };
 
   const handleGoToUpdate = (productId: string) => {
-    history.push(`/admin/${productId}/edit`);
+    history.push(`/admin/products/${productId}/edit`);
   };
 
   return (
