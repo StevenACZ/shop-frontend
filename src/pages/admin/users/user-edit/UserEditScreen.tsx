@@ -146,10 +146,10 @@ const UserEditScreen: React.FC<Props> = () => {
               <Alert message="Updated" type="success" showIcon banner />
             )}
             <Button width="100%" type="submit">
-              UPDATE
+              Update
             </Button>
             <Button width="100%" type="button" onClick={() => history.goBack()}>
-              GO BACK
+              Go Back
             </Button>
           </Form>
         )}
