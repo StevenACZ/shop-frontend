@@ -9,9 +9,10 @@ import { listProductDetails } from '../../../actions/product/productDetails';
 
 // Redux - Slices
 import {
-  selectError,
-  selectLoading,
-  selectProduct,
+  selectProductDetailsProduct,
+  selectProductDetailsLoading,
+  selectProductDetailsError,
+  productDetailsReset,
 } from '../../../slices/product/productDetails';
 
 // React Router
@@ -46,7 +47,7 @@ const ProductDetails: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   // Selector
-  const product = useSelector(selectProduct) as {
+  const product = useSelector(selectProductDetailsProduct) as {
     _id: string;
     name: string;
     image: string;
@@ -56,8 +57,8 @@ const ProductDetails: React.FC<Props> = () => {
     rating: number;
     numReviews: number;
   };
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  const loading = useSelector(selectProductDetailsLoading);
+  const error = useSelector(selectProductDetailsError);
 
   const [quantity, setQuantity] = useState<number>();
   const { productID } = useParams() as { productID: string };
@@ -77,6 +78,12 @@ const ProductDetails: React.FC<Props> = () => {
   const addToCartHandler = () => {
     history.push(`/cart/${product._id}?qty=${quantity}`);
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(productDetailsReset());
+    };
+  }, [dispatch]);
 
   return (
     <Spin spinning={loading}>
