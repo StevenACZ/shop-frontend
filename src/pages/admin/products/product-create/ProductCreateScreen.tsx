@@ -10,9 +10,9 @@ import { createProduct } from '../../../../actions/product/productCreate';
 // Redux - Slices
 import { selectUserInfo } from '../../../../slices/user';
 import {
-  selectSuccess,
-  selectLoading,
-  selectError,
+  selectProductCreateSuccess,
+  selectProductCreateLoading,
+  selectProductCreateError,
   productCreateReset,
 } from '../../../../slices/product/productCreate';
 
@@ -45,9 +45,9 @@ const ProductCreateScreen: React.FC<Props> = () => {
   const userInfo = useSelector(selectUserInfo) as {
     isAdmin: boolean;
   };
-  const success = useSelector(selectSuccess);
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  const success = useSelector(selectProductCreateSuccess);
+  const loading = useSelector(selectProductCreateLoading);
+  const error = useSelector(selectProductCreateError);
 
   const { register, errors, handleSubmit } = useForm();
 
