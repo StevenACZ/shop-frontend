@@ -43,11 +43,15 @@ const ProductListScreen: React.FC<Props> = () => {
     }
   }, [history, userInfo]);
 
+  const handleCreateProduct = () => {
+    history.push('/admin/products');
+  };
+
   return (
     <ProductListScreenStyled>
       <Header>
         <h2>Product list</h2>
-        <Button>
+        <Button onClick={() => handleCreateProduct()}>
           <p>Create Product</p>
           <FileAddOutlined />
         </Button>
