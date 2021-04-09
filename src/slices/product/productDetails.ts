@@ -31,32 +31,42 @@ export const productDetailsSlice = createSlice({
   name: 'productDetails',
   initialState,
   reducers: {
-    productRequest: (state) => {
+    productDetailsRequest: (state) => {
       state.product = null;
       state.loading = true;
       state.error = null;
     },
-    productSuccess: (state, action) => {
+    productDetailsSuccess: (state, action) => {
       state.product = action.payload;
       state.loading = false;
       state.error = null;
     },
-    productFail: (state, action) => {
+    productDetailsFail: (state, action) => {
       state.product = null;
       state.loading = false;
       state.error = action.payload;
+    },
+    productDetailsReset: (state) => {
+      state.product = null;
+      state.loading = false;
+      state.error = null;
     },
   },
 });
 
 export const {
-  productRequest,
-  productSuccess,
-  productFail,
+  productDetailsRequest,
+  productDetailsSuccess,
+  productDetailsFail,
+  productDetailsReset,
 } = productDetailsSlice.actions;
 
-export const selectProduct = (state: RootState) => state.productDetails.product;
-export const selectLoading = (state: RootState) => state.productDetails.loading;
-export const selectError = (state: RootState) => state.productDetails.error;
+export const selectProductDetailsProduct = (state: RootState) =>
+  state.productDetails.product;
+export const selectProductDetailsLoading = (state: RootState) =>
+  state.productDetails.loading;
+
+export const selectProductDetailsError = (state: RootState) =>
+  state.productDetails.error;
 
 export default productDetailsSlice.reducer;
