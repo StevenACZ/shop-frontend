@@ -9,9 +9,9 @@ import { listProducts } from '../../../actions/product/productList';
 
 // Redux - Slices
 import {
-  selectProducts,
-  selectLoading,
-  selectError,
+  selectProductListProducts,
+  selectProductListLoading,
+  selectProductListError,
 } from '../../../slices/product/productList';
 
 // Styles
@@ -33,9 +33,9 @@ const ProductList: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   // Selector
-  const productList = useSelector(selectProducts);
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  const productList = useSelector(selectProductListProducts);
+  const loading = useSelector(selectProductListLoading);
+  const error = useSelector(selectProductListError);
 
   useEffect(() => {
     dispatch(listProducts());
