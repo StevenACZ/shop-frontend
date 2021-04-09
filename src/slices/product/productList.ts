@@ -32,6 +32,11 @@ export const productListSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    productListReset: (state) => {
+      state.products = null;
+      state.loading = false;
+      state.error = null;
+    },
   },
 });
 
@@ -39,6 +44,7 @@ export const {
   productListRequest,
   productListSuccess,
   productListFail,
+  productListReset,
 } = productListSlice.actions;
 
 export const selectProducts = (state: RootState) => state.productList.products;
