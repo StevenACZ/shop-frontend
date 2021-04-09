@@ -3,7 +3,8 @@ import { color } from '../../../theme/variables';
 
 export const Container = styled.main`
   max-width: 1000px;
-  margin: 30px auto;
+  padding: 30px 0;
+  margin: 0 auto;
   background-color: ${color.colorWhite};
 
   @media (max-width: 1000px) {
