@@ -9,12 +9,12 @@ import { getUserById, updateUser } from '../../../../actions/user';
 
 // Redux - Slices
 import {
+  selectUserInfo,
+  selectProfile,
+  selectSuccess,
   selectErrorDetails,
   selectErrorUpdate,
   selectLoading,
-  selectProfile,
-  selectSuccess,
-  selectUserInfo,
 } from '../../../../slices/user';
 
 // React Router
