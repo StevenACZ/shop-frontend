@@ -6,18 +6,21 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Redux - Actions
 import { listProductDetails } from '../../../../actions/product/productDetails';
+import { updateProduct } from '../../../../actions/product/productUpdate';
 
 // Redux - Slices
 import { selectUserInfo } from '../../../../slices/user';
 import {
-  selectLoading,
-  selectProduct,
+  selectProductDetailsProduct,
+  selectProductDetailsLoading,
+  productDetailsReset,
 } from '../../../../slices/product/productDetails';
 import {
-  selectSuccess,
-  selectError,
-  productCreateReset,
-} from '../../../../slices/product/productCreate';
+  selectProductUpdateSuccess,
+  selectProductUpdateLoading,
+  selectProductUpdateError,
+  productUpdateReset,
+} from '../../../../slices/product/productUpdate';
 
 // React Router
 import { useHistory, useParams } from 'react-router';
@@ -48,9 +51,14 @@ const ProductEditScreen: React.FC<Props> = () => {
   const userInfo = useSelector(selectUserInfo) as {
     isAdmin: boolean;
   };
-  const product = useSelector(selectProduct);
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+
+  const product = useSelector(selectProductDetailsProduct);
+  const loadingProductDetails = useSelector(selectProductDetailsLoading);
+
+  const loadingProductUpdate = useSelector(selectProductUpdateLoading);
+
+  const successUpdate = useSelector(selectProductUpdateSuccess);
+  const error = useSelector(selectProductUpdateError);
 
   const { productId } = useParams() as { productId: string };
 
@@ -74,24 +82,23 @@ const ProductEditScreen: React.FC<Props> = () => {
       category: string;
       description: string;
     }) => {
-      // dispatch(listProductDetails(data));
-      const h = {
-        name,
-        price: Number(price),
-        image,
-        brand,
-        countInStock: Number(countInStock),
-        category,
-        description,
-      };
-
-      console.log(h);
+      dispatch(
+        updateProduct(productId, {
+          name,
+          price: Number(price),
+          image,
+          brand,
+          countInStock: Number(countInStock),
+          category,
+          description,
+        })
+      );
     }
   );
 
   useEffect(() => {
     dispatch(listProductDetails(productId));
-  }, [dispatch, productId]);
+  }, [dispatch, productId, successUpdate]);
 
   useEffect(() => {
     if (!userInfo) {
@@ -103,21 +110,16 @@ const ProductEditScreen: React.FC<Props> = () => {
     }
   }, [history, userInfo]);
 
-  // useEffect(() => {
-  //   if (success) {
-  //     history.push('/admin/productlist');
-  //   }
-  // }, [history, success]);
-
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(productCreateReset());
-  //   };
-  // }, [dispatch]);
+  useEffect(() => {
+    return () => {
+      dispatch(productUpdateReset());
+      dispatch(productDetailsReset());
+    };
+  }, [dispatch]);
 
   return (
     <ProductEditScreenStyled>
-      <Spin spinning={loading}>
+      <Spin spinning={loadingProductDetails || loadingProductUpdate}>
         {product && (
           <Form onSubmit={handleCreate}>
             <h2>Edit product</h2>
@@ -202,6 +204,9 @@ const ProductEditScreen: React.FC<Props> = () => {
                 required: 'Description is required',
               })}
             />
+            {successUpdate && (
+              <Alert message="Updated" type="success" showIcon banner />
+            )}
             <Button width="100%" type="submit">
               Update
             </Button>
