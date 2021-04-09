@@ -3,23 +3,23 @@ import axios from '../../axios/index';
 
 // Redux - Slices
 import {
-  productRequest,
-  productSuccess,
-  productFail,
+  productDetailsRequest,
+  productDetailsSuccess,
+  productDetailsFail,
 } from '../../slices/product/productDetails';
 
 export const listProductDetails = (productId: string) => async (
   dispatch: any
 ) => {
   try {
-    dispatch(productRequest());
+    dispatch(productDetailsRequest());
 
     const { data } = await axios.get(`/api/products/${productId}`);
 
-    dispatch(productSuccess(data));
+    dispatch(productDetailsSuccess(data));
   } catch (error) {
     dispatch(
-      productFail(
+      productDetailsFail(
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message
