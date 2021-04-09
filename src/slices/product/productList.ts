@@ -47,8 +47,12 @@ export const {
   productListReset,
 } = productListSlice.actions;
 
-export const selectProducts = (state: RootState) => state.productList.products;
-export const selectLoading = (state: RootState) => state.productList.loading;
-export const selectError = (state: RootState) => state.productList.error;
+export const selectProductListProducts = (state: RootState) =>
+  state.productList.products;
+export const selectProductListLoading = (state: RootState) =>
+  state.productList.loading;
+
+export const selectProductListError = (state: RootState) =>
+  state.productList.error;
 
 export default productListSlice.reducer;
