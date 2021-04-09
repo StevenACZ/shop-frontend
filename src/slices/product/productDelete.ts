@@ -32,6 +32,11 @@ export const productDeleteSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    productDeleteReset: (state) => {
+      state.success = false;
+      state.loading = false;
+      state.error = null;
+    },
   },
 });
 
@@ -39,10 +44,15 @@ export const {
   productDeleteRequest,
   productDeleteSuccess,
   productDeleteFail,
+  productDeleteReset,
 } = productDeleteSlice.actions;
 
-export const selectSuccess = (state: RootState) => state.productDelete.success;
-export const selectLoading = (state: RootState) => state.productDelete.loading;
-export const selectError = (state: RootState) => state.productDelete.error;
+export const selectProductDeleteSuccess = (state: RootState) =>
+  state.productDelete.success;
+export const selectProductDeleteLoading = (state: RootState) =>
+  state.productDelete.loading;
+
+export const selectProductDeleteError = (state: RootState) =>
+  state.productDelete.error;
 
 export default productDeleteSlice.reducer;
