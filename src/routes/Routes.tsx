@@ -18,6 +18,7 @@ import UserListScreen from '../pages/admin/users/user-list/UserListScreen';
 import UserEditScreen from '../pages/admin/users/user-edit/UserEditScreen';
 import ProductListScreen from '../pages/admin/products/product-list/ProductListScreen';
 import ProductCreateScreen from '../pages/admin/products/product-create/ProductCreateScreen';
+import ProductEditScreen from '../pages/admin/products/product-edit/ProductEditScreen';
 
 interface Props {}
 
@@ -39,7 +40,11 @@ const Routes: React.FC<Props> = () => {
       <Route exact path="/admin/productlist" component={ProductListScreen} />
 
       <Route exact path="/admin/products" component={ProductCreateScreen} />
-      {/* <Route exact path="/admin/products/:productId/edit" component={ProductListScreen} /> */}
+      <Route
+        exact
+        path="/admin/products/:productId/edit"
+        component={ProductEditScreen}
+      />
 
       <Redirect to="/" />
     </Switch>
