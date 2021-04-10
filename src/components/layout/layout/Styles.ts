@@ -8,6 +8,6 @@ export const Container = styled.main`
   background-color: ${color.colorWhite};
 
   @media (max-width: 1000px) {
-    padding: 0 20px;
+    padding: 30px 20px;
   }
 `;
