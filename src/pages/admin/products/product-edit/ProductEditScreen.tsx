@@ -1,5 +1,8 @@
 // React
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
+// Axios
+import axios from '../../../../axios';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -96,7 +99,26 @@ const ProductEditScreen: React.FC<Props> = () => {
     }
   );
 
-  const uploadFileHandler = async (e: any) => {};
+  const [image, setImage] = useState();
+
+  const uploadFileHandler = async (e: any) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post('/api/upload', formData, config);
+      setImage(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     dispatch(listProductDetails(productId));
@@ -158,6 +180,7 @@ const ProductEditScreen: React.FC<Props> = () => {
               name="image"
               label="Image"
               defaultValue={product.image}
+              value={image}
               placeholder="Enter image"
               error={errors.image?.message}
               ref={register({
