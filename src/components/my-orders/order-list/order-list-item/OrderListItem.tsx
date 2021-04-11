@@ -31,32 +31,36 @@ const OrderListItem: React.FC<Props> = ({
   // History
   const history = useHistory();
 
+  const handleGoToOrder = (orderId: string) => {
+    history.push(`/order/${orderId}`);
+  };
+
   return (
     <OrderListItemStyled>
       <Header>
-        <h3>{_id && _id}</h3>
+        <h3>{_id}</h3>
       </Header>
       <Body>
         <p>
-          <span>Date:</span> {createdAt && createdAt.substring(0, 10)}
+          <span>Date:</span> {createdAt.substring(0, 10)}
         </p>
         <p>
-          <span>Total Price:</span> ${totalPrice && totalPrice}
+          <span>Total Price:</span> ${totalPrice}
         </p>
       </Body>
       <Footer>
-        {isPaid && isPaid ? (
+        {isPaid ? (
           <Alert message="Paid" type="success" showIcon />
         ) : (
           <Alert message="Not paid" type="error" showIcon />
         )}
-        {isDelivered && isDelivered ? (
+        {isDelivered ? (
           <Alert message="Delivered" type="success" showIcon />
         ) : (
           <Alert message="Not delivered" type="error" showIcon />
         )}
       </Footer>
-      <Button width="100%" onClick={() => history.push(`order/${_id}`)}>
+      <Button width="100%" onClick={() => handleGoToOrder(_id)}>
         Details
       </Button>
     </OrderListItemStyled>
