@@ -104,12 +104,22 @@ const Header: React.FC<Props> = () => {
           >
             Products
           </Menu.Item>
+
+          <Menu.Divider />
+
+          <Menu.Item
+            key="5"
+            icon={<DeploymentUnitOutlined />}
+            onClick={() => history.push('/admin/orderlist')}
+          >
+            Orders
+          </Menu.Item>
         </>
       )}
 
       <Menu.Divider />
 
-      <Menu.Item key="5" icon={<LogoutOutlined />} onClick={handleLogout}>
+      <Menu.Item key="999" icon={<LogoutOutlined />} onClick={handleLogout}>
         Logout
       </Menu.Item>
     </Menu>
