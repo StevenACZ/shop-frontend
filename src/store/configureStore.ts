@@ -4,6 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 // Redux - Slices
 import { userSlice } from '../slices/user';
 import { orderSlice } from '../slices/order';
+import { orderListSlice } from '../slices/order/orderList';
 import { cartSlice } from '../slices/cart';
 import { productListSlice } from '../slices/product/productList';
 import { productDetailsSlice } from '../slices/product/productDetails';
@@ -16,6 +17,7 @@ const store = configureStore({
     user: userSlice.reducer,
     cart: cartSlice.reducer,
     order: orderSlice.reducer,
+    orderList: orderListSlice.reducer,
     productList: productListSlice.reducer,
     productDetails: productDetailsSlice.reducer,
     productDelete: productDeleteSlice.reducer,

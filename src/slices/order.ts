@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/configureStore';
 
-interface CartState {
+interface OrderState {
   orders: null | [{}];
   order: null | {};
   success: boolean;
@@ -9,7 +9,7 @@ interface CartState {
   loading: boolean;
 }
 
-const initialState: CartState = {
+const initialState: OrderState = {
   orders: [{}],
   order: null,
   success: false,
