@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Redux - Slices
 import { selectUserInfo } from '../../../../slices/user';
+import { productListReset } from '../../../../slices/product/productList';
 
 // React Router
 import { useHistory } from 'react-router';
@@ -19,7 +20,6 @@ import { FileAddOutlined } from '@ant-design/icons';
 // Components
 import ProductList from '../../../../components/admin/products/product-list/ProductList';
 import Button from '../../../../components/button/Button';
-import { productListReset } from '../../../../slices/product/productList';
 
 interface Props {}
 
