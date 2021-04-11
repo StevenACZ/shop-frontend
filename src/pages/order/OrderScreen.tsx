@@ -239,7 +239,7 @@ const OrderScreen: React.FC<Props> = () => {
               />
             </div>
           )}
-          <Button onClick={() => history.push('/myorders')} width="100%">
+          <Button onClick={() => history.goBack()} width="100%">
             Go Back
           </Button>
           {error && <Alert message={error} type="error" showIcon banner />}
