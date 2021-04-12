@@ -5,14 +5,15 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Redux - Actions
-import { listMyOrders } from '../../../actions/order';
+import { listMyOrders } from '../../../actions/order/orderMyList';
 
 // Redux - Slices
 import {
-  selectError,
-  selectLoading,
-  selectOrders,
-} from '../../../slices/order';
+  selectOrderMyListOrders,
+  selectOrderMyListLoading,
+  selectOrderMyListError,
+  orderMyListReset,
+} from '../../../slices/order/orderMyList';
 
 // Styles
 import { OrderListStyled } from './Styles';
@@ -30,25 +31,29 @@ const OrderList: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   // Selector
-  const loading = useSelector(selectLoading);
-  const orders = useSelector(selectOrders);
-  const error = useSelector(selectError);
+  const myOrders = useSelector(selectOrderMyListOrders);
+  const loading = useSelector(selectOrderMyListLoading);
+  const error = useSelector(selectOrderMyListError);
 
   useEffect(() => {
     dispatch(listMyOrders());
   }, [dispatch]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(orderMyListReset());
+    };
+  }, [dispatch]);
+
   return (
     <Spin spinning={loading}>
       <OrderListStyled>
-        {orders &&
-          orders.map((order: any) => (
+        {myOrders &&
+          myOrders.map((order: any) => (
             <OrderListItem key={order._id + 1} {...order} />
           ))}
       </OrderListStyled>
-      {orders && error && (
-        <Alert message={error} type="error" showIcon banner />
-      )}
+      {error && <Alert message={error} type="error" showIcon banner />}
     </Spin>
   );
 };
