@@ -12,6 +12,7 @@ import {
   selectOrderListOrders,
   selectOrderListLoading,
   selectOrderListError,
+  orderListReset,
 } from '../../../../slices/order/orderList';
 
 // Styles
@@ -30,7 +31,7 @@ const OrderList: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   // Selector
-  const orderList = useSelector(selectOrderListOrders);
+  const orders = useSelector(selectOrderListOrders);
   const loading = useSelector(selectOrderListLoading);
   const error = useSelector(selectOrderListError);
 
@@ -38,11 +39,17 @@ const OrderList: React.FC<Props> = () => {
     dispatch(listOrders());
   }, [dispatch]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(orderListReset());
+    };
+  }, [dispatch]);
+
   return (
     <Spin spinning={loading}>
       <OrderListStyled>
-        {orderList &&
-          orderList.map((order: any) => (
+        {orders &&
+          orders.map((order: any) => (
             <OrderListItem key={order._id} {...order} />
           ))}
       </OrderListStyled>
