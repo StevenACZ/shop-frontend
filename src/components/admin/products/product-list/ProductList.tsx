@@ -12,6 +12,7 @@ import {
   selectProductListProducts,
   selectProductListLoading,
   selectProductListError,
+  productListReset,
 } from '../../../../slices/product/productList';
 import { selectProductDeleteSuccess } from '../../../../slices/product/productDelete';
 
@@ -40,6 +41,12 @@ const ProductList: React.FC<Props> = () => {
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch, success]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(productListReset());
+    };
+  }, [dispatch]);
 
   return (
     <Spin spinning={loading}>
