@@ -5,6 +5,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { userSlice } from '../slices/user';
 import { orderSlice } from '../slices/order';
 import { orderListSlice } from '../slices/order/orderList';
+import { orderMyListSlice } from '../slices/order/orderMyList';
 import { cartSlice } from '../slices/cart';
 import { productListSlice } from '../slices/product/productList';
 import { productDetailsSlice } from '../slices/product/productDetails';
@@ -18,6 +19,7 @@ const store = configureStore({
     cart: cartSlice.reducer,
     order: orderSlice.reducer,
     orderList: orderListSlice.reducer,
+    orderMyList: orderMyListSlice.reducer,
     productList: productListSlice.reducer,
     productDetails: productDetailsSlice.reducer,
     productDelete: productDeleteSlice.reducer,
