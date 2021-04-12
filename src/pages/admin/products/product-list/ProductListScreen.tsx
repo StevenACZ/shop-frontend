@@ -2,11 +2,10 @@
 import React, { useEffect } from 'react';
 
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // Redux - Slices
 import { selectUserInfo } from '../../../../slices/user';
-import { productListReset } from '../../../../slices/product/productList';
 
 // React Router
 import { useHistory } from 'react-router';
@@ -27,9 +26,6 @@ const ProductListScreen: React.FC<Props> = () => {
   // History
   const history = useHistory();
 
-  // Dispatch
-  const dispatch = useDispatch();
-
   // Selector
   const userInfo = useSelector(selectUserInfo) as {
     name: string;
@@ -46,12 +42,6 @@ const ProductListScreen: React.FC<Props> = () => {
       }
     }
   }, [history, userInfo]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(productListReset());
-    };
-  }, [dispatch]);
 
   const handleCreateProduct = () => {
     history.push('/admin/products');
