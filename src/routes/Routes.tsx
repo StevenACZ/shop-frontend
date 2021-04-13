@@ -26,7 +26,9 @@ interface Props {}
 const Routes: React.FC<Props> = () => {
   return (
     <Switch>
+      <Route exact path="/search/:keyword" component={HomeScreen} />
       <Route exact path="/" component={HomeScreen} />
+
       <Route exact path="/product/:productID" component={ProductScreen} />
       <Route exact path="/cart/:productID?" component={CartScreen} />
       <Route exact path="/login" component={LoginScreen} />
