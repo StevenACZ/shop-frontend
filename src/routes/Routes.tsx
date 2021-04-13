@@ -27,6 +27,12 @@ const Routes: React.FC<Props> = () => {
   return (
     <Switch>
       <Route exact path="/search/:keyword" component={HomeScreen} />
+      <Route exact path="/page/:pageNumber" component={HomeScreen} />
+      <Route
+        exact
+        path="/search/:keyword/page/:pageNumber"
+        component={HomeScreen}
+      />
       <Route exact path="/" component={HomeScreen} />
 
       <Route exact path="/product/:productID" component={ProductScreen} />
