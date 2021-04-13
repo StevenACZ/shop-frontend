@@ -48,6 +48,11 @@ const Routes: React.FC<Props> = () => {
       <Route exact path="/admin/:userId/edit" component={UserEditScreen} />
 
       <Route exact path="/admin/productlist" component={ProductListScreen} />
+      <Route
+        exact
+        path="/admin/productlist/:pageNumber"
+        component={ProductListScreen}
+      />
       <Route exact path="/admin/orderlist" component={OrderListScreen} />
 
       <Route exact path="/admin/products" component={ProductCreateScreen} />
