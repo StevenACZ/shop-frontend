@@ -9,9 +9,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // Redux - Actions
 import { getOrderDetails, payOrder } from '../../actions/order';
+import { deliverOrder } from '../../actions/order/orderDeliver';
 
 // Redux - Slices
 import { selectUserInfo } from '../../slices/user';
+import {
+  selectOrderDeliverSuccess,
+  orderDeliverReset,
+} from '../../slices/order/orderDeliver';
 
 import { selectError, selectLoading, selectOrder } from '../../slices/order';
 
@@ -79,9 +84,13 @@ const OrderScreen: React.FC<Props> = () => {
     paidAt: string;
     deliveredAt: string;
   };
-  const userInfo = useSelector(selectUserInfo);
+  const userInfo = useSelector(selectUserInfo) as {
+    isAdmin: boolean;
+  };
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+
+  const successDeliver = useSelector(selectOrderDeliverSuccess);
 
   const { orderId } = useParams() as { orderId: string };
 
@@ -107,7 +116,7 @@ const OrderScreen: React.FC<Props> = () => {
 
   useEffect(() => {
     dispatch(getOrderDetails(orderId));
-  }, [dispatch, orderId]);
+  }, [dispatch, orderId, successDeliver]);
 
   useEffect(() => {
     if (order) {
@@ -129,6 +138,16 @@ const OrderScreen: React.FC<Props> = () => {
   const handlerSuccessPayment = (paymentResult: any) => {
     dispatch(payOrder(orderId, paymentResult));
   };
+
+  const handleDeliver = (orderId: string) => {
+    dispatch(deliverOrder(orderId));
+  };
+
+  useEffect(() => {
+    return () => {
+      dispatch(orderDeliverReset());
+    };
+  }, [dispatch]);
 
   return (
     <Spin spinning={loading}>
@@ -225,6 +244,11 @@ const OrderScreen: React.FC<Props> = () => {
                   onSuccess={handlerSuccessPayment}
                 />
               </div>
+            )}
+            {userInfo.isAdmin && (
+              <Button onClick={() => handleDeliver(orderId)} width="100%">
+                Deliver
+              </Button>
             )}
             <Button onClick={() => history.goBack()} width="100%">
               Go Back
