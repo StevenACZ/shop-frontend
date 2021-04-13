@@ -8,11 +8,15 @@ import {
   productListFail,
 } from '../../slices/product/productList';
 
-export const listProducts = (keyword = '') => async (dispatch: any) => {
+export const listProducts = (keyword = '', pageNumber = '') => async (
+  dispatch: any
+) => {
   try {
     dispatch(productListRequest());
 
-    const { data } = await axios.get(`/api/products?keyword=${keyword}`);
+    const { data } = await axios.get(
+      `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+    );
 
     dispatch(productListSuccess(data));
   } catch (error) {
