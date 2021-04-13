@@ -17,7 +17,6 @@ import { NavLink, useHistory } from 'react-router-dom';
 import {
   HeaderStyled,
   Logo,
-  Search,
   Navbar,
   Profile,
   HeaderContainer,
@@ -30,7 +29,6 @@ import {
   ProfileOutlined,
   LogoutOutlined,
   ShoppingCartOutlined,
-  SearchOutlined,
   MenuOutlined,
   TeamOutlined,
   DeploymentUnitOutlined,
@@ -42,6 +40,7 @@ import { Drawer, Dropdown, Menu } from 'antd';
 
 // Components
 import Button from '../../button/Button';
+import SearchBox from '../../search-box/SearchBox';
 
 interface Props {}
 
@@ -144,14 +143,7 @@ const Header: React.FC<Props> = () => {
           </NavLink>
         </Logo>
 
-        <Search>
-          <label>
-            <input type="text" placeholder="Search" />
-          </label>
-          <Button>
-            <SearchOutlined />
-          </Button>
-        </Search>
+        <SearchBox />
 
         {/* MOBILE */}
         <DrawerStyled>
