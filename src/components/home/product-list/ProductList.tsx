@@ -15,6 +15,9 @@ import {
   productListReset,
 } from '../../../slices/product/productList';
 
+// React Router
+import { useParams } from 'react-router';
+
 // Styles
 import { ProductListStyled } from './Styles';
 
@@ -38,13 +41,15 @@ const ProductList: React.FC<Props> = () => {
   const loading = useSelector(selectProductListLoading);
   const error = useSelector(selectProductListError);
 
+  const { keyword } = useParams() as { keyword: string };
+
   useEffect(() => {
-    dispatch(listProducts());
+    dispatch(listProducts(keyword));
 
     return () => {
       dispatch(productListReset());
     };
-  }, [dispatch]);
+  }, [dispatch, keyword]);
 
   return (
     <Spin spinning={loading} delay={0}>
