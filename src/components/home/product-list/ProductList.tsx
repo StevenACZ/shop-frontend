@@ -12,14 +12,16 @@ import {
   selectProductListProducts,
   selectProductListLoading,
   selectProductListError,
+  selectProductListPages,
+  selectProductListPage,
   productListReset,
 } from '../../../slices/product/productList';
 
 // React Router
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 
 // Styles
-import { ProductListStyled } from './Styles';
+import { ProductListStyled, ProductListContent } from './Styles';
 
 // Types
 import { Product } from '../../../data/products';
@@ -27,38 +29,64 @@ import { Product } from '../../../data/products';
 // Antd Components
 import { Alert, Spin } from 'antd';
 
+// Antd Components
+import { Pagination } from 'antd';
+
 // Components
 import ProductListItem from './product-list-item/ProductListItem';
 
 interface Props {}
 
 const ProductList: React.FC<Props> = () => {
+  // History
+  const history = useHistory();
+
   // Dispatch
   const dispatch = useDispatch();
 
   // Selector
   const productList = useSelector(selectProductListProducts);
+  const pages = useSelector(selectProductListPages);
+  const page = useSelector(selectProductListPage);
   const loading = useSelector(selectProductListLoading);
   const error = useSelector(selectProductListError);
 
   const { keyword } = useParams() as { keyword: string };
+  const { pageNumber } = (useParams() as { pageNumber: string }) || 1;
+
+  function onChange(pageNumber: number) {
+    history.push(`/page/${pageNumber}`);
+  }
 
   useEffect(() => {
-    dispatch(listProducts(keyword));
+    dispatch(listProducts(keyword, pageNumber));
 
     return () => {
       dispatch(productListReset());
     };
-  }, [dispatch, keyword]);
+  }, [dispatch, keyword, pageNumber]);
 
   return (
     <Spin spinning={loading} delay={0}>
       <ProductListStyled>
-        {productList &&
-          productList.map((product: Product) => (
-            <ProductListItem key={product._id} {...product} />
-          ))}
+        <ProductListContent>
+          {productList && (
+            <>
+              {productList.map((product: Product) => (
+                <ProductListItem key={product._id} {...product} />
+              ))}
+            </>
+          )}
+        </ProductListContent>
+        {productList && pages && page && (
+          <Pagination
+            onChange={onChange}
+            current={page}
+            total={pages * productList.length}
+          />
+        )}
       </ProductListStyled>
+
       {productList && error && (
         <Alert message={error} type="error" showIcon banner />
       )}
