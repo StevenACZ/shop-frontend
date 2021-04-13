@@ -3,21 +3,20 @@ import type { RootState } from '../../store/configureStore';
 
 interface OrderMyListState {
   orders: null | [{}];
-  error: null | {};
   loading: boolean;
+  error: null | string;
 }
 
 const initialState: OrderMyListState = {
   orders: null,
-  error: null,
   loading: false,
+  error: null,
 };
 
 export const orderMyListSlice = createSlice({
   name: 'orderMyList',
   initialState,
   reducers: {
-    // CREATE
     orderMyListRequest: (state) => {
       state.orders = null;
       state.error = null;
