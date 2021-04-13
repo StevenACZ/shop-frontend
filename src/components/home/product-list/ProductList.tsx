@@ -27,10 +27,7 @@ import { ProductListStyled, ProductListContent } from './Styles';
 import { Product } from '../../../data/products';
 
 // Antd Components
-import { Alert, Spin } from 'antd';
-
-// Antd Components
-import { Pagination } from 'antd';
+import { Alert, Spin, Pagination } from 'antd';
 
 // Components
 import ProductListItem from './product-list-item/ProductListItem';
@@ -54,9 +51,13 @@ const ProductList: React.FC<Props> = () => {
   const { keyword } = useParams() as { keyword: string };
   const { pageNumber } = (useParams() as { pageNumber: string }) || 1;
 
-  function onChange(pageNumber: number) {
-    history.push(`/page/${pageNumber}`);
-  }
+  const changePage = (pageNumber: number, keyword = '') => {
+    if (keyword) {
+      history.push(`/search/${keyword}/page/${pageNumber}`);
+    } else {
+      history.push(`/page/${pageNumber}`);
+    }
+  };
 
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber));
@@ -80,16 +81,14 @@ const ProductList: React.FC<Props> = () => {
         </ProductListContent>
         {productList && pages && page && (
           <Pagination
-            onChange={onChange}
+            onChange={(e) => changePage(e, keyword)}
             current={page}
             total={pages * productList.length}
           />
         )}
       </ProductListStyled>
 
-      {productList && error && (
-        <Alert message={error} type="error" showIcon banner />
-      )}
+      {error && <Alert message={error} type="error" showIcon banner />}
     </Spin>
   );
 };
