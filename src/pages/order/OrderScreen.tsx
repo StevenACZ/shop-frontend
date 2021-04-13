@@ -132,56 +132,43 @@ const OrderScreen: React.FC<Props> = () => {
 
   return (
     <Spin spinning={loading}>
-      <OrderScreenStyled>
-        <Details>
-          <h2>ORDER {order && order._id}</h2>
-          <div>
-            <h2>Shipping</h2>
-            <p>Name: {order && order.user.name}</p>
-            <p>Email: {order && order.user.email}</p>
-            <p>
-              Address:{' '}
-              {order && (
+      {order && (
+        <OrderScreenStyled>
+          <Details>
+            <h2>ORDER {order._id}</h2>
+            <div>
+              <h2>Shipping</h2>
+              <p>Name: {order.user.name}</p>
+              <p>Email: {order.user.email}</p>
+              <p>
+                Address:{' '}
                 <span>
                   {order.shippingAddress.address}, {order.shippingAddress.city},{' '}
                   {order.shippingAddress.postalCode},{' '}
                   {order.shippingAddress.country}
                 </span>
+              </p>
+              {!order.isDelivered ? (
+                <Alert message="Not Delivered" type="error" />
+              ) : (
+                <Alert message={`Paided ${order.deliveredAt}`} type="success" />
               )}
-            </p>
-            {order && (
-              <>
-                {!order.isDelivered ? (
-                  <Alert message="Not Delivered" type="error" />
-                ) : (
-                  <Alert
-                    message={`Paided ${order.deliveredAt}`}
-                    type="success"
-                  />
-                )}
-              </>
-            )}
-          </div>
-          <div>
-            <h2>Payment method</h2>
-            <p>
-              Method: <span>{order && order.paymentMethod}</span>
-            </p>
-            {order && (
-              <>
-                {!order.isPaid ? (
-                  <Alert message="Not Paid" type="error" />
-                ) : (
-                  <Alert message={`Paid on ${order.paidAt}`} type="success" />
-                )}
-              </>
-            )}
-          </div>
-          <div>
-            <h2>Order items</h2>
-            <OrderList>
-              {order &&
-                order.orderItems.map((product: any) => (
+            </div>
+            <div>
+              <h2>Payment method</h2>
+              <p>
+                Method: <span>{order.paymentMethod}</span>
+              </p>
+              {!order.isPaid ? (
+                <Alert message="Not Paid" type="error" />
+              ) : (
+                <Alert message={`Paid on ${order.paidAt}`} type="success" />
+              )}
+            </div>
+            <div>
+              <h2>Order items</h2>
+              <OrderList>
+                {order.orderItems.map((product: any) => (
                   <OrderItem key={product.product}>
                     <OrderImage
                       onClick={() =>
@@ -207,44 +194,45 @@ const OrderScreen: React.FC<Props> = () => {
                     </OrderCant>
                   </OrderItem>
                 ))}
-            </OrderList>
-          </div>
-        </Details>
-
-        <OrderSummary>
-          <div>
-            <h2>Order Summary</h2>
-          </div>
-          <div>
-            <span>Items:</span>
-            <span>${itemsPrice}</span>
-          </div>
-          <div>
-            <span>Shipping:</span>
-            <span>${order && order.shippingPrice}</span>
-          </div>
-          <div>
-            <span>Tax:</span>
-            <span>${order && order.taxPrice}</span>
-          </div>
-          <div>
-            <span>Total:</span>
-            <span>${order && order.totalPrice}</span>
-          </div>
-          {order && !order.isPaid && (
-            <div>
-              <PayPalButton
-                amount={order && order.totalPrice}
-                onSuccess={handlerSuccessPayment}
-              />
+              </OrderList>
             </div>
-          )}
-          <Button onClick={() => history.goBack()} width="100%">
-            Go Back
-          </Button>
-          {error && <Alert message={error} type="error" showIcon banner />}
-        </OrderSummary>
-      </OrderScreenStyled>
+          </Details>
+
+          <OrderSummary>
+            <div>
+              <h2>Order Summary</h2>
+            </div>
+            <div>
+              <span>Items:</span>
+              <span>${itemsPrice}</span>
+            </div>
+            <div>
+              <span>Shipping:</span>
+              <span>${order.shippingPrice}</span>
+            </div>
+            <div>
+              <span>Tax:</span>
+              <span>${order.taxPrice}</span>
+            </div>
+            <div>
+              <span>Total:</span>
+              <span>${order.totalPrice}</span>
+            </div>
+            {!order.isPaid && (
+              <div>
+                <PayPalButton
+                  amount={order.totalPrice}
+                  onSuccess={handlerSuccessPayment}
+                />
+              </div>
+            )}
+            <Button onClick={() => history.goBack()} width="100%">
+              Go Back
+            </Button>
+          </OrderSummary>
+        </OrderScreenStyled>
+      )}
+      {error && <Alert message={error} type="error" showIcon banner />}
     </Spin>
   );
 };
