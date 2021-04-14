@@ -7,18 +7,28 @@ import { ReviewListItemStyled, Header, Comment } from './Styles';
 // Antd Components
 import { Rate } from 'antd';
 
-interface Props {}
+interface Props {
+  name: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+}
 
-const ReviewListItem: React.FC<Props> = () => {
+const ReviewListItem: React.FC<Props> = ({
+  name,
+  rating,
+  comment,
+  createdAt,
+}) => {
   return (
     <ReviewListItemStyled>
       <Header>
-        <h4>Jane Doe</h4>
-        <Rate allowHalf defaultValue={2.5} />
-        <p>2020-09-27</p>
+        <h4>{name}</h4>
+        <Rate disabled allowHalf defaultValue={rating} />
+        <p>{createdAt.substring(0, 10)}</p>
       </Header>
       <Comment>
-        <p>These are great headphone!</p>
+        <p>{comment}</p>
       </Comment>
     </ReviewListItemStyled>
   );
