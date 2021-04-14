@@ -32,7 +32,9 @@ const ReviewList: React.FC<Props> = () => {
     <Spin spinning={loading}>
       <ReviewListStyled>
         {product &&
-          product.reviews.map((review: any) => <ReviewListItem {...review} />)}
+          product.reviews.map((review: any) => (
+            <ReviewListItem key={review._id} {...review} />
+          ))}
       </ReviewListStyled>
       {product && product.reviews.length === 0 && (
         <Alert message="No Reviews" type="warning" />
