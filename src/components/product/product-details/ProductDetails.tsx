@@ -29,10 +29,7 @@ import {
 } from './Styles';
 
 // Antd Components
-import { InputNumber, Rate } from 'antd';
-
-// Antd Components
-import { Alert, Button as ButtonAnt, Spin } from 'antd';
+import { Alert, Button as ButtonAnt, Spin, InputNumber, Rate } from 'antd';
 
 // Components
 import Button from '../../button/Button';
