@@ -67,7 +67,7 @@ const ProductEditScreen: React.FC<Props> = () => {
 
   const { register, errors, handleSubmit } = useForm();
 
-  const handleCreate = handleSubmit(
+  const handleEdit = handleSubmit(
     ({
       name,
       price,
@@ -145,7 +145,7 @@ const ProductEditScreen: React.FC<Props> = () => {
     <ProductEditScreenStyled>
       <Spin spinning={loadingProductDetails || loadingProductUpdate}>
         {product && (
-          <Form onSubmit={handleCreate}>
+          <Form onSubmit={handleEdit}>
             <h2>Edit product</h2>
             <Input
               name="name"
