@@ -16,6 +16,7 @@ const ProductScreen: React.FC<Props> = () => {
       <Header>
         <h2>Product Details</h2>
       </Header>
+
       <ProductDetails />
       <ProductReviews />
     </ProductScreenStyled>
