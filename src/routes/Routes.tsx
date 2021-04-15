@@ -35,7 +35,7 @@ const Routes: React.FC<Props> = () => {
       />
       <Route exact path="/" component={HomeScreen} />
 
-      <Route exact path="/product/:productID" component={ProductScreen} />
+      <Route exact path="/product/:productId" component={ProductScreen} />
       <Route exact path="/cart/:productID?" component={CartScreen} />
       <Route exact path="/login" component={LoginScreen} />
       <Route exact path="/register" component={RegisterScreen} />
