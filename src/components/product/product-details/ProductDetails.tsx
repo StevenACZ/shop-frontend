@@ -14,6 +14,7 @@ import {
   selectProductDetailsError,
   productDetailsReset,
 } from '../../../slices/product/productDetails';
+import { selectProductCreateReviewSuccess } from '../../../slices/product/productCreateReview';
 
 // React Router
 import { useHistory, useParams } from 'react-router';
@@ -57,12 +58,14 @@ const ProductDetails: React.FC<Props> = () => {
   const loading = useSelector(selectProductDetailsLoading);
   const error = useSelector(selectProductDetailsError);
 
+  const successCreateReview = useSelector(selectProductCreateReviewSuccess);
+
   const [quantity, setQuantity] = useState<number>();
-  const { productID } = useParams() as { productID: string };
+  const { productId } = useParams() as { productId: string };
 
   useEffect(() => {
-    dispatch(listProductDetails(productID));
-  }, [dispatch, productID]);
+    dispatch(listProductDetails(productId));
+  }, [dispatch, productId, successCreateReview]);
 
   useEffect(() => {
     if (product) {
