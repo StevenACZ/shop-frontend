@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Styles
-import { ProductReviewsStyled, Header } from './Styles';
+import { ProductReviewsStyled } from './Styles';
 
 // Components
 import ReviewList from './review-list/ReviewList';
