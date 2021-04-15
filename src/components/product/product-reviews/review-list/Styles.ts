@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ReviewListStyled = styled.ul`
-  padding: 0 20px;
+  padding: 0 0 0 20px;
 `;
 
 export const Header = styled.div`
