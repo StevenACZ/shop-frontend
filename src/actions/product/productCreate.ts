@@ -8,7 +8,10 @@ import {
   productCreateFail,
 } from '../../slices/product/productCreate';
 
-export const createProduct = () => async (dispatch: any, getState: any) => {
+export const createProduct = (product: any) => async (
+  dispatch: any,
+  getState: any
+) => {
   try {
     dispatch(productCreateRequest());
 
@@ -24,7 +27,7 @@ export const createProduct = () => async (dispatch: any, getState: any) => {
       },
     };
 
-    await axios.post('/api/products', {}, config);
+    await axios.post('/api/products', product, config);
 
     dispatch(productCreateSuccess());
   } catch (error) {
