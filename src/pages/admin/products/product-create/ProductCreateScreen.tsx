@@ -1,5 +1,8 @@
 // React
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
+// Axios
+import axios from '../../../../axios';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -51,9 +54,58 @@ const ProductCreateScreen: React.FC<Props> = () => {
 
   const { register, errors, handleSubmit } = useForm();
 
-  const handleCreate = handleSubmit((data: { name: string; email: string }) => {
-    dispatch(createProduct());
-  });
+  const handleCreate = handleSubmit(
+    ({
+      name,
+      price,
+      image,
+      brand,
+      countInStock,
+      category,
+      description,
+    }: {
+      name: string;
+      price: number;
+      image: string;
+      brand: string;
+      countInStock: number;
+      category: string;
+      description: string;
+    }) => {
+      dispatch(
+        createProduct({
+          name,
+          price: Number(price),
+          image,
+          brand,
+          countInStock: Number(countInStock),
+          category,
+          description,
+        })
+      );
+    }
+  );
+
+  const [image, setImage] = useState();
+
+  const uploadFileHandler = async (e: any) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post('/api/upload', formData, config);
+      setImage(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     if (!userInfo) {
@@ -89,7 +141,7 @@ const ProductCreateScreen: React.FC<Props> = () => {
             placeholder="Enter name"
             error={errors.name?.message}
             ref={register({
-              // required: 'Name is required',
+              required: 'Name is required',
               minLength: {
                 value: 3,
                 message: 'Name must be at least 3 characters',
@@ -101,20 +153,69 @@ const ProductCreateScreen: React.FC<Props> = () => {
             })}
           />
           <Input
-            name="email"
-            label="Email Address"
-            placeholder="Enter email"
-            error={errors.email?.message}
+            type="number"
+            name="price"
+            label="Price"
+            placeholder="Enter price"
+            error={errors.price?.message}
             ref={register({
-              // required: 'Email is required',
-              minLength: {
-                value: 3,
-                message: 'Email must be at least 3 characters',
-              },
-              maxLength: {
-                value: 200,
-                message: 'Email must not be greater than 100 characters',
-              },
+              required: 'Price is required',
+            })}
+          />
+          <Input
+            name="image"
+            label="Image"
+            placeholder="Enter image"
+            value={image}
+            error={errors.image?.message}
+            ref={register({
+              required: 'Image is required',
+            })}
+          />
+          <Input
+            type="file"
+            name="imageUpload"
+            label="Image Upload"
+            onChange={uploadFileHandler}
+            placeholder="Enter imageUpload"
+            error={errors.imageUpload?.message}
+            ref={register({})}
+          />
+          <Input
+            name="brand"
+            label="Brand"
+            placeholder="Enter brand"
+            error={errors.brand?.message}
+            ref={register({
+              required: 'Brand is required',
+            })}
+          />
+          <Input
+            type="number"
+            name="countInStock"
+            label="Count In Stock"
+            placeholder="Enter count in stock"
+            error={errors.countInStock?.message}
+            ref={register({
+              required: 'Count In Stock is required',
+            })}
+          />
+          <Input
+            name="category"
+            label="Category"
+            placeholder="Enter category"
+            error={errors.category?.message}
+            ref={register({
+              required: 'Category is required',
+            })}
+          />
+          <Input
+            name="description"
+            label="Description"
+            placeholder="Enter description"
+            error={errors.description?.message}
+            ref={register({
+              required: 'Description is required',
             })}
           />
           <Button width="100%" type="submit">
