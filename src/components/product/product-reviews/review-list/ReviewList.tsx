@@ -12,7 +12,7 @@ import {
 } from '../../../../slices/product/productDetails';
 
 // Styles
-import { ReviewListStyled } from './Styles';
+import { ReviewListStyled, Header } from './Styles';
 
 // Antd Components
 import { Alert, Spin } from 'antd';
@@ -30,6 +30,9 @@ const ReviewList: React.FC<Props> = () => {
 
   return (
     <Spin spinning={loading}>
+      <Header>
+        <h2>Reviews</h2>
+      </Header>
       <ReviewListStyled>
         {product &&
           product.reviews.map((review: any) => (
